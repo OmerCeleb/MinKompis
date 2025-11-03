@@ -1,0 +1,197 @@
+{
+  "common": {
+    "appName": "MinKompis",
+    "login": "Giriş Yap",
+    "register": "Kayıt Ol",
+    "logout": "Çıkış Yap",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "search": "Ara",
+    "loading": "Yükleniyor...",
+    "perHour": "saat başı",
+    "from": "İtibaren",
+    "viewProfile": "Profili gör",
+    "contactNow": "Şimdi iletişime geç",
+    "sendMessage": "Mesaj gönder",
+    "languages": "Diller",
+    "location": "Konum",
+    "rating": "Puan",
+    "reviews": "Yorumlar",
+    "verified": "Doğrulanmış",
+    "seeAll": "Tümünü gör",
+    "back": "Geri",
+    "continue": "Devam",
+    "optional": "İsteğe bağlı",
+    "required": "Zorunlu",
+    "recommended": "Önerilen"
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "findServices": "Hizmet Bul",
+    "becomeProvider": "Hizmet Sağlayıcı Ol",
+    "howItWorks": "Nasıl Çalışır",
+    "about": "Hakkımızda",
+    "dashboard": "Panel",
+    "myServices": "Hizmetlerim",
+    "bookings": "Rezervasyonlar",
+    "messages": "Mesajlar"
+  },
+  "auth": {
+    "loginTitle": "Hesabınıza giriş yapın",
+    "welcomeBack": "Tekrar hoş geldiniz! Lütfen bilgilerinizi girin.",
+    "registerTitle": "MinKompis'e Katılın",
+    "registerCustomer": "Müşteri olarak kayıt ol",
+    "registerProvider": "Hizmet sağlayıcı olarak kayıt ol",
+    "email": "E-posta adresi",
+    "password": "Şifre",
+    "confirmPassword": "Şifreyi onayla",
+    "firstName": "Ad",
+    "lastName": "Soyad",
+    "phone": "Telefon numarası",
+    "businessName": "İşletme/Hizmet Adı",
+    "businessNamePlaceholder": "örn: Maria'nın İsveççe Dersleri",
+    "noAccount": "Hesabınız yok mu?",
+    "hasAccount": "Zaten hesabınız var mı?",
+    "forgotPassword": "Şifrenizi mi unuttunuz?",
+    "rememberMe": "Beni hatırla",
+    "loginWith": "ile giriş yap",
+    "registerWith": "ile kayıt ol",
+    "recommended": "Önerilen",
+    "bankIdRecommended": "BankID önerilir",
+    "bankIdInfo": "Güvenli, hızlı ve şifre gerektirmez. İsveç'te milyonlarca kişi tarafından kullanılır.",
+    "orContinueWith": "veya e-posta ile devam et",
+    "createAccount": "Hesap Oluştur",
+    "signingIn": "Giriş yapılıyor...",
+    "creatingAccount": "Hesap oluşturuluyor...",
+    "chooseAccountType": "Platformumuzu nasıl kullanmak istediğinizi seçin",
+    "customerBenefit1": "Kullanımı ücretsiz",
+    "customerBenefit2": "Aylık ücret yok",
+    "customerDesc": "Kendi dilinizi konuşan doğrulanmış hizmet sağlayıcıları bulun ve işe alın",
+    "providerBenefit1": "Katılım ücretsiz",
+    "providerBenefit2": "%15 komisyon",
+    "providerDesc": "Hizmetlerinizi sunun ve müşterilere kendi dillerinde ulaşın",
+    "termsAgree": "Kullanım Koşullarını kabul ediyorum",
+    "privacyAgree": "Gizlilik Politikasını kabul ediyorum",
+    "alreadyHaveAccount": "Zaten hesabınız var mı?",
+    "logIn": "Giriş yap",
+    "signUp": "Kayıt ol",
+    "step1Title": "Temel Bilgiler",
+    "step2Title": "Hizmet Detayları",
+    "step3Title": "Fotoğraflar & Profil",
+    "languagesYouSpeak": "Konuştuğunuz Diller",
+    "primaryCategory": "Ana Hizmet Kategorisi",
+    "profilePhoto": "Profil Fotoğrafı",
+    "profilePhotoOptional": "İsteğe bağlı ama önerilen",
+    "portfolioPhotos": "Portfolyo Fotoğrafları",
+    "portfolioPhotosDesc": "Daha fazla müşteri çekmek için çalışmalarınızdan örnekler gösterin (maks 6 fotoğraf)",
+    "aboutYou": "Hakkınızda",
+    "aboutYouPlaceholder": "Müşterilere deneyiminiz, nitelikleriniz ve hizmetinizi özel kılan şeyler hakkında bilgi verin...",
+    "whyAddPhoto": "Neden fotoğraf eklemeliyim?",
+    "whyAddPhotoDesc": "Fotoğraflı profiller 5 kat daha fazla görüntüleme alır ve müşterilerle güven oluşturur.",
+    "completeProfileTitle": "Eksiksiz profiller daha iyi performans gösterir!",
+    "completeProfileDesc": "Fotoğraf ve detaylı biyografiye sahip sağlayıcılar %80'e kadar daha fazla müşteri talebi alır.",
+    "addPhoto": "Fotoğraf Ekle",
+    "characterCount": "karakter"
+  },
+  "home": {
+    "hero": {
+      "title": "Kendi dilinde güvenilir hizmet sağlayıcılar bul",
+      "subtitle": "Kendi dilini konuşan ve ihtiyaçlarını anlayan doğrulanmış profesyonellerle bağlan",
+      "searchPlaceholder": "Hangi hizmeti arıyorsunuz?",
+      "searchButton": "Ara",
+      "becomeProvider": "Sağlayıcı ol",
+      "stats": {
+        "providers": "Hizmet sağlayıcı",
+        "languages": "Dil",
+        "rating": "Ort. puan"
+      }
+    },
+    "categories": {
+      "title": "Kategorilere göre göz at",
+      "subtitle": "İhtiyaçlarınız için doğru profesyoneli bulun",
+      "viewAll": "Kategorideki tümünü gör",
+      "providers": "sağlayıcı"
+    },
+    "featured": {
+      "title": "Öne çıkan hizmet sağlayıcılar",
+      "subtitle": "Sana yardım etmeye hazır yüksek puanlı profesyoneller"
+    },
+    "howItWorks": {
+      "title": "Nasıl çalışır",
+      "subtitle": "İhtiyacın olan yardımı almak için basit adımlar",
+      "forCustomers": "Müşteriler için",
+      "forProviders": "Hizmet sağlayıcılar için",
+      "step1Customer": {
+        "title": "Hizmet ara",
+        "desc": "Kendi dilini konuşan sağlayıcıları bul"
+      },
+      "step2Customer": {
+        "title": "Profilleri gör",
+        "desc": "Puanları, yorumları ve deneyimi kontrol et"
+      },
+      "step3Customer": {
+        "title": "Direkt iletişim",
+        "desc": "Sağlayıcılarla mesajlaş ve detayları konuş"
+      },
+      "step4Customer": {
+        "title": "Rezerve et & öde",
+        "desc": "Platformumuz üzerinden güvenli ödeme"
+      },
+      "step1Provider": {
+        "title": "Profil oluştur",
+        "desc": "Profesyonel profilini kur"
+      },
+      "step2Provider": {
+        "title": "Hizmetleri listele",
+        "desc": "Hizmetlerini ekle ve fiyat belirle"
+      },
+      "step3Provider": {
+        "title": "İletişim al",
+        "desc": "Müşteriler sana ulaşacak"
+      },
+      "step4Provider": {
+        "title": "Para kazan",
+        "desc": "Hizmet ver ve ödemeyi al"
+      }
+    },
+    "testimonials": {
+      "title": "Kullanıcılarımız ne diyor",
+      "subtitle": "Binlerce memnun kullanıcı MinKompis üzerinden yardım buldu"
+    },
+    "cta": {
+      "customerTitle": "Bir hizmete mi ihtiyacın var?",
+      "customerDesc": "Kendi dilinde güvenilir sağlayıcılar bul",
+      "customerButton": "Hizmetlere göz at",
+      "providerTitle": "Hizmetlerini sunmak ister misin?",
+      "providerDesc": "Platformumuza katıl ve müşterilere ulaş",
+      "providerButton": "Sağlayıcı ol"
+    }
+  },
+  "categories": {
+    "education": "Eğitim & Özel Ders",
+    "educationDesc": "Dil dersleri, matematik yardımı, kariyer koçluğu",
+    "home": "Ev Hizmetleri",
+    "homeDesc": "Temizlik, tamirat, bakım, taşıma",
+    "official": "Resmi İşlemler",
+    "officialDesc": "Tercüme, evrak yardımı, izin danışmanlığı",
+    "health": "Sağlık & Fitness",
+    "healthDesc": "Kişisel antrenörlük, beslenme, terapi",
+    "business": "İş Hizmetleri",
+    "businessDesc": "Muhasebe, hukuki danışmanlık, konsültasyon",
+    "creative": "Kreatif Hizmetler",
+    "creativeDesc": "Fotoğrafçılık, tasarım, içerik üretimi"
+  },
+  "footer": {
+    "tagline": "İsveç'te kendi dilinde hizmetler için ortağınız",
+    "browseServices": "Hizmetlere Göz At",
+    "becomeProvider": "Sağlayıcı Ol",
+    "aboutUs": "Hakkımızda",
+    "helpCenter": "Yardım Merkezi",
+    "safety": "Güvenlik",
+    "contact": "İletişim",
+    "privacy": "Gizlilik",
+    "terms": "Koşullar",
+    "cookies": "Çerezler",
+    "allRightsReserved": "Tüm hakları saklıdır"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "common": {
+    "appName": "MinKompis",
+    "welcome": "Hoş Geldiniz",
+    "login": "Giriş Yap",
+    "register": "Kayıt Ol",
+    "logout": "Çıkış Yap",
+    "submit": "Gönder",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "search": "Ara",
+    "filter": "Filtrele"
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "jobs": "İlanlar",
+    "dashboard": "Kontrol Paneli",
+    "profile": "Profil"
+  },
+  "categories": {
+    "official": "Resmi İşlemler",
+    "home": "Ev Hizmetleri",
+    "coaching": "Koçluk & Danışmanlık"
+  },
+  "languages": {
+    "tr": "Türkçe",
+    "sv": "İsveççe",
+    "en": "İngilizce",
+    "ar": "Arapça"
+  }
+}

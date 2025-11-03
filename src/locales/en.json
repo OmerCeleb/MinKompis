@@ -1,0 +1,31 @@
+{
+  "common": {
+    "appName": "MinKompis",
+    "welcome": "Welcome",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "search": "Search",
+    "filter": "Filter"
+  },
+  "nav": {
+    "home": "Home",
+    "jobs": "Jobs",
+    "dashboard": "Dashboard",
+    "profile": "Profile"
+  },
+  "categories": {
+    "official": "Official Matters",
+    "home": "Home Services",
+    "coaching": "Coaching & Consulting"
+  },
+  "languages": {
+    "tr": "Turkish",
+    "sv": "Swedish",
+    "en": "English",
+    "ar": "Arabic"
+  }
+}

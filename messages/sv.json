@@ -1,0 +1,197 @@
+{
+  "common": {
+    "appName": "MinKompis",
+    "login": "Logga in",
+    "register": "Registrera",
+    "logout": "Logga ut",
+    "save": "Spara",
+    "cancel": "Avbryt",
+    "search": "Sök",
+    "loading": "Laddar...",
+    "perHour": "per timme",
+    "from": "Från",
+    "viewProfile": "Visa profil",
+    "contactNow": "Kontakta nu",
+    "sendMessage": "Skicka meddelande",
+    "languages": "Språk",
+    "location": "Plats",
+    "rating": "Betyg",
+    "reviews": "Recensioner",
+    "verified": "Verifierad",
+    "seeAll": "Se alla",
+    "back": "Tillbaka",
+    "continue": "Fortsätt",
+    "optional": "Valfritt",
+    "required": "Obligatoriskt",
+    "recommended": "Rekommenderas"
+  },
+  "nav": {
+    "home": "Hem",
+    "findServices": "Hitta tjänster",
+    "becomeProvider": "Bli tjänsteleverantör",
+    "howItWorks": "Så fungerar det",
+    "about": "Om oss",
+    "dashboard": "Dashboard",
+    "myServices": "Mina tjänster",
+    "bookings": "Bokningar",
+    "messages": "Meddelanden"
+  },
+  "auth": {
+    "loginTitle": "Logga in på ditt konto",
+    "welcomeBack": "Välkommen tillbaka! Vänligen ange dina uppgifter.",
+    "registerTitle": "Gå med i MinKompis",
+    "registerCustomer": "Registrera som kund",
+    "registerProvider": "Registrera som tjänsteleverantör",
+    "email": "E-postadress",
+    "password": "Lösenord",
+    "confirmPassword": "Bekräfta lösenord",
+    "firstName": "Förnamn",
+    "lastName": "Efternamn",
+    "phone": "Telefonnummer",
+    "businessName": "Företags-/Tjänstenamn",
+    "businessNamePlaceholder": "t.ex. Marias svenska lektioner",
+    "noAccount": "Har du inget konto?",
+    "hasAccount": "Har du redan ett konto?",
+    "forgotPassword": "Glömt lösenord?",
+    "rememberMe": "Kom ihåg mig",
+    "loginWith": "Logga in med",
+    "registerWith": "Registrera med",
+    "recommended": "Rekommenderad",
+    "bankIdRecommended": "BankID rekommenderas",
+    "bankIdInfo": "Säkert, snabbt och inget lösenord behövs. Används av miljontals i Sverige.",
+    "orContinueWith": "eller fortsätt med e-post",
+    "createAccount": "Skapa konto",
+    "signingIn": "Loggar in...",
+    "creatingAccount": "Skapar konto...",
+    "chooseAccountType": "Välj hur du vill använda vår plattform",
+    "customerBenefit1": "Gratis att använda",
+    "customerBenefit2": "Inga månadsavgifter",
+    "customerDesc": "Hitta och anlita verifierade tjänsteleverantörer på ditt språk",
+    "providerBenefit1": "Gratis att gå med",
+    "providerBenefit2": "15% provision",
+    "providerDesc": "Erbjud dina tjänster och nå kunder på deras språk",
+    "termsAgree": "Jag godkänner användarvillkoren",
+    "privacyAgree": "Jag godkänner integritetspolicyn",
+    "alreadyHaveAccount": "Har du redan ett konto?",
+    "logIn": "Logga in",
+    "signUp": "Registrera",
+    "step1Title": "Grundläggande information",
+    "step2Title": "Tjänstedetaljer",
+    "step3Title": "Foton & Profil",
+    "languagesYouSpeak": "Språk du talar",
+    "primaryCategory": "Primär tjänstekategori",
+    "profilePhoto": "Profilfoto",
+    "profilePhotoOptional": "Valfritt men rekommenderas",
+    "portfolioPhotos": "Portfoliofoton",
+    "portfolioPhotosDesc": "Visa exempel på ditt arbete för att locka fler kunder (max 6 foton)",
+    "aboutYou": "Om dig",
+    "aboutYouPlaceholder": "Berätta för kunderna om din erfarenhet, kvalifikationer och vad som gör din tjänst speciell...",
+    "whyAddPhoto": "Varför lägga till ett foto?",
+    "whyAddPhotoDesc": "Profiler med foton får 5 gånger fler visningar och bygger förtroende med kunder.",
+    "completeProfileTitle": "Kompletta profiler presterar bättre!",
+    "completeProfileDesc": "Leverantörer med foton och detaljerade biografier får upp till 80% fler kundförfrågningar.",
+    "addPhoto": "Lägg till foto",
+    "characterCount": "tecken"
+  },
+  "home": {
+    "hero": {
+      "title": "Hitta pålitliga tjänsteleverantörer på ditt språk",
+      "subtitle": "Anslut med verifierade proffs som talar ditt språk och förstår dina behov",
+      "searchPlaceholder": "Vilken tjänst letar du efter?",
+      "searchButton": "Sök",
+      "becomeProvider": "Bli leverantör",
+      "stats": {
+        "providers": "Tjänsteleverantörer",
+        "languages": "Språk",
+        "rating": "Genomsnittligt betyg"
+      }
+    },
+    "categories": {
+      "title": "Bläddra efter kategori",
+      "subtitle": "Hitta rätt professionell för dina behov",
+      "viewAll": "Visa alla i kategorin",
+      "providers": "leverantörer"
+    },
+    "featured": {
+      "title": "Utvalda tjänsteleverantörer",
+      "subtitle": "Högt rankade proffs redo att hjälpa dig"
+    },
+    "howItWorks": {
+      "title": "Så fungerar det",
+      "subtitle": "Enkla steg för att få den hjälp du behöver",
+      "forCustomers": "För kunder",
+      "forProviders": "För tjänsteleverantörer",
+      "step1Customer": {
+        "title": "Sök tjänster",
+        "desc": "Hitta leverantörer som talar ditt språk"
+      },
+      "step2Customer": {
+        "title": "Visa profiler",
+        "desc": "Kontrollera betyg, recensioner och erfarenhet"
+      },
+      "step3Customer": {
+        "title": "Kontakta direkt",
+        "desc": "Meddela leverantörer och diskutera detaljer"
+      },
+      "step4Customer": {
+        "title": "Boka & betala",
+        "desc": "Säker betalning genom vår plattform"
+      },
+      "step1Provider": {
+        "title": "Skapa profil",
+        "desc": "Ställ in din professionella profil"
+      },
+      "step2Provider": {
+        "title": "Lista tjänster",
+        "desc": "Lägg till dina tjänster och sätt priser"
+      },
+      "step3Provider": {
+        "title": "Bli kontaktad",
+        "desc": "Kunder kommer att kontakta dig"
+      },
+      "step4Provider": {
+        "title": "Tjäna pengar",
+        "desc": "Tillhandahåll tjänst och få betalt"
+      }
+    },
+    "testimonials": {
+      "title": "Vad våra användare säger",
+      "subtitle": "Tusentals nöjda användare har hittat hjälp genom MinKompis"
+    },
+    "cta": {
+      "customerTitle": "Behöver du en tjänst?",
+      "customerDesc": "Hitta pålitliga leverantörer på ditt språk",
+      "customerButton": "Bläddra tjänster",
+      "providerTitle": "Vill du erbjuda dina tjänster?",
+      "providerDesc": "Gå med på vår plattform och nå kunder",
+      "providerButton": "Bli leverantör"
+    }
+  },
+  "categories": {
+    "education": "Utbildning & Undervisning",
+    "educationDesc": "Språklektioner, mattehjälp, karriärcoaching",
+    "home": "Hemtjänster",
+    "homeDesc": "Städning, reparationer, underhåll, flyttning",
+    "official": "Officiella tjänster",
+    "officialDesc": "Översättning, dokumenthjälp, tillståndshjälp",
+    "health": "Hälsa & Välmående",
+    "healthDesc": "Personlig träning, nutrition, terapi",
+    "business": "Företagstjänster",
+    "businessDesc": "Bokföring, juridisk rådgivning, konsultation",
+    "creative": "Kreativa tjänster",
+    "creativeDesc": "Fotografi, design, innehållsskapande"
+  },
+  "footer": {
+    "tagline": "Din partner för tjänster på ditt språk i Sverige",
+    "browseServices": "Bläddra tjänster",
+    "becomeProvider": "Bli leverantör",
+    "aboutUs": "Om oss",
+    "helpCenter": "Hjälpcenter",
+    "safety": "Säkerhet",
+    "contact": "Kontakt",
+    "privacy": "Integritet",
+    "terms": "Villkor",
+    "cookies": "Cookies",
+    "allRightsReserved": "Alla rättigheter förbehållna"
+  }
+}

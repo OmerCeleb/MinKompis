@@ -1,0 +1,265 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  CUSTOMER
+  PROVIDER
+  ADMIN
+}
+
+enum ServiceStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  INACTIVE
+}
+
+enum BookingStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  password      String
+  role          UserRole
+  firstName     String
+  lastName      String
+  phone         String?
+  avatar        String?
+  languages     String[] // ["tr", "en", "sv"]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  providerProfile ProviderProfile?
+  customerProfile CustomerProfile?
+  sentMessages    Message[]        @relation("SentMessages")
+  receivedMessages Message[]       @relation("ReceivedMessages")
+  bookings        Booking[]
+  reviews         Review[]         @relation("ReviewsGiven")
+  receivedReviews Review[]         @relation("ReviewsReceived")
+}
+
+// Provider (Hizmet Veren) Profili
+model ProviderProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  bio             String   @db.Text
+  title           String   // "Matematik Öğretmeni", "Temizlik Uzmanı"
+  yearsExperience Int?
+  languages       String[] // Konuştuğu diller
+  location        String   // "Stockholm", "Göteborg"
+  isVerified      Boolean  @default(false)
+  rating          Float    @default(0)
+  reviewCount     Int      @default(0)
+  completedJobs   Int      @default(0)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  services        Service[]
+  bookings        Booking[]
+  availability    Availability[]
+}
+
+// Müşteri Profili
+model CustomerProfile {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  location  String?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  bookings  Booking[]
+}
+
+// Hizmet Kategorileri
+model Category {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  nameEn      String
+  nameSv      String
+  nameTr      String
+  descEn      String    @db.Text
+  descSv      String    @db.Text
+  descTr      String    @db.Text
+  icon        String
+  order       Int       @default(0)
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  services    Service[]
+}
+
+// Provider'ın Sunduğu Hizmetler
+model Service {
+  id              String        @id @default(cuid())
+  providerId      String
+  provider        ProviderProfile @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  
+  categoryId      String
+  category        Category      @relation(fields: [categoryId], references: [id])
+  
+  title           String
+  description     String        @db.Text
+  languages       String[]      // Bu hizmette konuşulan diller
+  pricePerHour    Int?          // Saatlik ücret (öre cinsinden)
+  priceFixed      Int?          // Sabit ücret
+  priceType       String        // "HOURLY", "FIXED", "NEGOTIABLE"
+  
+  status          ServiceStatus @default(DRAFT)
+  images          String[]
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relations
+  bookings        Booking[]
+
+  @@index([providerId])
+  @@index([categoryId])
+  @@index([status])
+}
+
+// Provider'ın Müsaitlik Durumu
+model Availability {
+  id          String   @id @default(cuid())
+  providerId  String
+  provider    ProviderProfile @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  
+  dayOfWeek   Int      // 0=Pazar, 1=Pazartesi, ...
+  startTime   String   // "09:00"
+  endTime     String   // "17:00"
+  isAvailable Boolean  @default(true)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([providerId])
+}
+
+// Rezervasyon/İletişim
+model Booking {
+  id          String        @id @default(cuid())
+  
+  customerId  String
+  customer    CustomerProfile @relation(fields: [customerId], references: [id])
+  
+  providerId  String
+  provider    ProviderProfile @relation(fields: [providerId], references: [id])
+  
+  serviceId   String
+  service     Service       @relation(fields: [serviceId], references: [id])
+  
+  userId      String
+  user        User          @relation(fields: [userId], references: [id])
+  
+  message     String        @db.Text
+  scheduledAt DateTime?
+  
+  status      BookingStatus @default(PENDING)
+  totalAmount Int           // Toplam tutar (öre)
+  commission  Int           // Platform komisyonu (öre)
+  
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  payment     Payment?
+  review      Review?
+
+  @@index([customerId])
+  @@index([providerId])
+  @@index([status])
+}
+
+// Mesajlaşma
+model Message {
+  id         String   @id @default(cuid())
+  
+  senderId   String
+  sender     User     @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  
+  receiverId String
+  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+  
+  content    String   @db.Text
+  isRead     Boolean  @default(false)
+  
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([senderId])
+  @@index([receiverId])
+  @@index([createdAt])
+}
+
+// Ödeme
+model Payment {
+  id          String        @id @default(cuid())
+  bookingId   String        @unique
+  booking     Booking       @relation(fields: [bookingId], references: [id])
+  
+  amount      Int           // Toplam tutar
+  commission  Int           // Platform komisyonu
+  providerAmount Int        // Provider'a gidecek tutar
+  
+  status      PaymentStatus @default(PENDING)
+  stripeId    String?       // Stripe payment intent ID
+  
+  paidAt      DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([bookingId])
+  @@index([status])
+}
+
+// Değerlendirme/Yorum
+model Review {
+  id          String   @id @default(cuid())
+  bookingId   String   @unique
+  booking     Booking  @relation(fields: [bookingId], references: [id])
+  
+  reviewerId  String
+  reviewer    User     @relation("ReviewsGiven", fields: [reviewerId], references: [id])
+  
+  revieweeId  String
+  reviewee    User     @relation("ReviewsReceived", fields: [revieweeId], references: [id])
+  
+  rating      Int      // 1-5
+  comment     String?  @db.Text
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([reviewerId])
+  @@index([revieweeId])
+}

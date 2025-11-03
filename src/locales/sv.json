@@ -1,0 +1,31 @@
+{
+  "common": {
+    "appName": "MinKompis",
+    "welcome": "Välkommen",
+    "login": "Logga in",
+    "register": "Registrera",
+    "logout": "Logga ut",
+    "submit": "Skicka",
+    "cancel": "Avbryt",
+    "save": "Spara",
+    "search": "Sök",
+    "filter": "Filtrera"
+  },
+  "nav": {
+    "home": "Hem",
+    "jobs": "Tjänster",
+    "dashboard": "Instrumentpanel",
+    "profile": "Profil"
+  },
+  "categories": {
+    "official": "Officiella Ärenden",
+    "home": "Hemtjänster",
+    "coaching": "Coaching & Rådgivning"
+  },
+  "languages": {
+    "tr": "Turkiska",
+    "sv": "Svenska",
+    "en": "Engelska",
+    "ar": "Arabiska"
+  }
+}

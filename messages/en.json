@@ -1,0 +1,173 @@
+{
+  "common": {
+    "appName": "MinKompis",
+    "login": "Log in",
+    "register": "Sign up",
+    "logout": "Log out",
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search",
+    "loading": "Loading...",
+    "perHour": "per hour",
+    "from": "From",
+    "viewProfile": "View profile",
+    "contactNow": "Contact now",
+    "sendMessage": "Send message",
+    "languages": "Languages",
+    "location": "Location",
+    "rating": "Rating",
+    "reviews": "Reviews",
+    "verified": "Verified",
+    "seeAll": "See all"
+  },
+  "nav": {
+    "home": "Home",
+    "findServices": "Find Services",
+    "becomeProvider": "Become a Provider",
+    "howItWorks": "How it works",
+    "about": "About",
+    "dashboard": "Dashboard",
+    "myServices": "My Services",
+    "bookings": "Bookings",
+    "messages": "Messages"
+  },
+  "auth": {
+    "loginTitle": "Log in to your account",
+    "welcomeBack": "Welcome back! Please enter your details.",
+    "registerTitle": "Join MinKompis",
+    "registerCustomer": "Sign up as Customer",
+    "registerProvider": "Sign up as Service Provider",
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "phone": "Phone number",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "forgotPassword": "Forgot password?",
+    "rememberMe": "Remember me",
+    "loginWith": "Login with",
+    "registerWith": "Register with",
+    "recommended": "Recommended",
+    "bankIdRecommended": "BankID is recommended",
+    "bankIdInfo": "Secure, fast, and no password needed. Used by millions in Sweden.",
+    "orContinueWith": "or continue with email",
+    "createAccount": "Create Account",
+    "signingIn": "Signing in...",
+    "creatingAccount": "Creating account...",
+    "chooseAccountType": "Choose how you want to use our platform",
+    "customerBenefit1": "Free to use",
+    "customerBenefit2": "No monthly fees",
+    "customerDesc": "Find and hire verified service providers in your language",
+    "providerBenefit1": "Free to join",
+    "providerBenefit2": "15% commission",
+    "providerDesc": "Offer your services and reach customers in their language",
+    "termsAgree": "I agree to the Terms and Conditions",
+    "privacyAgree": "I agree to the Privacy Policy",
+    "alreadyHaveAccount": "Already have an account?",
+    "logIn": "Log in",
+    "signUp": "Sign up"
+  },
+  "home": {
+    "hero": {
+      "title": "Find trusted service providers in your language",
+      "subtitle": "Connect with verified professionals who speak your language and understand your needs",
+      "searchPlaceholder": "What service are you looking for?",
+      "searchButton": "Search",
+      "becomeProvider": "Become a provider",
+      "stats": {
+        "providers": "Service providers",
+        "languages": "Languages",
+        "rating": "Avg rating"
+      }
+    },
+    "categories": {
+      "title": "Browse by category",
+      "subtitle": "Find the right professional for your needs",
+      "viewAll": "View all in category",
+      "providers": "providers"
+    },
+    "featured": {
+      "title": "Featured service providers",
+      "subtitle": "Highly rated professionals ready to help you"
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "subtitle": "Simple steps to get the help you need",
+      "forCustomers": "For Customers",
+      "forProviders": "For Service Providers",
+      "step1Customer": {
+        "title": "Search services",
+        "desc": "Find providers who speak your language"
+      },
+      "step2Customer": {
+        "title": "View profiles",
+        "desc": "Check ratings, reviews and experience"
+      },
+      "step3Customer": {
+        "title": "Contact directly",
+        "desc": "Message providers and discuss details"
+      },
+      "step4Customer": {
+        "title": "Book & pay",
+        "desc": "Secure payment through our platform"
+      },
+      "step1Provider": {
+        "title": "Create profile",
+        "desc": "Set up your professional profile"
+      },
+      "step2Provider": {
+        "title": "List services",
+        "desc": "Add your services and set prices"
+      },
+      "step3Provider": {
+        "title": "Get contacted",
+        "desc": "Customers will reach out to you"
+      },
+      "step4Provider": {
+        "title": "Earn money",
+        "desc": "Provide service and get paid"
+      }
+    },
+    "testimonials": {
+      "title": "What our users say",
+      "subtitle": "Thousands of satisfied users have found help through MinKompis"
+    },
+    "cta": {
+      "customerTitle": "Need a service?",
+      "customerDesc": "Find trusted providers in your language",
+      "customerButton": "Browse services",
+      "providerTitle": "Want to offer your services?",
+      "providerDesc": "Join our platform and reach customers",
+      "providerButton": "Become a provider"
+    }
+  },
+  "categories": {
+    "education": "Education & Tutoring",
+    "educationDesc": "Language lessons, math tutoring, career coaching",
+    "home": "Home Services",
+    "homeDesc": "Cleaning, repairs, maintenance, moving",
+    "official": "Official Services",
+    "officialDesc": "Translation, document help, permit assistance",
+    "health": "Health & Wellness",
+    "healthDesc": "Personal training, nutrition, therapy",
+    "business": "Business Services",
+    "businessDesc": "Accounting, legal advice, consulting",
+    "creative": "Creative Services",
+    "creativeDesc": "Photography, design, content creation"
+  },
+  "footer": {
+    "tagline": "Your partner for services in your language in Sweden",
+    "browseServices": "Browse Services",
+    "becomeProvider": "Become Provider",
+    "aboutUs": "About Us",
+    "helpCenter": "Help Center",
+    "safety": "Safety",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies",
+    "allRightsReserved": "All rights reserved"
+  }
+}
