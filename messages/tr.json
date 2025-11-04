@@ -285,6 +285,30 @@
     "manageAvailabilityDesc": "Çalışma saatlerini ayarla",
     "viewAnalytics": "Analizleri Gör",
     "viewAnalyticsDesc": "Performansını takip et",
+    "messages": {
+      "title": "Mesajlar",
+      "subtitle": "Müşterilerinizle iletişim kurun",
+      "searchConversations": "Konuşmalarda ara...",
+      "active": "Aktif",
+      "typeMessage": "Mesajınızı yazın...",
+      "selectConversation": "Bir konuşma seçin",
+      "selectConversationDesc": "Mesajlaşmaya başlamak için soldaki listeden bir konuşma seçin"
+    },
+    "reviews": {
+      "title": "Yorumlar",
+      "subtitle": "Müşteri geri bildirimlerinizi görüntüleyin ve yanıtlayın",
+      "averageRating": "Ortalama Puan",
+      "basedOn": "{{count}} yorum baz alınarak",
+      "ratingBreakdown": "Puan Dağılımı",
+      "filterByRating": "Puana göre filtrele",
+      "all": "Tümü",
+      "noReviews": "Yorum bulunamadı",
+      "noReviewsDesc": "Bu filtre için henüz yorum yok",
+      "reply": "Yanıtla",
+      "yourReply": "Yanıtınız",
+      "writeReply": "Yanıtınızı yazın...",
+      "sendReply": "Yanıtı Gönder"
+    },
     "services": {
       "title": "Hizmetlerim",
       "subtitle": "Hizmet tekliflerinizi yönetin",

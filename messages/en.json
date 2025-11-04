@@ -285,6 +285,30 @@
     "manageAvailabilityDesc": "Set your working hours",
     "viewAnalytics": "View Analytics",
     "viewAnalyticsDesc": "Track your performance",
+    "messages": {
+      "title": "Messages",
+      "subtitle": "Communicate with your customers",
+      "searchConversations": "Search conversations...",
+      "active": "Active",
+      "typeMessage": "Type your message...",
+      "selectConversation": "Select a conversation",
+      "selectConversationDesc": "Choose a conversation from the list to start messaging"
+    },
+    "reviews": {
+      "title": "Reviews",
+      "subtitle": "View and respond to customer feedback",
+      "averageRating": "Average Rating",
+      "basedOn": "Based on {{count}} reviews",
+      "ratingBreakdown": "Rating Breakdown",
+      "filterByRating": "Filter by rating",
+      "all": "All",
+      "noReviews": "No reviews found",
+      "noReviewsDesc": "No reviews match this filter yet",
+      "reply": "Reply",
+      "yourReply": "Your Reply",
+      "writeReply": "Write your reply...",
+      "sendReply": "Send Reply"
+    },
     "services": {
       "title": "My Services",
       "subtitle": "Manage your service offerings",

@@ -285,6 +285,30 @@
     "manageAvailabilityDesc": "Ställ in dina arbetstider",
     "viewAnalytics": "Visa Analys",
     "viewAnalyticsDesc": "Följ din prestation",
+      "messages": {
+        "title": "Meddelanden",
+        "subtitle": "Kommunicera med dina kunder",
+        "searchConversations": "Sök konversationer...",
+        "active": "Aktiv",
+        "typeMessage": "Skriv ditt meddelande...",
+        "selectConversation": "Välj en konversation",
+        "selectConversationDesc": "Välj en konversation från listan för att börja chatta"
+      },
+    "reviews": {
+      "title": "Recensioner",
+      "subtitle": "Visa och svara på kundfeedback",
+      "averageRating": "Genomsnittligt Betyg",
+      "basedOn": "Baserat på {{count}} recensioner",
+      "ratingBreakdown": "Betygfördelning",
+      "filterByRating": "Filtrera efter betyg",
+      "all": "Alla",
+      "noReviews": "Inga recensioner hittades",
+      "noReviewsDesc": "Inga recensioner matchar detta filter ännu",
+      "reply": "Svara",
+      "yourReply": "Ditt Svar",
+      "writeReply": "Skriv ditt svar...",
+      "sendReply": "Skicka Svar"
+    },
     "services": {
       "title": "Mina Tjänster",
       "subtitle": "Hantera dina tjänsteerbjudanden",
