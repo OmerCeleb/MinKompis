@@ -289,7 +289,7 @@
     "myServices": "Mina Tjänster",
     "myMessages": "Meddelanden",
     "myReviews": "Omdömen",
-    "settings": "Inställningar",
+    "mySettings": "Inställningar",
     "providerAccount": "Leverantörskonto",
     "viewPublicProfile": "Visa Offentlig Profil",
     "welcomeBack": "Välkommen tillbaka, Ayşe!",
@@ -319,6 +319,185 @@
         "selectConversation": "Välj en konversation",
         "selectConversationDesc": "Välj en konversation från listan för att börja chatta"
       },
+
+    "settings": {
+      "title": "Inställningar",
+      "subtitle": "Hantera dina kontoinställningar och preferenser",
+
+      "tabs": {
+        "profile": "Profilinställningar",
+        "account": "Kontosäkerhet",
+        "service": "Tjänstinställningar",
+        "notifications": "Notiser"
+      },
+
+      "profile": {
+        "title": "Profilinformation",
+        "subtitle": "Uppdatera din offentliga profilinformation",
+        "firstName": "Förnamn",
+        "lastName": "Efternamn",
+        "businessName": "Företagsnamn",
+        "businessNameHint": "Valfritt - Ditt professionella företagsnamn",
+        "phone": "Telefonnummer",
+        "location": "Plats",
+        "bio": "Om dig",
+        "bioHint": "Berätta om dig själv och dina tjänster (max 500 tecken)",
+        "profilePhoto": "Profilbild",
+        "changePhoto": "Byt bild",
+        "uploadPhoto": "Ladda upp bild",
+        "removePhoto": "Ta bort bild",
+        "charactersLeft": "tecken kvar",
+        "saveChanges": "Spara ändringar"
+      },
+
+      "account": {
+        "title": "Kontosäkerhet",
+        "subtitle": "Hantera dina inloggningsuppgifter och säkerhetsinställningar",
+        "email": "E-postadress",
+        "emailVerified": "E-post verifierad",
+        "emailNotVerified": "E-post ej verifierad",
+        "verifyEmail": "Verifiera e-post",
+        "changeEmail": "Ändra e-post",
+        "currentPassword": "Nuvarande lösenord",
+        "newPassword": "Nytt lösenord",
+        "confirmPassword": "Bekräfta nytt lösenord",
+        "changePassword": "Ändra lösenord",
+        "passwordRequirements": "Lösenordet måste vara minst 8 tecken och innehålla stora bokstäver, små bokstäver och siffror",
+        "twoFactor": "Tvåfaktorsautentisering",
+        "twoFactorDesc": "Lägg till ett extra säkerhetslager till ditt konto",
+        "enable": "Aktivera",
+        "disable": "Inaktivera",
+        "enabled": "Aktiverad",
+        "disabled": "Inaktiverad",
+        "sessions": "Aktiva sessioner",
+        "sessionsDesc": "Hantera enheter som är inloggade på ditt konto",
+        "currentDevice": "Nuvarande enhet",
+        "lastActive": "Senast aktiv",
+        "signOutAll": "Logga ut alla enheter",
+        "deleteAccount": "Ta bort konto",
+        "deleteAccountDesc": "Ta bort ditt konto permanent. Denna åtgärd kan inte ångras.",
+        "deleteAccountButton": "Ta bort mitt konto",
+        "saveChanges": "Spara ändringar"
+      },
+
+      "service": {
+        "title": "Tjänstinställningar",
+        "subtitle": "Konfigurera dina tjänstepreferenser och tillgänglighet",
+        "languages": {
+          "title": "Språk du talar",
+          "subtitle": "Välj språk du kan tillhandahålla tjänster på",
+          "addLanguage": "Lägg till språk",
+          "removeLanguage": "Ta bort språk"
+        },
+        "categories": {
+          "title": "Tjänstekategorier",
+          "subtitle": "Välj kategorier av tjänster du erbjuder",
+          "selectCategories": "Välj kategorier"
+        },
+        "pricing": {
+          "title": "Prissättning",
+          "subtitle": "Ställ in din timtaxa",
+          "hourlyRate": "Timtaxa",
+          "currency": "SEK",
+          "priceHint": "Rekommenderat intervall: 200-800 SEK/timme"
+        },
+        "availability": {
+          "title": "Tillgänglighet",
+          "subtitle": "Ställ in dina arbetstider",
+          "monday": "Måndag",
+          "tuesday": "Tisdag",
+          "wednesday": "Onsdag",
+          "thursday": "Torsdag",
+          "friday": "Fredag",
+          "saturday": "Lördag",
+          "sunday": "Söndag",
+          "closed": "Stängt",
+          "setHours": "Ställ in tider",
+          "from": "Från",
+          "to": "Till",
+          "addTimeSlot": "Lägg till tidsperiod",
+          "autoAccept": "Acceptera bokningar automatiskt",
+          "autoAcceptDesc": "Nya bokningar accepteras automatiskt"
+        }
+      },
+
+      "notifications": {
+        "title": "Notisinställningar",
+        "subtitle": "Välj när och hur du vill bli meddelad",
+        "email": {
+          "title": "E-postnotiser",
+          "subtitle": "Ta emot notiser via e-post",
+          "enable": "Aktivera e-postnotiser"
+        },
+        "sms": {
+          "title": "SMS-notiser",
+          "subtitle": "Ta emot notiser via SMS till din telefon",
+          "enable": "Aktivera SMS-notiser"
+        },
+        "types": {
+          "title": "Notistyper",
+          "newBookings": "Nya bokningar",
+          "newBookingsDesc": "När du får en ny bokningsförfrågan",
+          "messages": "Meddelanden",
+          "messagesDesc": "När du får ett nytt meddelande",
+          "reviews": "Recensioner",
+          "reviewsDesc": "När du får en ny recension",
+          "promotions": "Kampanjer och uppdateringar",
+          "promotionsDesc": "Specialerbjudanden och nyheter från MinKompis",
+          "reminders": "Påminnelser",
+          "remindersDesc": "Påminnelser om kommande möten",
+          "marketing": "Marknadsföringsmejl",
+          "marketingDesc": "Tips, trender och bästa praxis"
+        }
+      },
+
+      "actions": {
+        "save": "Spara ändringar",
+        "cancel": "Avbryt",
+        "saving": "Sparar...",
+        "saved": "Sparat!",
+        "error": "Ett fel uppstod",
+        "unsavedChanges": "Du har osparade ändringar",
+        "discardChanges": "Kasta ändringar"
+      },
+
+      "messages": {
+        "profileUpdated": "Profil uppdaterad!",
+        "accountUpdated": "Kontoinställningar uppdaterade!",
+        "serviceUpdated": "Tjänstinställningar uppdaterade!",
+        "notificationsUpdated": "Notisinställningar uppdaterade!",
+        "photoUploaded": "Bild uppladdad!",
+        "photoRemoved": "Bild borttagen!",
+        "emailVerificationSent": "Verifieringsmejl skickat!",
+        "passwordChanged": "Lösenord ändrat!",
+        "sessionEnded": "Session avslutad",
+        "allSessionsEnded": "Alla sessioner avslutade",
+        "error": "Ett fel uppstod. Försök igen."
+      },
+
+      "confirmations": {
+        "deleteAccount": {
+          "title": "Ta bort konto",
+          "message": "Är du säker på att du vill ta bort ditt konto? Denna åtgärd kan inte ångras och all din data kommer att raderas permanent.",
+          "confirm": "Ja, ta bort mitt konto",
+          "cancel": "Avbryt"
+        },
+        "signOutAll": {
+          "title": "Logga ut alla sessioner",
+          "message": "Är du säker på att du vill logga ut från alla enheter?",
+          "confirm": "Ja, logga ut alla sessioner",
+          "cancel": "Avbryt"
+        },
+        "unsavedChanges": {
+          "title": "Osparade ändringar",
+          "message": "Du har osparade ändringar. Är du säker på att du vill lämna denna sida?",
+          "confirm": "Ja, lämna",
+          "cancel": "Stanna på sidan"
+        }
+      }
+    },
+
+
     "reviews": {
       "title": "Recensioner",
       "subtitle": "Visa och svara på kundfeedback",

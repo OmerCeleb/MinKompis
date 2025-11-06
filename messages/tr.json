@@ -289,7 +289,7 @@
     "myServices": "Hizmetlerim",
     "myMessages": "Mesajlarim",
     "myReviews": "Yorumlar",
-    "settings": "Ayarlar",
+    "mySettings": "Ayarlar",
     "providerAccount": "Sağlayıcı Hesabı",
     "viewPublicProfile": "Herkese açık profili gör",
     "welcomeBack": "Tekrar hoş geldin, Ayşe!",
@@ -333,6 +333,181 @@
       "yourReply": "Yanıtınız",
       "writeReply": "Yanıtınızı yazın...",
       "sendReply": "Yanıtı Gönder"
+    },
+    "settings": {
+      "title": "Ayarlar",
+      "subtitle": "Hesap ayarlarınızı ve tercihlerinizi yönetin",
+
+      "tabs": {
+        "profile": "Profil Ayarları",
+        "account": "Hesap Güvenliği",
+        "service": "Hizmet Ayarları",
+        "notifications": "Bildirimler"
+      },
+      "profile": {
+        "title": "Profil Bilgileri",
+        "subtitle": "Herkese açık profil bilgilerinizi güncelleyin",
+        "firstName": "Ad",
+        "lastName": "Soyad",
+        "businessName": "İşletme Adı",
+        "businessNameHint": "Opsiyonel - Profesyonel bir işletme adı",
+        "phone": "Telefon Numarası",
+        "location": "Konum",
+        "bio": "Hakkınızda",
+        "bioHint": "Kendinizi ve hizmetlerinizi tanıtın (maks. 500 karakter)",
+        "profilePhoto": "Profil Fotoğrafı",
+        "changePhoto": "Fotoğraf Değiştir",
+        "uploadPhoto": "Fotoğraf Yükle",
+        "removePhoto": "Fotoğrafı Kaldır",
+        "charactersLeft": "karakter kaldı",
+        "saveChanges": "Değişiklikler kaydet"
+      },
+
+      "account": {
+        "title": "Hesap Güvenliği",
+        "subtitle": "Giriş bilgilerinizi ve güvenlik ayarlarınızı yönetin",
+        "email": "E-posta Adresi",
+        "emailVerified": "E-posta doğrulandı",
+        "emailNotVerified": "E-posta doğrulanmadı",
+        "verifyEmail": "E-postayı Doğrula",
+        "changeEmail": "E-posta Değiştir",
+        "currentPassword": "Mevcut Şifre",
+        "newPassword": "Yeni Şifre",
+        "confirmPassword": "Yeni Şifreyi Onayla",
+        "changePassword": "Şifre Değiştir",
+        "passwordRequirements": "Şifre en az 8 karakter olmalı ve büyük harf, küçük harf ve rakam içermelidir",
+        "twoFactor": "İki Faktörlü Doğrulama",
+        "twoFactorDesc": "Hesabınıza ekstra güvenlik katmanı ekleyin",
+        "enable": "Etkinleştir",
+        "disable": "Devre Dışı Bırak",
+        "enabled": "Etkin",
+        "disabled": "Devre Dışı",
+        "sessions": "Aktif Oturumlar",
+        "sessionsDesc": "Hesabınıza giriş yapmış cihazları yönetin",
+        "currentDevice": "Mevcut cihaz",
+        "lastActive": "Son aktif",
+        "saveChanges": "Değişiklikler kaydet",
+        "signOutAll": "Tüm Cihazlardan Çıkış Yap",
+        "deleteAccount": "Hesabı Sil",
+        "deleteAccountDesc": "Hesabınızı kalıcı olarak silin. Bu işlem geri alınamaz.",
+        "deleteAccountButton": "Hesabımı Sil"
+      },
+
+      "service": {
+        "title": "Hizmet Ayarları",
+        "subtitle": "Hizmet tercihlerinizi ve müsaitliğinizi yapılandırın",
+        "languages": {
+          "title": "Konuştuğunuz Diller",
+          "subtitle": "Hizmet verebileceğiniz dilleri seçin",
+          "addLanguage": "Dil Ekle",
+          "removeLanguage": "Dili Kaldır"
+        },
+        "categories": {
+          "title": "Hizmet Kategorileri",
+          "subtitle": "Sunduğunuz hizmet kategorilerini seçin",
+          "selectCategories": "Kategorileri seçin"
+        },
+        "pricing": {
+          "title": "Ücretlendirme",
+          "subtitle": "Saat başı ücretinizi belirleyin",
+          "hourlyRate": "Saat Başı Ücret",
+          "currency": "SEK",
+          "priceHint": "Önerilen aralık: 200-800 SEK/saat"
+        },
+        "availability": {
+          "title": "Müsaitlik",
+          "subtitle": "Çalışma saatlerinizi ayarlayın",
+          "monday": "Pazartesi",
+          "tuesday": "Salı",
+          "wednesday": "Çarşamba",
+          "thursday": "Perşembe",
+          "friday": "Cuma",
+          "saturday": "Cumartesi",
+          "sunday": "Pazar",
+          "closed": "Kapalı",
+          "setHours": "Saat Ayarla",
+          "from": "Başlangıç",
+          "to": "Bitiş",
+          "addTimeSlot": "Zaman Aralığı Ekle",
+          "autoAccept": "Rezervasyonları Otomatik Kabul Et",
+          "autoAcceptDesc": "Yeni rezervasyonlar otomatik olarak kabul edilir"
+        }
+      },
+
+      "notifications": {
+        "title": "Bildirim Tercihleri",
+        "subtitle": "Bildirim almak istediğiniz durumları seçin",
+        "email": {
+          "title": "E-posta Bildirimleri",
+          "subtitle": "E-posta ile bildirim alın",
+          "enable": "E-posta bildirimlerini etkinleştir"
+        },
+        "sms": {
+          "title": "SMS Bildirimleri",
+          "subtitle": "Telefon numaranıza SMS ile bildirim alın",
+          "enable": "SMS bildirimlerini etkinleştir"
+        },
+        "types": {
+          "title": "Bildirim Türleri",
+          "newBookings": "Yeni Rezervasyonlar",
+          "newBookingsDesc": "Yeni rezervasyon talebi geldiğinde",
+          "messages": "Mesajlar",
+          "messagesDesc": "Yeni mesaj aldığınızda",
+          "reviews": "Yorumlar",
+          "reviewsDesc": "Yeni yorum aldığınızda",
+          "promotions": "Promosyonlar ve Güncellemeler",
+          "promotionsDesc": "MinKompis'ten özel teklifler ve haberler",
+          "reminders": "Hatırlatmalar",
+          "remindersDesc": "Yaklaşan randevular için hatırlatmalar",
+          "marketing": "Pazarlama E-postaları",
+          "marketingDesc": "İpuçları, trendler ve en iyi uygulamalar"
+        }
+      },
+
+      "actions": {
+        "save": "Değişiklikleri Kaydet",
+        "cancel": "İptal",
+        "saving": "Kaydediliyor...",
+        "saved": "Kaydedildi!",
+        "error": "Bir hata oluştu",
+        "unsavedChanges": "Kaydedilmemiş değişiklikler var",
+        "discardChanges": "Değişiklikleri iptal et"
+      },
+
+      "messages": {
+        "profileUpdated": "Profil başarıyla güncellendi!",
+        "accountUpdated": "Hesap ayarları güncellendi!",
+        "serviceUpdated": "Hizmet ayarları güncellendi!",
+        "notificationsUpdated": "Bildirim tercihleri güncellendi!",
+        "photoUploaded": "Fotoğraf yüklendi!",
+        "photoRemoved": "Fotoğraf kaldırıldı!",
+        "emailVerificationSent": "Doğrulama e-postası gönderildi!",
+        "passwordChanged": "Şifre başarıyla değiştirildi!",
+        "sessionEnded": "Oturum sonlandırıldı",
+        "allSessionsEnded": "Tüm oturumlar sonlandırıldı",
+        "error": "Bir hata oluştu. Lütfen tekrar deneyin."
+      },
+
+      "confirmations": {
+        "deleteAccount": {
+          "title": "Hesabı Sil",
+          "message": "Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinecektir.",
+          "confirm": "Evet, Hesabımı Sil",
+          "cancel": "İptal"
+        },
+        "signOutAll": {
+          "title": "Tüm Oturumları Sonlandır",
+          "message": "Tüm cihazlardan çıkış yapmak istediğinizden emin misiniz?",
+          "confirm": "Evet, Tüm Oturumları Sonlandır",
+          "cancel": "İptal"
+        },
+        "unsavedChanges": {
+          "title": "Kaydedilmemiş Değişiklikler",
+          "message": "Kaydedilmemiş değişiklikleriniz var. Sayfadan ayrılmak istediğinizden emin misiniz?",
+          "confirm": "Evet, Ayrıl",
+          "cancel": "Sayfada Kal"
+        }
+      }
     },
     "services": {
       "title": "Hizmetlerim",

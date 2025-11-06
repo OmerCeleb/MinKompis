@@ -58,7 +58,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             )
         },
         {
-            name: t('settings'),
+            name: t('mySettings'),
             href: '/dashboard/settings',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

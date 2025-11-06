@@ -158,7 +158,7 @@ export default function DashboardSettingsPage() {
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
-                            {t('profile')}
+                            {t('tabs.profile')}
                         </div>
                     </button>
 
@@ -174,7 +174,7 @@ export default function DashboardSettingsPage() {
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                             </svg>
-                            {t('account')}
+                            {t('tabs.account')}
                         </div>
                     </button>
 
@@ -190,7 +190,7 @@ export default function DashboardSettingsPage() {
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
-                            {t('service')}
+                            {t('tabs.service')}
                         </div>
                     </button>
 
@@ -206,7 +206,7 @@ export default function DashboardSettingsPage() {
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                             </svg>
-                            {t('notifications')}
+                            {t('tabs.notifications')}
                         </div>
                     </button>
                 </div>
@@ -218,11 +218,11 @@ export default function DashboardSettingsPage() {
                 {/* Profile Settings */}
                 {activeTab === 'profile' && (
                     <div className="space-y-6">
-                        <h2 className="text-2xl font-bold text-neutral-900 mb-6">{t('profileSettings')}</h2>
+                        <h2 className="text-2xl font-bold text-neutral-900 mb-6">{t('profile.title')}</h2>
 
                         {/* Profile Photo */}
                         <div>
-                            <label className="block text-sm font-medium text-neutral-700 mb-3">{t('profilePhoto')}</label>
+                            <label className="block text-sm font-medium text-neutral-700 mb-3">{t('profile.profilePhoto')}</label>
                             <div className="flex items-center gap-6">
                                 <img
                                     src={profileData.profilePhoto}
@@ -231,9 +231,8 @@ export default function DashboardSettingsPage() {
                                 />
                                 <div>
                                     <Button size="sm" variant="outline">
-                                        {t('changePhoto')}
+                                        {t('profile.changePhoto')}
                                     </Button>
-                                    <p className="text-xs text-neutral-500 mt-2">{t('photoRequirements')}</p>
                                 </div>
                             </div>
                         </div>
@@ -241,7 +240,7 @@ export default function DashboardSettingsPage() {
                         {/* Name */}
                         <div className="grid md:grid-cols-2 gap-6">
                             <div>
-                                <label className="block text-sm font-medium text-neutral-700 mb-2">{t('firstName')}</label>
+                                <label className="block text-sm font-medium text-neutral-700 mb-2">{t('profile.firstName')}</label>
                                 <input
                                     type="text"
                                     value={profileData.firstName}
@@ -250,7 +249,7 @@ export default function DashboardSettingsPage() {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-neutral-700 mb-2">{t('lastName')}</label>
+                                <label className="block text-sm font-medium text-neutral-700 mb-2">{t('profile.lastName')}</label>
                                 <input
                                     type="text"
                                     value={profileData.lastName}
@@ -262,7 +261,7 @@ export default function DashboardSettingsPage() {
 
                         {/* Business Name */}
                         <div>
-                            <label className="block text-sm font-medium text-neutral-700 mb-2">{t('businessName')}</label>
+                            <label className="block text-sm font-medium text-neutral-700 mb-2">{t('profile.businessName')}</label>
                             <input
                                 type="text"
                                 value={profileData.businessName}
@@ -274,7 +273,7 @@ export default function DashboardSettingsPage() {
                         {/* Phone & Location */}
                         <div className="grid md:grid-cols-2 gap-6">
                             <div>
-                                <label className="block text-sm font-medium text-neutral-700 mb-2">{t('phone')}</label>
+                                <label className="block text-sm font-medium text-neutral-700 mb-2">{t('profile.phone')}</label>
                                 <input
                                     type="tel"
                                     value={profileData.phone}
@@ -283,7 +282,7 @@ export default function DashboardSettingsPage() {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-neutral-700 mb-2">{t('location')}</label>
+                                <label className="block text-sm font-medium text-neutral-700 mb-2">{t('profile.location')}</label>
                                 <input
                                     type="text"
                                     value={profileData.location}
@@ -295,7 +294,7 @@ export default function DashboardSettingsPage() {
 
                         {/* Bio */}
                         <div>
-                            <label className="block text-sm font-medium text-neutral-700 mb-2">{t('bio')}</label>
+                            <label className="block text-sm font-medium text-neutral-700 mb-2">{t('profile.bio')}</label>
                             <textarea
                                 rows={4}
                                 value={profileData.bio}
@@ -305,7 +304,7 @@ export default function DashboardSettingsPage() {
                         </div>
 
                         <Button onClick={handleSaveProfile} disabled={loading} size="lg">
-                            {loading ? t('saving') : t('saveChanges')}
+                            {loading ? t('saving') : t('profile.saveChanges')}
                         </Button>
                     </div>
                 )}
@@ -313,11 +312,11 @@ export default function DashboardSettingsPage() {
                 {/* Account Settings */}
                 {activeTab === 'account' && (
                     <div className="space-y-6">
-                        <h2 className="text-2xl font-bold text-neutral-900 mb-6">{t('accountSettings')}</h2>
+                        <h2 className="text-2xl font-bold text-neutral-900 mb-6">{t('account.subtitle')}</h2>
 
                         {/* Email */}
                         <div>
-                            <label className="block text-sm font-medium text-neutral-700 mb-2">{t('email')}</label>
+                            <label className="block text-sm font-medium text-neutral-700 mb-2">{t('account.email')}</label>
                             <input
                                 type="email"
                                 value={accountData.email}
@@ -327,11 +326,11 @@ export default function DashboardSettingsPage() {
                         </div>
 
                         <div className="border-t border-neutral-200 pt-6">
-                            <h3 className="text-lg font-semibold text-neutral-900 mb-4">{t('changePassword')}</h3>
+                            <h3 className="text-lg font-semibold text-neutral-900 mb-4">{t('account.changePassword')}</h3>
 
                             <div className="space-y-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-neutral-700 mb-2">{t('currentPassword')}</label>
+                                    <label className="block text-sm font-medium text-neutral-700 mb-2">{t('account.currentPassword')}</label>
                                     <input
                                         type="password"
                                         value={accountData.currentPassword}
@@ -341,7 +340,7 @@ export default function DashboardSettingsPage() {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-neutral-700 mb-2">{t('newPassword')}</label>
+                                    <label className="block text-sm font-medium text-neutral-700 mb-2">{t('account.newPassword')}</label>
                                     <input
                                         type="password"
                                         value={accountData.newPassword}
@@ -351,7 +350,7 @@ export default function DashboardSettingsPage() {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-neutral-700 mb-2">{t('confirmPassword')}</label>
+                                    <label className="block text-sm font-medium text-neutral-700 mb-2">{t('account.confirmPassword')}</label>
                                     <input
                                         type="password"
                                         value={accountData.confirmPassword}
@@ -363,14 +362,13 @@ export default function DashboardSettingsPage() {
                         </div>
 
                         <Button onClick={handleSaveAccount} disabled={loading} size="lg">
-                            {loading ? t('saving') : t('saveChanges')}
+                            {loading ? t('saving') : t('account.saveChanges')}
                         </Button>
 
                         <div className="border-t border-neutral-200 pt-6">
-                            <h3 className="text-lg font-semibold text-red-600 mb-3">{t('dangerZone')}</h3>
-                            <p className="text-sm text-neutral-600 mb-4">{t('dangerZoneDesc')}</p>
+                            <p className="text-sm text-neutral-600 mb-4">{t('account.deleteAccountDesc')}</p>
                             <Button variant="outline" className="border-red-300 text-red-600 hover:bg-red-50">
-                                {t('deleteAccount')}
+                                {t('account.deleteAccountButton')}
                             </Button>
                         </div>
                     </div>
@@ -379,11 +377,11 @@ export default function DashboardSettingsPage() {
                 {/* Service Settings */}
                 {activeTab === 'service' && (
                     <div className="space-y-6">
-                        <h2 className="text-2xl font-bold text-neutral-900 mb-6">{t('serviceSettings')}</h2>
+                        <h2 className="text-2xl font-bold text-neutral-900 mb-6">{t('service.subtitle')}</h2>
 
                         {/* Languages */}
                         <div>
-                            <label className="block text-sm font-medium text-neutral-700 mb-3">{t('languages')}</label>
+                            <label className="block text-sm font-medium text-neutral-700 mb-3">{t('service.languages.subtitle')}</label>
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                                 {availableLanguages.map((lang) => (
                                     <button
@@ -404,7 +402,7 @@ export default function DashboardSettingsPage() {
 
                         {/* Categories */}
                         <div>
-                            <label className="block text-sm font-medium text-neutral-700 mb-3">{t('categories')}</label>
+                            <label className="block text-sm font-medium text-neutral-700 mb-3">{t('service.categories.subtitle')}</label>
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                                 {categories.map((cat) => (
                                     <button
@@ -425,7 +423,7 @@ export default function DashboardSettingsPage() {
 
                         {/* Default Hourly Rate */}
                         <div>
-                            <label className="block text-sm font-medium text-neutral-700 mb-2">{t('defaultHourlyRate')}</label>
+                            <label className="block text-sm font-medium text-neutral-700 mb-2">{t('service.pricing.hourlyRate')}</label>
                             <div className="flex items-center gap-3">
                                 <input
                                     type="number"
@@ -438,7 +436,7 @@ export default function DashboardSettingsPage() {
                         </div>
 
                         <Button onClick={handleSaveService} disabled={loading} size="lg">
-                            {loading ? t('saving') : t('saveChanges')}
+                            {loading ? t('saving') : t('account.saveChanges')}
                         </Button>
                     </div>
                 )}
@@ -446,13 +444,13 @@ export default function DashboardSettingsPage() {
                 {/* Notification Settings */}
                 {activeTab === 'notifications' && (
                     <div className="space-y-6">
-                        <h2 className="text-2xl font-bold text-neutral-900 mb-6">{t('notificationSettings')}</h2>
+                        <h2 className="text-2xl font-bold text-neutral-900 mb-6">{t('notifications.subtitle')}</h2>
 
                         <div className="space-y-4">
                             <label className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
                                 <div>
-                                    <div className="font-medium text-neutral-900">{t('emailNotifications')}</div>
-                                    <div className="text-sm text-neutral-600">{t('emailNotificationsDesc')}</div>
+                                    <div className="font-medium text-neutral-900">{t('notifications.email.title')}</div>
+                                    <div className="text-sm text-neutral-600">{t('notifications.email.enable')}</div>
                                 </div>
                                 <input
                                     type="checkbox"
@@ -464,8 +462,8 @@ export default function DashboardSettingsPage() {
 
                             <label className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
                                 <div>
-                                    <div className="font-medium text-neutral-900">{t('newBookings')}</div>
-                                    <div className="text-sm text-neutral-600">{t('newBookingsDesc')}</div>
+                                    <div className="font-medium text-neutral-900">{t('notifications.types.newBookings')}</div>
+                                    <div className="text-sm text-neutral-600">{t('notifications.types.newBookingsDesc')}</div>
                                 </div>
                                 <input
                                     type="checkbox"
@@ -477,8 +475,8 @@ export default function DashboardSettingsPage() {
 
                             <label className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
                                 <div>
-                                    <div className="font-medium text-neutral-900">{t('messages')}</div>
-                                    <div className="text-sm text-neutral-600">{t('messagesDesc')}</div>
+                                    <div className="font-medium text-neutral-900">{t('notifications.types.messages')}</div>
+                                    <div className="text-sm text-neutral-600">{t('notifications.types.messagesDesc')}</div>
                                 </div>
                                 <input
                                     type="checkbox"
@@ -490,8 +488,8 @@ export default function DashboardSettingsPage() {
 
                             <label className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
                                 <div>
-                                    <div className="font-medium text-neutral-900">{t('reviews')}</div>
-                                    <div className="text-sm text-neutral-600">{t('reviewsDesc')}</div>
+                                    <div className="font-medium text-neutral-900">{t('notifications.types.reviews')}</div>
+                                    <div className="text-sm text-neutral-600">{t('notifications.types.reviewsDesc')}</div>
                                 </div>
                                 <input
                                     type="checkbox"
@@ -503,8 +501,8 @@ export default function DashboardSettingsPage() {
 
                             <label className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
                                 <div>
-                                    <div className="font-medium text-neutral-900">{t('promotions')}</div>
-                                    <div className="text-sm text-neutral-600">{t('promotionsDesc')}</div>
+                                    <div className="font-medium text-neutral-900">{t('notifications.types.promotions')}</div>
+                                    <div className="text-sm text-neutral-600">{t('notifications.types.promotionsDesc')}</div>
                                 </div>
                                 <input
                                     type="checkbox"
@@ -516,8 +514,8 @@ export default function DashboardSettingsPage() {
 
                             <label className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
                                 <div>
-                                    <div className="font-medium text-neutral-900">{t('smsNotifications')}</div>
-                                    <div className="text-sm text-neutral-600">{t('smsNotificationsDesc')}</div>
+                                    <div className="font-medium text-neutral-900">{t('notifications.sms.title')}</div>
+                                    <div className="text-sm text-neutral-600">{t('notifications.sms.subtitle')}</div>
                                 </div>
                                 <input
                                     type="checkbox"
@@ -529,7 +527,7 @@ export default function DashboardSettingsPage() {
                         </div>
 
                         <Button onClick={handleSaveNotifications} disabled={loading} size="lg">
-                            {loading ? t('saving') : t('saveChanges')}
+                            {loading ? t('saving') : t('account.saveChanges')}
                         </Button>
                     </div>
                 )}

@@ -40,7 +40,7 @@ export default function CustomerDashboardLayout({ children }: { children: ReactN
             )
         },
         {
-            name: t('settings'),
+            name: t('mySettings'),
             href: '/customer/settings',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

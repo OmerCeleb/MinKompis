@@ -289,7 +289,7 @@
     "myServices": "My Services",
     "myMessages": "Messages",
     "myReviews": "Reviews",
-    "settings": "Settings",
+    "mySettings": "Settings",
     "providerAccount": "Provider Account",
     "viewPublicProfile": "View Public Profile",
     "welcomeBack": "Welcome back, Ayşe!",
@@ -318,6 +318,184 @@
       "typeMessage": "Type your message...",
       "selectConversation": "Select a conversation",
       "selectConversationDesc": "Choose a conversation from the list to start messaging"
+    },
+
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Manage your account settings and preferences",
+
+      "tabs": {
+        "profile": "Profile Settings",
+        "account": "Account Security",
+        "service": "Service Settings",
+        "notifications": "Notifications"
+      },
+
+      "profile": {
+        "title": "Profile Information",
+        "subtitle": "Update your public profile information",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "businessName": "Business Name",
+        "businessNameHint": "Optional - Your professional business name",
+        "phone": "Phone Number",
+        "location": "Location",
+        "bio": "About You",
+        "bioHint": "Tell us about yourself and your services (max. 500 characters)",
+        "profilePhoto": "Profile Photo",
+        "changePhoto": "Change Photo",
+        "uploadPhoto": "Upload Photo",
+        "removePhoto": "Remove Photo",
+        "charactersLeft": "characters left",
+        "saveChanges": "Save changes"
+
+      },
+
+      "account": {
+        "title": "Account Security",
+        "subtitle": "Manage your login credentials and security settings",
+        "email": "Email Address",
+        "emailVerified": "Email verified",
+        "emailNotVerified": "Email not verified",
+        "verifyEmail": "Verify Email",
+        "changeEmail": "Change Email",
+        "currentPassword": "Current Password",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm New Password",
+        "changePassword": "Change Password",
+        "passwordRequirements": "Password must be at least 8 characters and include uppercase, lowercase, and numbers",
+        "twoFactor": "Two-Factor Authentication",
+        "twoFactorDesc": "Add an extra layer of security to your account",
+        "enable": "Enable",
+        "disable": "Disable",
+        "enabled": "Enabled",
+        "disabled": "Disabled",
+        "sessions": "Active Sessions",
+        "sessionsDesc": "Manage devices logged into your account",
+        "currentDevice": "Current device",
+        "lastActive": "Last active",
+        "signOutAll": "Sign Out All Devices",
+        "deleteAccount": "Delete Account",
+        "deleteAccountDesc": "Permanently delete your account. This action cannot be undone.",
+        "deleteAccountButton": "Delete My Account",
+        "saveChanges": "Save changes"
+      },
+
+      "service": {
+        "title": "Service Settings",
+        "subtitle": "Configure your service preferences and availability",
+        "languages": {
+          "title": "Languages You Speak",
+          "subtitle": "Select languages you can provide services in",
+          "addLanguage": "Add Language",
+          "removeLanguage": "Remove Language"
+        },
+        "categories": {
+          "title": "Service Categories",
+          "subtitle": "Select the categories of services you offer",
+          "selectCategories": "Select categories"
+        },
+        "pricing": {
+          "title": "Pricing",
+          "subtitle": "Set your hourly rate",
+          "hourlyRate": "Hourly Rate",
+          "currency": "SEK",
+          "priceHint": "Recommended range: 200-800 SEK/hour"
+        },
+        "availability": {
+          "title": "Availability",
+          "subtitle": "Set your working hours",
+          "monday": "Monday",
+          "tuesday": "Tuesday",
+          "wednesday": "Wednesday",
+          "thursday": "Thursday",
+          "friday": "Friday",
+          "saturday": "Saturday",
+          "sunday": "Sunday",
+          "closed": "Closed",
+          "setHours": "Set Hours",
+          "from": "From",
+          "to": "To",
+          "addTimeSlot": "Add Time Slot",
+          "autoAccept": "Auto-Accept Bookings",
+          "autoAcceptDesc": "New bookings will be automatically accepted"
+        }
+      },
+
+      "notifications": {
+        "title": "Notification Preferences",
+        "subtitle": "Choose when and how you want to be notified",
+        "email": {
+          "title": "Email Notifications",
+          "subtitle": "Receive notifications via email",
+          "enable": "Enable email notifications"
+        },
+        "sms": {
+          "title": "SMS Notifications",
+          "subtitle": "Receive notifications via SMS to your phone",
+          "enable": "Enable SMS notifications"
+        },
+        "types": {
+          "title": "Notification Types",
+          "newBookings": "New Bookings",
+          "newBookingsDesc": "When you receive a new booking request",
+          "messages": "Messages",
+          "messagesDesc": "When you receive a new message",
+          "reviews": "Reviews",
+          "reviewsDesc": "When you receive a new review",
+          "promotions": "Promotions and Updates",
+          "promotionsDesc": "Special offers and news from MinKompis",
+          "reminders": "Reminders",
+          "remindersDesc": "Reminders for upcoming appointments",
+          "marketing": "Marketing Emails",
+          "marketingDesc": "Tips, trends, and best practices"
+        }
+      },
+
+      "actions": {
+        "save": "Save Changes",
+        "cancel": "Cancel",
+        "saving": "Saving...",
+        "saved": "Saved!",
+        "error": "An error occurred",
+        "unsavedChanges": "You have unsaved changes",
+        "discardChanges": "Discard changes"
+      },
+
+      "messages": {
+        "profileUpdated": "Profile updated successfully!",
+        "accountUpdated": "Account settings updated!",
+        "serviceUpdated": "Service settings updated!",
+        "notificationsUpdated": "Notification preferences updated!",
+        "photoUploaded": "Photo uploaded!",
+        "photoRemoved": "Photo removed!",
+        "emailVerificationSent": "Verification email sent!",
+        "passwordChanged": "Password changed successfully!",
+        "sessionEnded": "Session ended",
+        "allSessionsEnded": "All sessions ended",
+        "error": "An error occurred. Please try again."
+      },
+
+      "confirmations": {
+        "deleteAccount": {
+          "title": "Delete Account",
+          "message": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently deleted.",
+          "confirm": "Yes, Delete My Account",
+          "cancel": "Cancel"
+        },
+        "signOutAll": {
+          "title": "Sign Out All Sessions",
+          "message": "Are you sure you want to sign out from all devices?",
+          "confirm": "Yes, Sign Out All Sessions",
+          "cancel": "Cancel"
+        },
+        "unsavedChanges": {
+          "title": "Unsaved Changes",
+          "message": "You have unsaved changes. Are you sure you want to leave this page?",
+          "confirm": "Yes, Leave",
+          "cancel": "Stay on Page"
+        }
+      }
     },
     "reviews": {
       "title": "Reviews",
