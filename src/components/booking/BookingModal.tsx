@@ -1,312 +1,290 @@
 // src/components/booking/BookingModal.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/shared';
+import { useBooking } from '@/hooks';
 
 interface BookingModalProps {
     isOpen: boolean;
     onClose: () => void;
     provider: {
         id: string;
-        firstName: string;
-        lastName: string;
+        name: string;
         avatar: string;
+        title: string;
         hourlyRate: number;
     };
-    service?: {
-        title: string;
-        duration: number;
-    };
+    serviceId: string;
 }
 
 export default function BookingModal({
                                          isOpen,
                                          onClose,
                                          provider,
-                                         service
+                                         serviceId
                                      }: BookingModalProps) {
     const t = useTranslations('booking');
     const tCommon = useTranslations('common');
 
-    const [formData, setFormData] = useState({
-        date: '',
-        time: '',
-        duration: service?.duration || 60,
-        message: '',
-        agreedToTerms: false
-    });
-    const [loading, setLoading] = useState(false);
+    const { createBooking, loading } = useBooking();
 
-    // Reset form when modal opens
-    useEffect(() => {
-        if (isOpen) {
-            setFormData({
-                date: '',
-                time: '',
-                duration: service?.duration || 60,
-                message: '',
-                agreedToTerms: false
-            });
-        }
-    }, [isOpen, service]);
+    const [selectedDate, setSelectedDate] = useState('');
+    const [selectedTime, setSelectedTime] = useState('');
+    const [duration, setDuration] = useState(60);
+    const [message, setMessage] = useState('');
+    const [agreedToTerms, setAgreedToTerms] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
 
-    // Prevent body scroll when modal is open
-    useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-        return () => {
-            document.body.style.overflow = 'unset';
-        };
-    }, [isOpen]);
+    // Available time slots
+    const timeSlots = [
+        '09:00', '10:00', '11:00', '12:00', '13:00', '14:00',
+        '15:00', '16:00', '17:00', '18:00', '19:00'
+    ];
 
-    if (!isOpen) return null;
-
-    const calculateTotal = () => {
-        return (provider.hourlyRate * formData.duration) / 60;
-    };
+    // Calculate total price
+    const totalPrice = (provider.hourlyRate / 60) * duration;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!formData.agreedToTerms) {
-            alert(t('mustAgreeToTerms'));
+        if (!agreedToTerms) {
+            alert(t('mustAgreeToTerms')); // TODO: Replace with toast
             return;
         }
 
-        setLoading(true);
-
-        // TODO: Backend integration
-        console.log('Booking request:', {
+        const result = await createBooking({
+            serviceId,
             providerId: provider.id,
-            ...formData,
-            totalPrice: calculateTotal()
+            date: selectedDate,
+            time: selectedTime,
+            duration,
+            message,
+            totalAmount: totalPrice
         });
 
-        setTimeout(() => {
-            setLoading(false);
-            alert(t('bookingSuccess'));
-            onClose();
-        }, 1500);
+        if (result.success) {
+            setShowSuccess(true);
+            setTimeout(() => {
+                onClose();
+                setShowSuccess(false);
+                // Reset form
+                setSelectedDate('');
+                setSelectedTime('');
+                setDuration(60);
+                setMessage('');
+                setAgreedToTerms(false);
+            }, 2000);
+        }
     };
 
-    // Generate time slots (09:00 - 20:00, every 30 min)
-    const timeSlots = [];
-    for (let hour = 9; hour <= 20; hour++) {
-        for (let min = 0; min < 60; min += 30) {
-            if (hour === 20 && min > 0) break;
-            const time = `${hour.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}`;
-            timeSlots.push(time);
-        }
+    if (!isOpen) return null;
+
+    // Success message
+    if (showSuccess) {
+        return (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+                <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center animate-fade-in">
+                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <h3 className="text-2xl font-bold text-neutral-900 mb-2">
+                        Success!
+                    </h3>
+                    <p className="text-neutral-600">
+                        {t('bookingSuccess')}
+                    </p>
+                </div>
+            </div>
+        );
     }
 
-    // Get min date (today)
-    const today = new Date().toISOString().split('T')[0];
-
     return (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
-            {/* Backdrop */}
-            <div
-                className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
-                onClick={onClose}
-            />
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 overflow-y-auto">
+            <div className="bg-white rounded-2xl max-w-2xl w-full my-8">
 
-            {/* Modal */}
-            <div className="flex min-h-full items-center justify-center p-4">
-                <div
-                    className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-                    onClick={(e) => e.stopPropagation()}
-                >
+                {/* Header */}
+                <div className="flex items-center justify-between p-6 border-b border-neutral-200">
+                    <div className="flex items-center gap-4">
+                        <img
+                            src={provider.avatar}
+                            alt={provider.name}
+                            className="w-12 h-12 rounded-full"
+                        />
+                        <div>
+                            <h2 className="text-xl font-bold text-neutral-900">
+                                {t('bookAppointment')}
+                            </h2>
+                            <p className="text-sm text-neutral-600">
+                                {provider.name} - {provider.title}
+                            </p>
+                        </div>
+                    </div>
+                    <button
+                        onClick={onClose}
+                        className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+                    >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
 
-                    {/* Header */}
-                    <div className="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between rounded-t-2xl z-10">
-                        <h2 className="text-2xl font-bold text-neutral-900">
-                            {t('bookAppointment')}
-                        </h2>
-                        <button
-                            onClick={onClose}
-                            className="w-10 h-10 rounded-full hover:bg-neutral-100 transition-colors flex items-center justify-center"
-                        >
-                            <svg className="w-6 h-6 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
+                {/* Body */}
+                <form onSubmit={handleSubmit} className="p-6 space-y-6">
+
+                    {/* Date Selection */}
+                    <div>
+                        <label className="block text-sm font-medium text-neutral-700 mb-2">
+                            {t('selectDate')}
+                        </label>
+                        <input
+                            type="date"
+                            value={selectedDate}
+                            onChange={(e) => setSelectedDate(e.target.value)}
+                            min={new Date().toISOString().split('T')[0]}
+                            required
+                            className="w-full px-4 py-3 border border-neutral-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        />
                     </div>
 
-                    {/* Provider Info */}
-                    <div className="px-6 py-4 bg-neutral-50 border-b border-neutral-200">
-                        <div className="flex items-center gap-4">
-                            <img
-                                src={provider.avatar}
-                                alt={`${provider.firstName} ${provider.lastName}`}
-                                className="w-16 h-16 rounded-full object-cover ring-4 ring-white"
-                            />
-                            <div className="flex-1">
-                                <h3 className="font-semibold text-lg text-neutral-900">
-                                    {provider.firstName} {provider.lastName}
-                                </h3>
-                                {service && (
-                                    <p className="text-sm text-neutral-600">{service.title}</p>
-                                )}
-                                <p className="text-sm font-medium text-primary-600 mt-1">
-                                    {provider.hourlyRate} SEK / {t('hour')}
+                    {/* Time Selection */}
+                    <div>
+                        <label className="block text-sm font-medium text-neutral-700 mb-2">
+                            {t('selectTime')}
+                        </label>
+                        <div className="grid grid-cols-4 gap-2">
+                            {timeSlots.map(time => (
+                                <button
+                                    key={time}
+                                    type="button"
+                                    onClick={() => setSelectedTime(time)}
+                                    className={`px-4 py-2 rounded-lg border transition-all ${
+                                        selectedTime === time
+                                            ? 'bg-primary-600 text-white border-primary-600'
+                                            : 'bg-white text-neutral-700 border-neutral-300 hover:border-primary-500'
+                                    }`}
+                                >
+                                    {time}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Duration */}
+                    <div>
+                        <label className="block text-sm font-medium text-neutral-700 mb-2">
+                            {t('sessionDuration')}
+                        </label>
+                        <select
+                            value={duration}
+                            onChange={(e) => setDuration(Number(e.target.value))}
+                            className="w-full px-4 py-3 border border-neutral-300 rounded-xl focus:ring-2 focus:ring-primary-500"
+                        >
+                            <option value={30}>30 {t('minutes')}</option>
+                            <option value={60}>1 {t('hour')}</option>
+                            <option value={90}>1.5 {t('hour')}</option>
+                            <option value={120}>2 {t('hour')}</option>
+                        </select>
+                    </div>
+
+                    {/* Message */}
+                    <div>
+                        <label className="block text-sm font-medium text-neutral-700 mb-2">
+                            {t('message')} <span className="text-neutral-500">({tCommon('optional')})</span>
+                        </label>
+                        <textarea
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            placeholder={t('messagePlaceholder')}
+                            rows={4}
+                            className="w-full px-4 py-3 border border-neutral-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+                        />
+                        <p className="mt-2 text-xs text-neutral-500">
+                            {t('messageHint')}
+                        </p>
+                    </div>
+
+                    {/* Price Summary */}
+                    <div className="bg-neutral-50 rounded-xl p-4">
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-neutral-600">{t('hourlyRate')}</span>
+                            <span className="font-semibold">{provider.hourlyRate} SEK/{t('hour')}</span>
+                        </div>
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-neutral-600">{t('duration')}</span>
+                            <span className="font-semibold">{duration} {t('minutes')}</span>
+                        </div>
+                        <div className="border-t border-neutral-200 pt-2 mt-2">
+                            <div className="flex justify-between items-center">
+                                <span className="font-semibold text-lg">{t('totalPrice')}</span>
+                                <span className="font-bold text-2xl text-primary-600">
+                  {Math.round(totalPrice)} SEK
+                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Terms Agreement */}
+                    <label className="flex items-start gap-3 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            checked={agreedToTerms}
+                            onChange={(e) => setAgreedToTerms(e.target.checked)}
+                            className="mt-1 w-4 h-4 text-primary-600 rounded"
+                        />
+                        <span className="text-sm text-neutral-600">
+              {t('agreeToTerms')}{' '}
+                            <a href="/terms" target="_blank" className="text-primary-600 hover:underline">
+                {t('termsAndConditions')}
+              </a>{' '}
+                            {t('and')}{' '}
+                            <a href="/privacy" target="_blank" className="text-primary-600 hover:underline">
+                {t('privacyPolicy')}
+              </a>
+            </span>
+                    </label>
+
+                    {/* Notice */}
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <div className="flex gap-3">
+                            <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <div>
+                                <p className="font-semibold text-blue-900 text-sm">
+                                    {t('importantNotice')}
+                                </p>
+                                <p className="text-blue-800 text-sm mt-1">
+                                    {t('bookingNotice')}
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    {/* Form */}
-                    <form onSubmit={handleSubmit} className="p-6 space-y-6">
-
-                        {/* Date Selection */}
-                        <div>
-                            <label className="block text-sm font-medium text-neutral-900 mb-2">
-                                {t('selectDate')} *
-                            </label>
-                            <input
-                                type="date"
-                                required
-                                min={today}
-                                value={formData.date}
-                                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                                className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                            />
-                        </div>
-
-                        {/* Time Selection */}
-                        <div>
-                            <label className="block text-sm font-medium text-neutral-900 mb-2">
-                                {t('selectTime')} *
-                            </label>
-                            <select
-                                required
-                                value={formData.time}
-                                onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                                className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                            >
-                                <option value="">{t('chooseTime')}</option>
-                                {timeSlots.map(time => (
-                                    <option key={time} value={time}>{time}</option>
-                                ))}
-                            </select>
-                        </div>
-
-                        {/* Duration */}
-                        <div>
-                            <label className="block text-sm font-medium text-neutral-900 mb-2">
-                                {t('duration')} *
-                            </label>
-                            <select
-                                required
-                                value={formData.duration}
-                                onChange={(e) => setFormData({ ...formData, duration: parseInt(e.target.value) })}
-                                className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                            >
-                                <option value={30}>30 {t('minutes')}</option>
-                                <option value={45}>45 {t('minutes')}</option>
-                                <option value={60}>60 {t('minutes')}</option>
-                                <option value={90}>90 {t('minutes')}</option>
-                                <option value={120}>120 {t('minutes')}</option>
-                            </select>
-                        </div>
-
-                        {/* Message */}
-                        <div>
-                            <label className="block text-sm font-medium text-neutral-900 mb-2">
-                                {t('message')} ({tCommon('optional')})
-                            </label>
-                            <textarea
-                                rows={4}
-                                value={formData.message}
-                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                placeholder={t('messagePlaceholder')}
-                                className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
-                            />
-                            <p className="text-xs text-neutral-500 mt-1">
-                                {t('messageHint')}
-                            </p>
-                        </div>
-
-                        {/* Price Summary */}
-                        <div className="bg-primary-50 border border-primary-200 rounded-xl p-4">
-                            <div className="flex items-center justify-between mb-3">
-                                <span className="text-sm text-neutral-700">{t('sessionDuration')}:</span>
-                                <span className="font-medium text-neutral-900">{formData.duration} {t('minutes')}</span>
-                            </div>
-                            <div className="flex items-center justify-between mb-3">
-                                <span className="text-sm text-neutral-700">{t('hourlyRate')}:</span>
-                                <span className="font-medium text-neutral-900">{provider.hourlyRate} SEK</span>
-                            </div>
-                            <div className="h-px bg-primary-300 my-3"></div>
-                            <div className="flex items-center justify-between">
-                                <span className="text-base font-semibold text-neutral-900">{t('totalPrice')}:</span>
-                                <span className="text-2xl font-bold text-primary-600">{calculateTotal()} SEK</span>
-                            </div>
-                        </div>
-
-                        {/* Terms Agreement */}
-                        <div className="bg-neutral-50 rounded-lg p-4">
-                            <label className="flex items-start gap-3 cursor-pointer">
-                                <input
-                                    type="checkbox"
-                                    checked={formData.agreedToTerms}
-                                    onChange={(e) => setFormData({ ...formData, agreedToTerms: e.target.checked })}
-                                    className="mt-1 w-4 h-4 text-primary-600 border-neutral-300 rounded focus:ring-primary-500"
-                                />
-                                <span className="text-sm text-neutral-700">
-                  {t('agreeToTerms')}{' '}
-                                    <a href="/terms" target="_blank" className="text-primary-600 hover:text-primary-700 font-medium">
-                    {t('termsAndConditions')}
-                  </a>
-                                    {' '}{t('and')}{' '}
-                                    <a href="/privacy" target="_blank" className="text-primary-600 hover:text-primary-700 font-medium">
-                    {t('privacyPolicy')}
-                  </a>
-                </span>
-                            </label>
-                        </div>
-
-                        {/* Important Notice */}
-                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                            <div className="flex gap-3">
-                                <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                                </svg>
-                                <div className="text-sm text-blue-800">
-                                    <p className="font-semibold mb-1">{t('importantNotice')}</p>
-                                    <p>{t('bookingNotice')}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Actions */}
-                        <div className="flex gap-3 pt-2">
-                            <Button
-                                type="button"
-                                variant="outline"
-                                onClick={onClose}
-                                fullWidth
-                                size="lg"
-                            >
-                                {tCommon('cancel')}
-                            </Button>
-                            <Button
-                                type="submit"
-                                disabled={loading || !formData.agreedToTerms}
-                                fullWidth
-                                size="lg"
-                            >
-                                {loading ? t('sending') : t('sendRequest')}
-                            </Button>
-                        </div>
-
-                    </form>
-
-                </div>
+                    {/* Submit Button */}
+                    <div className="flex gap-3">
+                        <Button
+                            type="button"
+                            variant="outline"
+                            onClick={onClose}
+                            fullWidth
+                            disabled={loading}
+                        >
+                            {tCommon('cancel')}
+                        </Button>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            disabled={loading || !selectedDate || !selectedTime}
+                        >
+                            {loading ? t('sending') : t('sendRequest')}
+                        </Button>
+                    </div>
+                </form>
             </div>
         </div>
     );

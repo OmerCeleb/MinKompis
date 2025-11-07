@@ -1,186 +1,261 @@
+// src/app/[locale]/services/page.tsx
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { mockProviders, filterProviders, type Provider } from '@/lib/mockData';
-import SearchBar from '@/components/services/SearchBar';
-import FilterSidebar from '@/components/services/FilterSidebar';
+import Link from 'next/link';
 import ServiceCard from '@/components/services/ServiceCard';
 import Pagination from '@/components/services/Pagination';
+import { useProviders, usePagination, useDebouncedValue } from '@/hooks';
 
 export default function ServicesPage() {
     const t = useTranslations('services');
     const tCommon = useTranslations('common');
+    const tCat = useTranslations('categories');
 
-    // State
-    const [searchQuery, setSearchQuery] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('all');
-    const [selectedLanguage, setSelectedLanguage] = useState('all');
-    const [selectedLocation, setSelectedLocation] = useState('all');
-    const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
-    const [verifiedOnly, setVerifiedOnly] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [showFilters, setShowFilters] = useState(false);
+    // Search state
+    const [searchTerm, setSearchTerm] = useState('');
+    const debouncedSearch = useDebouncedValue(searchTerm, 500);
 
-    const itemsPerPage = 12;
-
-    // Filter providers
-    const filteredProviders = useMemo(() => {
-        return filterProviders(mockProviders, {
-            search: searchQuery,
-            category: selectedCategory,
-            language: selectedLanguage,
-            location: selectedLocation,
-            minPrice: priceRange.min,
-            maxPrice: priceRange.max,
-            verifiedOnly
-        });
-    }, [searchQuery, selectedCategory, selectedLanguage, selectedLocation, priceRange, verifiedOnly]);
+    // Get providers with filters
+    const {
+        providers,
+        loading,
+        error,
+        total,
+        filters,
+        updateFilters,
+        clearFilters,
+        sortBy,
+        setSortBy
+    } = useProviders({
+        searchTerm: debouncedSearch
+    });
 
     // Pagination
-    const totalPages = Math.ceil(filteredProviders.length / itemsPerPage);
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentProviders = filteredProviders.slice(startIndex, endIndex);
+    const {
+        currentItems,
+        currentPage,
+        totalPages,
+        goToPage,
+        startIndex,
+        endIndex
+    } = usePagination(providers, 12);
 
-    // Reset to page 1 when filters change
-    const handleFilterChange = () => {
-        setCurrentPage(1);
+    // Categories
+    const categories = [
+        { id: 'all', name: t('allCategories'), icon: '🔍' },
+        { id: 'education', name: tCat('education'), icon: '📚' },
+        { id: 'home', name: tCat('home'), icon: '🏠' },
+        { id: 'official', name: tCat('official'), icon: '📋' },
+        { id: 'health', name: tCat('health'), icon: '💪' },
+        { id: 'business', name: tCat('business'), icon: '💼' },
+        { id: 'creative', name: tCat('creative'), icon: '🎨' }
+    ];
+
+    // Languages
+    const languages = [
+        { code: 'all', name: t('allLanguages'), flag: '🌍' },
+        { code: 'sv', name: 'Svenska', flag: '🇸🇪' },
+        { code: 'en', name: 'English', flag: '🇬🇧' },
+        { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
+        { code: 'ar', name: 'العربية', flag: '🇸🇦' }
+    ];
+
+    // Sort options
+    const sortOptions = [
+        { value: 'recommended', label: t('recommended') },
+        { value: 'rating', label: t('highestRated') },
+        { value: 'price-low', label: t('lowestPrice') },
+        { value: 'price-high', label: t('highestPrice') },
+        { value: 'reviews', label: t('mostReviews') }
+    ];
+
+    const handleSortChange = (value: string) => {
+        if (value === 'price-low') {
+            setSortBy({ field: 'price', order: 'asc' });
+        } else if (value === 'price-high') {
+            setSortBy({ field: 'price', order: 'desc' });
+        } else if (value === 'rating') {
+            setSortBy({ field: 'rating', order: 'desc' });
+        } else if (value === 'reviews') {
+            setSortBy({ field: 'reviewCount', order: 'desc' });
+        } else {
+            setSortBy({ field: 'recommended', order: 'desc' });
+        }
     };
 
+    if (error) {
+        return (
+            <div className="min-h-screen bg-neutral-50 pt-24 pb-12">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+                        <p className="text-red-600 font-semibold">Error loading providers</p>
+                        <p className="text-red-500 mt-2">{error}</p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className="min-h-screen bg-gradient-to-b from-neutral-50 to-white pt-24 pb-12">
+        <div className="min-h-screen bg-neutral-50 pt-24 pb-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
                 <div className="mb-8">
-                    <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
+                    <h1 className="text-4xl font-bold text-neutral-900 mb-2">
                         {t('title')}
                     </h1>
-                    <p className="text-xl text-neutral-600">
+                    <p className="text-lg text-neutral-600">
                         {t('subtitle')}
                     </p>
                 </div>
 
-                {/* Search Bar */}
-                <SearchBar
-                    value={searchQuery}
-                    onChange={(value) => {
-                        setSearchQuery(value);
-                        handleFilterChange();
-                    }}
-                    onToggleFilters={() => setShowFilters(!showFilters)}
-                    showFilters={showFilters}
-                    placeholder={t('searchPlaceholder')}
-                />
+                {/* Search & Filters */}
+                <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
 
-                {/* Results Count */}
-                <div className="flex items-center justify-between mb-6">
-                    <p className="text-neutral-600">
-                        <span className="font-semibold text-neutral-900">{filteredProviders.length}</span>{' '}
-                        {filteredProviders.length === 1 ? t('providerFound') : t('providersFound')}
-                    </p>
+                    {/* Search Bar */}
+                    <div className="mb-6">
+                        <div className="relative">
+                            <input
+                                type="text"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                placeholder={t('searchPlaceholder')}
+                                className="w-full pl-12 pr-4 py-3 border border-neutral-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                            />
+                            <svg
+                                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-neutral-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
 
-                    {/* Sort */}
-                    <select className="px-4 py-2 border border-neutral-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                        <option>{t('sortBy')}: {t('recommended')}</option>
-                        <option>{t('highestRated')}</option>
-                        <option>{t('lowestPrice')}</option>
-                        <option>{t('highestPrice')}</option>
-                        <option>{t('mostReviews')}</option>
-                    </select>
-                </div>
+                    {/* Filter Chips */}
+                    <div className="flex flex-wrap gap-3 mb-4">
 
-                {/* Main Content */}
-                <div className="flex gap-8">
+                        {/* Category Filter */}
+                        <select
+                            value={filters.category || 'all'}
+                            onChange={(e) => updateFilters({ category: e.target.value === 'all' ? undefined : e.target.value })}
+                            className="px-4 py-2 border border-neutral-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
+                        >
+                            {categories.map(cat => (
+                                <option key={cat.id} value={cat.id}>
+                                    {cat.icon} {cat.name}
+                                </option>
+                            ))}
+                        </select>
 
-                    {/* Filter Sidebar */}
-                    <FilterSidebar
-                        show={showFilters}
-                        selectedCategory={selectedCategory}
-                        selectedLanguage={selectedLanguage}
-                        selectedLocation={selectedLocation}
-                        priceRange={priceRange}
-                        verifiedOnly={verifiedOnly}
-                        onCategoryChange={(cat) => {
-                            setSelectedCategory(cat);
-                            handleFilterChange();
-                        }}
-                        onLanguageChange={(lang) => {
-                            setSelectedLanguage(lang);
-                            handleFilterChange();
-                        }}
-                        onLocationChange={(loc) => {
-                            setSelectedLocation(loc);
-                            handleFilterChange();
-                        }}
-                        onPriceRangeChange={(range) => {
-                            setPriceRange(range);
-                            handleFilterChange();
-                        }}
-                        onVerifiedChange={(verified) => {
-                            setVerifiedOnly(verified);
-                            handleFilterChange();
-                        }}
-                        onClearFilters={() => {
-                            setSearchQuery('');
-                            setSelectedCategory('all');
-                            setSelectedLanguage('all');
-                            setSelectedLocation('all');
-                            setPriceRange({ min: 0, max: 1000 });
-                            setVerifiedOnly(false);
-                            handleFilterChange();
-                        }}
-                    />
+                        {/* Language Filter */}
+                        <select
+                            value={filters.language || 'all'}
+                            onChange={(e) => updateFilters({ language: e.target.value === 'all' ? undefined : e.target.value })}
+                            className="px-4 py-2 border border-neutral-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
+                        >
+                            {languages.map(lang => (
+                                <option key={lang.code} value={lang.code}>
+                                    {lang.flag} {lang.name}
+                                </option>
+                            ))}
+                        </select>
 
-                    {/* Provider Grid */}
-                    <div className="flex-1">
-                        {currentProviders.length > 0 ? (
-                            <>
-                                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {currentProviders.map((provider) => (
-                                        <ServiceCard key={provider.id} provider={provider} />
-                                    ))}
-                                </div>
+                        {/* Verified Only */}
+                        <label className="flex items-center gap-2 px-4 py-2 border border-neutral-300 rounded-lg text-sm cursor-pointer hover:bg-neutral-50">
+                            <input
+                                type="checkbox"
+                                checked={filters.verifiedOnly || false}
+                                onChange={(e) => updateFilters({ verifiedOnly: e.target.checked || undefined })}
+                                className="w-4 h-4 text-primary-600 rounded"
+                            />
+                            <span>{t('verifiedOnly')}</span>
+                        </label>
 
-                                {/* Pagination */}
-                                {totalPages > 1 && (
-                                    <div className="mt-12">
-                                        <Pagination
-                                            currentPage={currentPage}
-                                            totalPages={totalPages}
-                                            onPageChange={setCurrentPage}
-                                        />
-                                    </div>
-                                )}
-                            </>
-                        ) : (
-                            <div className="text-center py-16">
-                                <div className="w-24 h-24 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                                    <svg className="w-12 h-12 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
-                                </div>
-                                <h3 className="text-2xl font-semibold text-neutral-900 mb-2">{t('noProvidersFound')}</h3>
-                                <p className="text-neutral-600 mb-6">{t('tryAdjusting')}</p>
-                                <button
-                                    onClick={() => {
-                                        setSearchQuery('');
-                                        setSelectedCategory('all');
-                                        setSelectedLanguage('all');
-                                        setSelectedLocation('all');
-                                        setPriceRange({ min: 0, max: 1000 });
-                                        setVerifiedOnly(false);
-                                        handleFilterChange();
-                                    }}
-                                    className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium"
-                                >
-                                    {t('clearAll')}
-                                </button>
-                            </div>
+                        {/* Clear Filters */}
+                        {(filters.category || filters.language || filters.verifiedOnly) && (
+                            <button
+                                onClick={clearFilters}
+                                className="px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                            >
+                                {t('clearAll')}
+                            </button>
                         )}
                     </div>
+
+                    {/* Sort & Results Count */}
+                    <div className="flex items-center justify-between">
+                        <p className="text-sm text-neutral-600">
+                            {total > 0 ? (
+                                <>
+                                    Showing {startIndex}-{endIndex} of <strong>{total}</strong> {total === 1 ? t('providerFound') : t('providersFound')}
+                                </>
+                            ) : (
+                                t('noProvidersFound')
+                            )}
+                        </p>
+
+                        <select
+                            value={`${sortBy.field}${sortBy.field === 'price' ? `-${sortBy.order === 'asc' ? 'low' : 'high'}` : ''}`}
+                            onChange={(e) => handleSortChange(e.target.value)}
+                            className="px-4 py-2 border border-neutral-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
+                        >
+                            {sortOptions.map(option => (
+                                <option key={option.value} value={option.value}>
+                                    {t('sortBy')}: {option.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
+
+                {/* Loading State */}
+                {loading ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {[...Array(6)].map((_, i) => (
+                            <div key={i} className="bg-white rounded-xl h-96 animate-pulse"></div>
+                        ))}
+                    </div>
+                ) : total === 0 ? (
+                    /* Empty State */
+                    <div className="text-center py-16">
+                        <div className="text-6xl mb-4">🔍</div>
+                        <h3 className="text-2xl font-bold text-neutral-900 mb-2">
+                            {t('noProvidersFound')}
+                        </h3>
+                        <p className="text-neutral-600 mb-6">
+                            {t('tryAdjusting')}
+                        </p>
+                        <button
+                            onClick={clearFilters}
+                            className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+                        >
+                            {t('clearAll')}
+                        </button>
+                    </div>
+                ) : (
+                    <>
+                        {/* Provider Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            {currentItems.map(provider => (
+                                <ServiceCard key={provider.id} provider={provider} />
+                            ))}
+                        </div>
+
+                        {/* Pagination */}
+                        {totalPages > 1 && (
+                            <Pagination
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                onPageChange={goToPage}
+                            />
+                        )}
+                    </>
+                )}
             </div>
         </div>
     );
