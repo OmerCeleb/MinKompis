@@ -16,5 +16,9 @@ export { useLocalStorage } from './useLocalStorage';
 export { useModal } from './useModal';
 export { useMediaQuery } from './useMediaQuery';
 
+// Toast hook from context
+export { useToast } from '@/contexts/ToastContext';
+export type { Toast, ToastType, ToastPosition } from '@/contexts/ToastContext';
+
 // Usage:
-// import { useAuth, useProviders, useBooking, type Provider } from '@/hooks';
+// import { useAuth, useProviders, useBooking, useToast, type Provider } from '@/hooks';

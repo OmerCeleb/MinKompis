@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/shared';
-import { useBooking } from '@/hooks';
+import { useBooking, useToast } from '@/hooks';
 
 export default function DashboardBookingsPage() {
     const t = useTranslations('dashboard.bookings');

@@ -5,25 +5,34 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Button } from '@/components/shared';
-import { useAuth } from '@/hooks';
+import { useAuth, useToast } from '@/hooks';
 
 export default function LoginPage() {
     const t = useTranslations('auth');
     const tCommon = useTranslations('common');
 
     const { login, loginWithBankID, loading, error } = useAuth();
+    const { showToast } = useToast();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await login({ email, password });
-        // Başarılı olursa useAuth otomatik yönlendirecek
+        const result = await login({ email, password });
+
+        if (result.success) {
+            showToast('Welcome back! 🎉', 'success');
+        } else {
+            showToast(result.error || 'Login failed', 'error');
+        }
     };
 
     const handleBankID = async () => {
-        await loginWithBankID();
+        const result = await loginWithBankID();
+        if (!result.success) {
+            showToast('BankID login not available yet', 'info');
+        }
     };
 
     return (

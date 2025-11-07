@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Button } from '@/components/shared';
-import { useAuth } from '@/hooks';
+import { useAuth, useToast } from '@/hooks';
 
 export default function CustomerRegisterPage() {
     const t = useTranslations('auth');

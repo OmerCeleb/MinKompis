@@ -1,521 +1,375 @@
+// src/app/[locale]/auth/register/provider/page.tsx
 'use client';
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Button } from '@/components/shared';
+import { useAuth } from '@/hooks';
 
 export default function ProviderRegisterPage() {
-  const t = useTranslations('auth');
-  const tCommon = useTranslations('common');
-  
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
-    businessName: '',
-    languages: [] as string[],
-    serviceCategory: '',
-    profilePhoto: null as File | null,
-    profilePhotoPreview: '',
-    portfolioPhotos: [] as File[],
-    portfolioPreviewUrls: [] as string[],
-    bio: ''
-  });
-  const [loading, setLoading] = useState(false);
+    const t = useTranslations('auth');
+    const tCommon = useTranslations('common');
 
-  const availableLanguages = [
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'sv', name: 'Svenska', flag: '🇸🇪' },
-    { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
-    { code: 'ar', name: 'العربية', flag: '🇸🇦' },
-    { code: 'es', name: 'Español', flag: '🇪🇸' },
-    { code: 'so', name: 'Soomaali', flag: '🇸🇴' },
-  ];
+    const { register, loginWithBankID, loading, error } = useAuth();
 
-  const tCategories = useTranslations('categories');
-  const categories = [
-    { id: 'education', name: tCategories('education'), icon: '📚' },
-    { id: 'home', name: tCategories('home'), icon: '🏠' },
-    { id: 'official', name: tCategories('official'), icon: '📋' },
-    { id: 'health', name: tCategories('health'), icon: '💪' },
-    { id: 'business', name: tCategories('business'), icon: '💼' },
-    { id: 'creative', name: tCategories('creative'), icon: '🎨' },
-  ];
+    const [step, setStep] = useState(1);
+    const [formData, setFormData] = useState({
+        // Step 1: Basic Info
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        password: '',
+        confirmPassword: '',
 
-  const toggleLanguage = (code: string) => {
-    setFormData(prev => ({
-      ...prev,
-      languages: prev.languages.includes(code)
-        ? prev.languages.filter(l => l !== code)
-        : [...prev.languages, code]
-    }));
-  };
+        // Step 2: Service Details
+        languages: [] as string[],
+        categories: [] as string[],
 
-  const handleProfilePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setFormData(prev => ({
-        ...prev,
-        profilePhoto: file,
-        profilePhotoPreview: URL.createObjectURL(file)
-      }));
-    }
-  };
-
-  const handlePortfolioPhotosChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    const newPreviewUrls = files.map(file => URL.createObjectURL(file));
-    
-    setFormData(prev => ({
-      ...prev,
-      portfolioPhotos: [...prev.portfolioPhotos, ...files],
-      portfolioPreviewUrls: [...prev.portfolioPreviewUrls, ...newPreviewUrls]
-    }));
-  };
-
-  const removePortfolioPhoto = (index: number) => {
-    setFormData(prev => ({
-      ...prev,
-      portfolioPhotos: prev.portfolioPhotos.filter((_item, i) => i !== index),
-      portfolioPreviewUrls: prev.portfolioPreviewUrls.filter((_item, i) => i !== index)
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (step < 3) {
-      setStep(step + 1);
-      return;
-    }
-    
-    setLoading(true);
-    
-    const submitData = new FormData();
-    submitData.append('firstName', formData.firstName);
-    submitData.append('lastName', formData.lastName);
-    submitData.append('email', formData.email);
-    submitData.append('phone', formData.phone);
-    submitData.append('password', formData.password);
-    submitData.append('businessName', formData.businessName);
-    submitData.append('languages', JSON.stringify(formData.languages));
-    submitData.append('serviceCategory', formData.serviceCategory);
-    submitData.append('bio', formData.bio);
-    
-    if (formData.profilePhoto) {
-      submitData.append('profilePhoto', formData.profilePhoto);
-    }
-    
-    formData.portfolioPhotos.forEach((photo, index) => {
-      submitData.append(`portfolioPhoto${index}`, photo);
+        // Step 3: Profile
+        bio: '',
+        profilePhoto: null as File | null
     });
-    
-    console.log('Provider registration:', Object.fromEntries(submitData));
-    
-    setTimeout(() => {
-      setLoading(false);
-      alert('Registration will be connected to backend');
-    }, 1000);
-  };
 
-  const handleBankID = () => {
-    alert('BankID registration coming soon!');
-  };
+    const availableLanguages = [
+        { code: 'sv', name: 'Svenska', flag: '🇸🇪' },
+        { code: 'en', name: 'English', flag: '🇬🇧' },
+        { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
+        { code: 'ar', name: 'العربية', flag: '🇸🇦' }
+    ];
 
-  return (
-    <div className="bg-white rounded-2xl shadow-2xl p-8 border border-neutral-100 max-w-2xl w-full mx-auto">
-      
-      <div className="text-center mb-6">
-        <Link href="/" className="inline-flex items-center gap-2.5 mb-4">
-          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-            <span className="text-white text-xl font-bold">M</span>
-          </div>
-        </Link>
-        <h1 className="text-2xl font-bold text-neutral-900 mb-2">
-          {t('registerProvider')}
-        </h1>
-        <p className="text-sm text-neutral-600">
-          {t('providerDesc')}
-        </p>
-      </div>
+    const categories = [
+        { id: 'education', name: 'Education & Tutoring', icon: '📚' },
+        { id: 'home', name: 'Home Services', icon: '🏠' },
+        { id: 'official', name: 'Official Procedures', icon: '📋' },
+        { id: 'health', name: 'Health & Fitness', icon: '💪' },
+        { id: 'business', name: 'Business Services', icon: '💼' },
+        { id: 'creative', name: 'Creative Services', icon: '🎨' }
+    ];
 
-      <div className="flex items-center justify-center gap-2 mb-8">
-        {[1, 2, 3].map((s) => (
-          <div key={s} className="flex items-center">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${
-              step >= s ? 'bg-blue-500 text-white' : 'bg-neutral-200 text-neutral-500'
-            }`}>
-              {s}
-            </div>
-            {s < 3 && (
-              <div className={`w-16 h-1 mx-1 transition-all ${
-                step > s ? 'bg-blue-500' : 'bg-neutral-200'
-              }`}></div>
-            )}
-          </div>
-        ))}
-      </div>
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }));
+    };
 
-      <div className="text-center mb-6">
-        <h2 className="text-lg font-semibold text-neutral-900">
-          {step === 1 && t('step1Title')}
-          {step === 2 && t('step2Title')}
-          {step === 3 && t('step3Title')}
-        </h2>
-      </div>
+    const toggleLanguage = (code: string) => {
+        setFormData(prev => ({
+            ...prev,
+            languages: prev.languages.includes(code)
+                ? prev.languages.filter(l => l !== code)
+                : [...prev.languages, code]
+        }));
+    };
 
-      {step === 1 && (
-        <>
-          <button
-            onClick={handleBankID}
-            className="w-full mb-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl py-3 font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-3"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-            </svg>
-            <span>{t('registerWith')} BankID</span>
-          </button>
+    const toggleCategory = (id: string) => {
+        setFormData(prev => ({
+            ...prev,
+            categories: prev.categories.includes(id)
+                ? prev.categories.filter(c => c !== id)
+                : [...prev.categories, id]
+        }));
+    };
 
-          <div className="flex items-center my-4">
-            <div className="flex-1 h-px bg-neutral-200"></div>
-            <span className="px-3 text-xs text-neutral-500">{t('orContinueWith')}</span>
-            <div className="flex-1 h-px bg-neutral-200"></div>
-          </div>
+    const handleNext = () => {
+        // Validate current step
+        if (step === 1) {
+            if (!formData.email || !formData.password || !formData.firstName || !formData.lastName) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            if (formData.password !== formData.confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+        }
+        if (step === 2) {
+            if (formData.languages.length === 0) {
+                alert('Please select at least one language');
+                return;
+            }
+            if (formData.categories.length === 0) {
+                alert('Please select at least one category');
+                return;
+            }
+        }
+        setStep(step + 1);
+    };
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
-                  {t('firstName')} *
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.firstName}
-                  onChange={(e) => setFormData({...formData, firstName: e.target.value})}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-1">
-                  {t('lastName')} *
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.lastName}
-                  onChange={(e) => setFormData({...formData, lastName: e.target.value})}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-            </div>
+    const handleSubmit = async () => {
+        if (!formData.bio) {
+            alert('Please add a bio about yourself');
+            return;
+        }
 
-            <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-1">
-                {t('businessName')} ({tCommon('optional')})
-              </label>
-              <input
-                type="text"
-                value={formData.businessName}
-                onChange={(e) => setFormData({...formData, businessName: e.target.value})}
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder={t('businessNamePlaceholder')}
-              />
-            </div>
+        await register({
+            email: formData.email,
+            password: formData.password,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            role: 'PROVIDER',
+            phone: formData.phone,
+            languages: formData.languages
+        });
+    };
 
-            <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-1">
-                {t('email')} *
-              </label>
-              <input
-                type="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
+    const handleBankID = async () => {
+        await loginWithBankID();
+    };
 
-            <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-1">
-                {t('phone')} *
-              </label>
-              <input
-                type="tel"
-                required
-                value={formData.phone}
-                onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="+46..."
-              />
-            </div>
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 flex items-center justify-center p-4 py-12">
+            <div className="bg-white rounded-2xl shadow-2xl border border-neutral-100 w-full max-w-2xl">
 
-            <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-1">
-                {t('password')} *
-              </label>
-              <input
-                type="password"
-                required
-                value={formData.password}
-                onChange={(e) => setFormData({...formData, password: e.target.value})}
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
+                {/* Header */}
+                <div className="text-center p-8 border-b border-neutral-200">
+                    <Link href="/" className="inline-flex items-center gap-2.5 mb-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
+                            <span className="text-white text-xl font-bold">M</span>
+                        </div>
+                    </Link>
+                    <h1 className="text-2xl font-bold text-neutral-900 mb-2">
+                        {t('registerProvider')}
+                    </h1>
+                    <p className="text-sm text-neutral-600">
+                        Join our platform and start earning
+                    </p>
 
-            <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-1">
-                {t('confirmPassword')} *
-              </label>
-              <input
-                type="password"
-                required
-                value={formData.confirmPassword}
-                onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-
-            <Button type="submit" fullWidth className="font-semibold">
-              {tCommon('continue')} →
-            </Button>
-          </form>
-        </>
-      )}
-
-      {step === 2 && (
-        <>
-          <form onSubmit={handleSubmit} className="space-y-5">
-            
-            <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-3">
-                {t('languagesYouSpeak')} *
-              </label>
-              <div className="grid grid-cols-2 gap-2">
-                {availableLanguages.map((lang) => (
-                  <button
-                    key={lang.code}
-                    type="button"
-                    onClick={() => toggleLanguage(lang.code)}
-                    className={`p-3 rounded-lg border-2 transition-all text-left ${
-                      formData.languages.includes(lang.code)
-                        ? 'border-blue-500 bg-blue-50'
-                        : 'border-neutral-200 hover:border-neutral-300'
-                    }`}
-                  >
-                    <span className="text-lg mr-2">{lang.flag}</span>
-                    <span className="text-sm font-medium">{lang.name}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-3">
-                {t('primaryCategory')} *
-              </label>
-              <div className="space-y-2">
-                {categories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    onClick={() => setFormData({...formData, serviceCategory: cat.id})}
-                    className={`w-full p-3 rounded-lg border-2 transition-all text-left flex items-center gap-3 ${
-                      formData.serviceCategory === cat.id
-                        ? 'border-blue-500 bg-blue-50'
-                        : 'border-neutral-200 hover:border-neutral-300'
-                    }`}
-                  >
-                    <span className="text-2xl">{cat.icon}</span>
-                    <span className="font-medium">{cat.name}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex gap-3">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setStep(1)}
-                className="flex-1"
-              >
-                ← {tCommon('back')}
-              </Button>
-              <Button
-                type="submit"
-                disabled={formData.languages.length === 0 || !formData.serviceCategory}
-                className="flex-1 font-semibold"
-              >
-                {tCommon('continue')} →
-              </Button>
-            </div>
-          </form>
-        </>
-      )}
-
-      {step === 3 && (
-        <>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            
-            <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-3">
-                {t('profilePhoto')} ({t('profilePhotoOptional')})
-              </label>
-              <div className="flex items-start gap-4">
-                {formData.profilePhotoPreview ? (
-                  <div className="relative">
-                    <img 
-                      src={formData.profilePhotoPreview} 
-                      alt="Profile preview"
-                      className="w-32 h-32 rounded-xl object-cover border-2 border-neutral-200"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setFormData({...formData, profilePhoto: null, profilePhotoPreview: ''})}
-                      className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
-                    >
-                      ×
-                    </button>
-                  </div>
-                ) : (
-                  <label className="w-32 h-32 border-2 border-dashed border-neutral-300 rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
-                    <svg className="w-8 h-8 text-neutral-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                    <span className="text-xs text-neutral-500">{t('addPhoto')}</span>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleProfilePhotoChange}
-                      className="hidden"
-                    />
-                  </label>
-                )}
-                <div className="flex-1">
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm">
-                    <div className="flex items-start gap-2">
-                      <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                      </svg>
-                      <div className="text-blue-800">
-                        <strong>{t('whyAddPhoto')}</strong>
-                        <p className="mt-1 text-blue-700">{t('whyAddPhotoDesc')}</p>
-                      </div>
+                    {/* Progress Steps */}
+                    <div className="flex items-center justify-center gap-2 mt-6">
+                        {[1, 2, 3].map(num => (
+                            <div key={num} className="flex items-center">
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
+                                    step >= num
+                                        ? 'bg-primary-600 text-white'
+                                        : 'bg-neutral-200 text-neutral-600'
+                                }`}>
+                                    {num}
+                                </div>
+                                {num < 3 && (
+                                    <div className={`w-12 h-0.5 mx-1 ${step > num ? 'bg-primary-600' : 'bg-neutral-200'}`} />
+                                )}
+                            </div>
+                        ))}
                     </div>
-                  </div>
+                    <div className="text-sm text-neutral-600 mt-2">
+                        {step === 1 && t('step1Title')}
+                        {step === 2 && t('step2Title')}
+                        {step === 3 && t('step3Title')}
+                    </div>
                 </div>
-              </div>
-            </div>
 
-            <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-3">
-                {t('portfolioPhotos')} ({tCommon('optional')})
-              </label>
-              <p className="text-sm text-neutral-600 mb-3">
-                {t('portfolioPhotosDesc')}
-              </p>
-              
-              <div className="grid grid-cols-3 gap-3">
-                {formData.portfolioPreviewUrls.map((url, index) => (
-                  <div key={index} className="relative group">
-                    <img 
-                      src={url} 
-                      alt={`Portfolio ${index + 1}`}
-                      className="w-full h-24 rounded-lg object-cover border-2 border-neutral-200"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removePortfolioPhoto(index)}
-                      className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      ×
-                    </button>
-                  </div>
-                ))}
-                
-                {formData.portfolioPhotos.length < 6 && (
-                  <label className="w-full h-24 border-2 border-dashed border-neutral-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
-                    <svg className="w-6 h-6 text-neutral-400 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                    <span className="text-xs text-neutral-500">{t('addPhoto')}</span>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      multiple
-                      onChange={handlePortfolioPhotosChange}
-                      className="hidden"
-                    />
-                  </label>
+                {/* Error Message */}
+                {error && (
+                    <div className="mx-8 mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                        <p className="text-red-600 text-sm">{error}</p>
+                    </div>
                 )}
-              </div>
-            </div>
 
-            <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-2">
-                {t('aboutYou')} ({tCommon('optional')})
-              </label>
-              <textarea
-                value={formData.bio}
-                onChange={(e) => setFormData({...formData, bio: e.target.value})}
-                maxLength={500}
-                rows={4}
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                placeholder={t('aboutYouPlaceholder')}
-              />
-              <p className="text-xs text-neutral-500 mt-1">
-                {formData.bio.length}/500 {t('characterCount')}
-              </p>
-            </div>
+                {/* Step 1: Basic Info */}
+                {step === 1 && (
+                    <div className="p-8 space-y-4">
+                        <button
+                            onClick={handleBankID}
+                            disabled={loading}
+                            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl py-3 font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                        >
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Register with BankID
+                        </button>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-              <div className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <div className="text-sm text-green-800">
-                  <strong>{t('completeProfileTitle')}</strong>
-                  <p className="mt-1 text-green-700">{t('completeProfileDesc')}</p>
+                        <div className="flex items-center my-4">
+                            <div className="flex-1 h-px bg-neutral-200"></div>
+                            <span className="px-3 text-xs text-neutral-500">or with email</span>
+                            <div className="flex-1 h-px bg-neutral-200"></div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3">
+                            <input
+                                type="text"
+                                name="firstName"
+                                value={formData.firstName}
+                                onChange={handleChange}
+                                placeholder={t('firstName')}
+                                required
+                                disabled={loading}
+                                className="px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 disabled:bg-neutral-100"
+                            />
+                            <input
+                                type="text"
+                                name="lastName"
+                                value={formData.lastName}
+                                onChange={handleChange}
+                                placeholder={t('lastName')}
+                                required
+                                disabled={loading}
+                                className="px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 disabled:bg-neutral-100"
+                            />
+                        </div>
+
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder={t('email')}
+                            required
+                            disabled={loading}
+                            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 disabled:bg-neutral-100"
+                        />
+
+                        <input
+                            type="tel"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            placeholder={t('phone')}
+                            disabled={loading}
+                            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 disabled:bg-neutral-100"
+                        />
+
+                        <input
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            placeholder={t('password')}
+                            required
+                            disabled={loading}
+                            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 disabled:bg-neutral-100"
+                        />
+
+                        <input
+                            type="password"
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            placeholder={t('confirmPassword')}
+                            required
+                            disabled={loading}
+                            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 disabled:bg-neutral-100"
+                        />
+
+                        <Button onClick={handleNext} fullWidth disabled={loading}>
+                            {tCommon('continue')} →
+                        </Button>
+                    </div>
+                )}
+
+                {/* Step 2: Service Details */}
+                {step === 2 && (
+                    <div className="p-8 space-y-6">
+                        <div>
+                            <label className="block text-sm font-medium text-neutral-900 mb-3">
+                                {t('languagesYouSpeak')} *
+                            </label>
+                            <div className="grid grid-cols-2 gap-2">
+                                {availableLanguages.map(lang => (
+                                    <button
+                                        key={lang.code}
+                                        type="button"
+                                        onClick={() => toggleLanguage(lang.code)}
+                                        className={`p-3 rounded-lg border-2 transition-all ${
+                                            formData.languages.includes(lang.code)
+                                                ? 'border-primary-600 bg-primary-50'
+                                                : 'border-neutral-200 hover:border-neutral-300'
+                                        }`}
+                                    >
+                                        <span className="text-2xl">{lang.flag}</span>
+                                        <span className="ml-2 font-medium">{lang.name}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-neutral-900 mb-3">
+                                {t('primaryCategory')} *
+                            </label>
+                            <div className="grid grid-cols-2 gap-2">
+                                {categories.map(cat => (
+                                    <button
+                                        key={cat.id}
+                                        type="button"
+                                        onClick={() => toggleCategory(cat.id)}
+                                        className={`p-3 rounded-lg border-2 transition-all text-left ${
+                                            formData.categories.includes(cat.id)
+                                                ? 'border-primary-600 bg-primary-50'
+                                                : 'border-neutral-200 hover:border-neutral-300'
+                                        }`}
+                                    >
+                                        <span className="text-xl">{cat.icon}</span>
+                                        <span className="ml-2 text-sm font-medium">{cat.name}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="flex gap-3 pt-4">
+                            <Button variant="outline" onClick={() => setStep(1)} fullWidth>
+                                ← {tCommon('back')}
+                            </Button>
+                            <Button onClick={handleNext} fullWidth>
+                                {tCommon('continue')} →
+                            </Button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Step 3: Profile & Bio */}
+                {step === 3 && (
+                    <div className="p-8 space-y-6">
+                        <div>
+                            <label className="block text-sm font-medium text-neutral-900 mb-2">
+                                {t('aboutYou')} *
+                            </label>
+                            <textarea
+                                name="bio"
+                                value={formData.bio}
+                                onChange={handleChange}
+                                placeholder={t('aboutYouPlaceholder')}
+                                rows={6}
+                                className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 resize-none"
+                            />
+                            <p className="text-xs text-neutral-500 mt-2">
+                                {formData.bio.length}/500 {t('characterCount')}
+                            </p>
+                        </div>
+
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">
+                                {t('completeProfileTitle')}
+                            </p>
+                            <p className="text-sm text-blue-800">
+                                {t('completeProfileDesc')}
+                            </p>
+                        </div>
+
+                        <div className="flex gap-3 pt-4">
+                            <Button variant="outline" onClick={() => setStep(2)} fullWidth disabled={loading}>
+                                ← {tCommon('back')}
+                            </Button>
+                            <Button onClick={handleSubmit} fullWidth disabled={loading}>
+                                {loading ? t('creatingAccount') : t('createAccount')}
+                            </Button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Login Link */}
+                <div className="p-6 border-t border-neutral-200 text-center">
+                    <p className="text-sm text-neutral-600">
+                        {t('hasAccount')}{' '}
+                        <Link href="/auth/login" className="text-primary-600 hover:text-primary-700 font-semibold">
+                            {t('logIn')}
+                        </Link>
+                    </p>
                 </div>
-              </div>
             </div>
-
-            <div className="flex gap-3">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setStep(2)}
-                className="flex-1"
-              >
-                ← {tCommon('back')}
-              </Button>
-              <Button
-                type="submit"
-                disabled={loading}
-                className="flex-1 font-semibold"
-              >
-                {loading ? t('creatingAccount') : t('createAccount')}
-              </Button>
-            </div>
-          </form>
-        </>
-      )}
-
-      <div className="mt-4 text-center">
-        <p className="text-sm text-neutral-600">
-          {t('hasAccount')}{' '}
-          <Link href="/auth/login" className="text-blue-600 hover:text-blue-700 font-semibold">
-            {tCommon('login')}
-          </Link>
-        </p>
-      </div>
-    </div>
-  );
+        </div>
+    );
 }
