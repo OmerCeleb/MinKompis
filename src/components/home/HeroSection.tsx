@@ -37,11 +37,6 @@ export default function HeroSection() {
           
           {/* Left Side - Text Content */}
           <div className="text-white">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-              <span className="text-sm font-medium">500+ {t('stats.providers')}</span>
-            </div>
-
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               {t('title')}
             </h1>
@@ -116,7 +111,7 @@ export default function HeroSection() {
               </div>
               <div>
                 <div className="text-3xl font-bold mb-1">24/7</div>
-                <div className="text-sm text-amber-200">Support</div>
+                <div className="text-sm text-amber-200">{t('stats.support')}</div>
               </div>
             </div>
           </div>

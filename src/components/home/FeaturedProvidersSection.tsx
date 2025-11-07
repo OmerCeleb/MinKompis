@@ -75,7 +75,7 @@ export default function FeaturedProvidersSection() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-full mb-4 font-medium">
             <span>⭐</span>
-            <span>Top Rated</span>
+              {t('topRated')}
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
             {t('title')}

@@ -125,16 +125,19 @@
       "stats": {
         "providers": "Hizmet sağlayıcı",
         "languages": "Dil",
-        "rating": "Ort. puan"
+        "rating": "Ort. puan",
+        "support" : "Destek"
       }
     },
     "categories": {
+      "browseServices": "Hizmetlere göz at",
       "title": "Kategorilere göre göz at",
       "subtitle": "İhtiyaçlarınız için doğru profesyoneli bulun",
       "viewAll": "Kategorideki tümünü gör",
       "providers": "sağlayıcı"
     },
     "featured": {
+      "topRated" : "En yüksek puanlı",
       "title": "Öne çıkan hizmet sağlayıcılar",
       "subtitle": "Sana yardım etmeye hazır yüksek puanlı profesyoneller"
     },
@@ -167,6 +170,7 @@
       }
     },
     "howItWorks": {
+      "simpleProcess" : "Basit adımlar",
       "title": "Nasıl çalışır",
       "subtitle": "İhtiyacın olan yardımı almak için basit adımlar",
       "forCustomers": "Müşteriler için",
@@ -205,6 +209,7 @@
       }
     },
     "testimonials": {
+      "averageRating" : "Ortalama Değerlendirme: 5,0",
       "title": "Kullanıcılarımız ne diyor",
       "subtitle": "Binlerce memnun kullanıcı MinKompis üzerinden yardım buldu"
     },
@@ -233,6 +238,7 @@
   },
   "services": {
     "title": "Hizmetlere Göz At",
+    "showing" : "Gösteriliyor",
     "subtitle": "Kendi dilinde güvenilir hizmet sağlayıcılar bul",
     "searchPlaceholder": "İsim, hizmet veya kelime ile ara...",
     "filters": "Filtreler",
@@ -261,7 +267,7 @@
     "busy": "Meşgul",
     "offline": "Çevrimdışı",
     "repliesIn": "Cevap süresi",
-    "from": "Başlangıç",
+    "from": "Başlayan",
     "viewProfile": "Profile Git",
     "jobs": "iş",
     "previous": "Önceki",
@@ -292,7 +298,7 @@
     "mySettings": "Ayarlar",
     "providerAccount": "Sağlayıcı Hesabı",
     "viewPublicProfile": "Herkese açık profili gör",
-    "welcomeBack": "Tekrar hoş geldin, Ayşe!",
+    "welcomeBack": "Tekrar hoş geldin",
     "dashboardSubtitle": "Bugün hizmetlerinle ilgili olanlar",
     "totalEarnings": "Toplam Kazanç",
     "completedJobs": "Tamamlanan İşler",
@@ -323,7 +329,7 @@
       "title": "Yorumlar",
       "subtitle": "Müşteri geri bildirimlerinizi görüntüleyin ve yanıtlayın",
       "averageRating": "Ortalama Puan",
-      "basedOn": "{{count}} yorum baz alınarak",
+      "basedOn": "{count} yorum baz alınarak",
       "ratingBreakdown": "Puan Dağılımı",
       "filterByRating": "Puana göre filtrele",
       "all": "Tümü",
@@ -545,7 +551,7 @@
       "past": "Geçmiş",
       "cancelled": "İptal Edilenler",
       "pending": "Beklemede",
-      "confirmed": "Onaylandı",
+      "accepted": "Onaylandı",
       "completed": "Tamamlandı",
       "noBookings": "Rezervasyon bulunamadı",
       "noBookingsDesc": "Bu kategoride henüz rezervasyonunuz yok",

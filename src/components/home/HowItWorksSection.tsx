@@ -113,8 +113,7 @@ export default function HowItWorksSection() {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-full mb-4 font-medium">
-            <span>🚀</span>
-            <span>Simple Process</span>
+              {t('simpleProcess')}
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
             {t('title')}

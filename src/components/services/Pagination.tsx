@@ -80,7 +80,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
-                    <span className="hidden sm:inline">Previous</span>
+                    <span className="hidden sm:inline">{t('previous')}</span>
                 </div>
             </button>
 
@@ -89,9 +89,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
                 {getPageNumbers().map((page, index) => {
                     if (page === '...') {
                         return (
-                            <span key={`ellipsis-${index}`} className="px-4 py-2 text-neutral-400">
-                ...
-              </span>
+                            <span key={`ellipsis-${index}`} className="px-4 py-2 text-neutral-400"></span>
                         );
                     }
 
@@ -125,7 +123,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
                 }`}
             >
                 <div className="flex items-center gap-2">
-                    <span className="hidden sm:inline">Next</span>
+                    <span className="hidden sm:inline">{t('next')}</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

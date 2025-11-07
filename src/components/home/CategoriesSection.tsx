@@ -12,54 +12,42 @@ export default function CategoriesSection() {
       slug: 'education',
       name: tCat('education'),
       desc: tCat('educationDesc'),
-      icon: '📚',
       image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80',
-      color: 'from-blue-500 to-blue-600',
       providers: 45,
     },
     {
       slug: 'home',
       name: tCat('home'),
       desc: tCat('homeDesc'),
-      icon: '🏠',
       image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80',
-      color: 'from-green-500 to-green-600',
       providers: 78,
     },
     {
       slug: 'official',
       name: tCat('official'),
       desc: tCat('officialDesc'),
-      icon: '📋',
       image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80',
-      color: 'from-purple-500 to-purple-600',
       providers: 32,
     },
     {
       slug: 'health',
       name: tCat('health'),
       desc: tCat('healthDesc'),
-      icon: '💪',
       image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80',
-      color: 'from-red-500 to-red-600',
       providers: 28,
     },
     {
       slug: 'business',
       name: tCat('business'),
       desc: tCat('businessDesc'),
-      icon: '💼',
       image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80',
-      color: 'from-indigo-500 to-indigo-600',
       providers: 21,
     },
     {
       slug: 'creative',
       name: tCat('creative'),
       desc: tCat('creativeDesc'),
-      icon: '🎨',
       image: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=600&q=80',
-      color: 'from-pink-500 to-pink-600',
       providers: 19,
     },
   ];
@@ -71,7 +59,7 @@ export default function CategoriesSection() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-neutral-100 text-neutral-700 px-4 py-2 rounded-full mb-4 font-medium">
             <span>🎯</span>
-            <span>Browse Services</span>
+              {t('browseServices')}
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
             {t('title')}

@@ -114,7 +114,7 @@ export default function ServiceCard({ provider }: ServiceCardProps) {
               {availabilityText[provider.availability]}
             </span>
                         <span className="text-xs text-neutral-500">
-              ⚡ Replies in {provider.responseTime}
+             {t('repliesIn')}{provider.responseTime}
             </span>
                     </div>
                 </div>
@@ -122,14 +122,14 @@ export default function ServiceCard({ provider }: ServiceCardProps) {
                 {/* Footer - Price & Action */}
                 <div className="mt-auto border-t border-neutral-200 p-4 bg-neutral-50 flex items-center justify-between">
                     <div>
-                        <div className="text-sm text-neutral-600">From</div>
+                        <div className="text-sm text-neutral-600"> {t('from')} </div>
                         <div className="text-2xl font-bold text-neutral-900">
                             {provider.hourlyRate} <span className="text-sm font-normal text-neutral-600">SEK/h</span>
                         </div>
                     </div>
 
                     <button className="px-5 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium text-sm group-hover:shadow-lg">
-                        View Profile
+                        {t('viewProfile')}
                     </button>
                 </div>
 

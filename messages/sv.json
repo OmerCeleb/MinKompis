@@ -125,16 +125,19 @@
       "stats": {
         "providers": "Tjänsteleverantörer",
         "languages": "Språk",
-        "rating": "Snittbetyg"
+        "rating": "Snittbetyg",
+        "support" : "Stöd"
       }
     },
     "categories": {
+      "browseServices": "Bläddra Tjänster",
       "title": "Bläddra efter kategorier",
       "subtitle": "Hitta rätt proffs för dina behov",
       "viewAll": "Se alla i kategori",
       "providers": "leverantörer"
     },
     "featured": {
+      "topRated" : "Högst betygsatt",
       "title": "Utvalda tjänsteleverantörer",
       "subtitle": "Högt rankade proffs redo att hjälpa dig"
     },
@@ -167,6 +170,7 @@
       }
     },
     "howItWorks": {
+      "simpleProcess" : "Enkel process",
       "title": "Hur det fungerar",
       "subtitle": "Enkla steg för att få den hjälp du behöver",
       "forCustomers": "För Kunder",
@@ -205,6 +209,7 @@
       }
     },
     "testimonials": {
+      "averageRating" : "Genomsnittligt betyg: 5,0",
       "title": "Vad våra användare säger",
       "subtitle": "Tusentals nöjda användare har hittat hjälp genom MinKompis"
     },
@@ -233,6 +238,7 @@
   },
   "services": {
     "title": "Bläddra bland Tjänster",
+    "showing" : "Visades",
     "subtitle": "Hitta pålitliga tjänsteleverantörer på ditt eget språk",
     "searchPlaceholder": "Sök efter namn, tjänst eller nyckelord...",
     "filters": "Filter",
@@ -292,7 +298,7 @@
     "mySettings": "Inställningar",
     "providerAccount": "Leverantörskonto",
     "viewPublicProfile": "Visa Offentlig Profil",
-    "welcomeBack": "Välkommen tillbaka, Ayşe!",
+    "welcomeBack": "Välkommen tillbaka",
     "dashboardSubtitle": "Vad som händer med dina tjänster idag",
     "totalEarnings": "Total Intäkt",
     "completedJobs": "Slutförda Jobb",
@@ -502,7 +508,7 @@
       "title": "Recensioner",
       "subtitle": "Visa och svara på kundfeedback",
       "averageRating": "Genomsnittligt Betyg",
-      "basedOn": "Baserat på {{count}} recensioner",
+      "basedOn": "Baserat på {count} recensioner",
       "ratingBreakdown": "Betygfördelning",
       "filterByRating": "Filtrera efter betyg",
       "all": "Alla",
@@ -549,7 +555,7 @@
       "past": "Tidigare",
       "cancelled": "Avbokade",
       "pending": "Väntar",
-      "confirmed": "Bekräftad",
+      "accepted": "Bekräftad",
       "completed": "Slutförd",
       "noBookings": "Inga bokningar hittades",
       "noBookingsDesc": "Du har inga bokningar i denna kategori ännu",

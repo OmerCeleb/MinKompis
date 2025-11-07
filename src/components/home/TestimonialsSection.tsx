@@ -80,7 +80,7 @@ export default function TestimonialsSection() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full mb-4 font-medium">
             <span className="text-yellow-500">★★★★★</span>
-            <span>5.0 Average Rating</span>
+              {t('averageRating')}
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
             {t('title')}

@@ -192,7 +192,7 @@ export default function ServicesPage() {
                         <p className="text-sm text-neutral-600">
                             {total > 0 ? (
                                 <>
-                                    Showing {startIndex}-{endIndex} of <strong>{total}</strong> {total === 1 ? t('providerFound') : t('providersFound')}
+                                    {t('showing')} {startIndex}-{endIndex}  <strong>{total}</strong> {total === 1 ? t('providerFound') : t('providersFound')}
                                 </>
                             ) : (
                                 t('noProvidersFound')

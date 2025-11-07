@@ -125,16 +125,19 @@
       "stats": {
         "providers": "Service providers",
         "languages": "Languages",
-        "rating": "Avg. rating"
+        "rating": "Avg. rating",
+        "support" : "Support"
       }
     },
     "categories": {
+      "browseServices": "Browse Services",
       "title": "Browse by categories",
       "subtitle": "Find the right professional for your needs",
       "viewAll": "View all in category",
       "providers": "providers"
     },
     "featured": {
+      "topRated" : "Top Rated",
       "title": "Featured service providers",
       "subtitle": "Highly-rated professionals ready to help you"
     },
@@ -167,6 +170,7 @@
       }
     },
     "howItWorks": {
+      "simpleProcess" : "Simple Process",
       "title": "How it works",
       "subtitle": "Simple steps to get the help you need",
       "forCustomers": "For Customers",
@@ -205,6 +209,7 @@
       }
     },
     "testimonials": {
+      "averageRating" : "Average Rating 5.0",
       "title": "What our users say",
       "subtitle": "Thousands of happy users have found help through MinKompis"
     },
@@ -233,6 +238,7 @@
   },
   "services": {
     "title": "Browse Services",
+    "showing" : "Showing",
     "subtitle": "Find reliable service providers in your own language",
     "searchPlaceholder": "Search by name, service, or keyword...",
     "filters": "Filters",
@@ -292,7 +298,7 @@
     "mySettings": "Settings",
     "providerAccount": "Provider Account",
     "viewPublicProfile": "View Public Profile",
-    "welcomeBack": "Welcome back, Ayşe!",
+    "welcomeBack": "Welcome back",
     "dashboardSubtitle": "What's up with your services today",
     "totalEarnings": "Total Earnings",
     "completedJobs": "Completed Jobs",
@@ -501,7 +507,7 @@
       "title": "Reviews",
       "subtitle": "View and respond to customer feedback",
       "averageRating": "Average Rating",
-      "basedOn": "Based on {{count}} reviews",
+      "basedOn": "Based on {count} reviews",
       "ratingBreakdown": "Rating Breakdown",
       "filterByRating": "Filter by rating",
       "all": "All",
@@ -548,7 +554,7 @@
       "past": "Past",
       "cancelled": "Cancelled",
       "pending": "Pending",
-      "confirmed": "Confirmed",
+      "accepted": "Confirmed",
       "completed": "Completed",
       "noBookings": "No bookings found",
       "noBookingsDesc": "You don't have any bookings in this category yet",
@@ -569,7 +575,7 @@
       "status": "Status"
     }
   },
-  "messages_en.json_customer_section": {
+  "messages_en": {
     "customer": {
       "customerAccount": "Customer Account",
       "myBookings": "My Bookings",
