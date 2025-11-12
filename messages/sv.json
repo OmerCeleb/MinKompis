@@ -600,6 +600,49 @@
     "sending": "Skickar...",
     "messageSent": "Meddelandet skickades! Kolla dina meddelanden för svar."
   },
+  "toast": {
+    "booking": {
+      "accepted": "Bokning godkänd!",
+      "rejected": "Bokning avvisad",
+      "completed": "Bokning slutförd!",
+      "cancelled": "Bokning avbokad",
+      "confirmDecline": "Är du säker på att du vill avvisa denna bokning?",
+      "confirmCancel": "Är du säker på att du vill avboka denna bokning?",
+      "acceptError": "Kunde inte godkänna bokning",
+      "rejectError": "Kunde inte avvisa bokning",
+      "completeError": "Kunde inte slutföra bokning",
+      "cancelError": "Kunde inte avboka bokning"
+    },
+    "auth": {
+      "registerSuccess": "Konto skapat!",
+      "registerError": "Registrering misslyckades",
+      "loginSuccess": "Inloggning lyckades!",
+      "loginError": "Inloggning misslyckades",
+      "logoutSuccess": "Utloggad",
+      "passwordMismatch": "Lösenorden matchar inte",
+      "fillAllFields": "Vänligen fyll i alla obligatoriska fält",
+      "selectLanguage": "Välj minst ett språk",
+      "selectCategory": "Välj minst en kategori",
+      "addBio": "Lägg till en presentation om dig själv"
+    },
+    "settings": {
+      "profileUpdated": "Profil uppdaterad!",
+      "profileError": "Kunde inte uppdatera profil",
+      "accountUpdated": "Kontoinställningar uppdaterade!",
+      "accountError": "Kunde inte uppdatera kontoinställningar",
+      "serviceUpdated": "Tjänstinställningar uppdaterade!",
+      "serviceError": "Kunde inte uppdatera tjänstinställningar",
+      "notificationsUpdated": "Notifieringsinställningar uppdaterade!",
+      "notificationsError": "Kunde inte uppdatera notifieringar"
+    },
+    "common": {
+      "success": "Åtgärden lyckades!",
+      "error": "Ett fel uppstod",
+      "confirm": "Bekräfta",
+      "cancel": "Avbryt",
+      "tryAgain": "Försök igen"
+    }
+  },
   "footer": {
     "tagline": "Din partner för tjänster på ditt eget språk i Sverige",
     "browseServices": "Bläddra bland Tjänster",

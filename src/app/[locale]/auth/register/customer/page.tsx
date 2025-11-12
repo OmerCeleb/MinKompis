@@ -8,10 +8,11 @@ import { Button } from '@/components/shared';
 import { useAuth, useToast } from '@/hooks';
 
 export default function CustomerRegisterPage() {
-    const t = useTranslations('auth');
+    const t = useTranslations('auth.register');
     const tCommon = useTranslations('common');
-
+    const tToast = useTranslations('toast');
     const { register, loginWithBankID, loading, error } = useAuth();
+    const { showToast } = useToast();
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -32,13 +33,13 @@ export default function CustomerRegisterPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Validate password match
+        // Validation
         if (formData.password !== formData.confirmPassword) {
-            alert('Passwords do not match!'); // TODO: Replace with toast
+            showToast(tToast('auth.passwordMismatch'), 'error');
             return;
         }
 
-        await register({
+        const result = await register({
             email: formData.email,
             password: formData.password,
             firstName: formData.firstName,
@@ -46,7 +47,12 @@ export default function CustomerRegisterPage() {
             role: 'CUSTOMER',
             phone: formData.phone
         });
-        // Başarılı olursa useAuth otomatik yönlendirecek
+
+        if (!result.success) {
+            showToast(result.error || tToast('auth.registerError'), 'error');
+        } else {
+            showToast(tToast('auth.registerSuccess'), 'success');
+        }
     };
 
     const handleBankID = async () => {
@@ -83,25 +89,28 @@ export default function CustomerRegisterPage() {
                 <button
                     onClick={handleBankID}
                     disabled={loading}
-                    className="w-full mb-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl py-3 font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full mb-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                 >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
                     </svg>
-                    <span>Register with BankID</span>
+                    {t('signUpBankID')}
                 </button>
 
-                <div className="flex items-center my-4">
-                    <div className="flex-1 h-px bg-neutral-200"></div>
-                    <span className="px-3 text-xs text-neutral-500">or with email</span>
-                    <div className="flex-1 h-px bg-neutral-200"></div>
+                {/* Divider */}
+                <div className="relative my-6">
+                    <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-neutral-300"></div>
+                    </div>
+                    <div className="relative flex justify-center text-sm">
+                        <span className="px-4 bg-white text-neutral-600">{t('orContinueWith')}</span>
+                    </div>
                 </div>
 
-                {/* Form */}
+                {/* Registration Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">
-
-                    {/* Name Fields */}
-                    <div className="grid grid-cols-2 gap-3">
+                    {/* First Name & Last Name */}
+                    <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium text-neutral-700 mb-1.5">
                                 {t('firstName')}
@@ -158,6 +167,7 @@ export default function CustomerRegisterPage() {
                             name="phone"
                             value={formData.phone}
                             onChange={handleChange}
+                            placeholder="+46 70 123 4567"
                             disabled={loading}
                             className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-neutral-100"
                         />

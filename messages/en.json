@@ -642,6 +642,49 @@
     "sending": "Sending...",
     "messageSent": "Message sent successfully! Check your messages for replies."
   },
+  "toast": {
+    "booking": {
+      "accepted": "Booking accepted successfully!",
+      "rejected": "Booking rejected",
+      "completed": "Booking completed!",
+      "cancelled": "Booking cancelled successfully",
+      "confirmDecline": "Are you sure you want to decline this booking?",
+      "confirmCancel": "Are you sure you want to cancel this booking?",
+      "acceptError": "Failed to accept booking",
+      "rejectError": "Failed to reject booking",
+      "completeError": "Failed to complete booking",
+      "cancelError": "Failed to cancel booking"
+    },
+    "auth": {
+      "registerSuccess": "Account created successfully!",
+      "registerError": "Registration failed",
+      "loginSuccess": "Login successful!",
+      "loginError": "Login failed",
+      "logoutSuccess": "Logged out successfully",
+      "passwordMismatch": "Passwords do not match",
+      "fillAllFields": "Please fill in all required fields",
+      "selectLanguage": "Please select at least one language",
+      "selectCategory": "Please select at least one category",
+      "addBio": "Please add a bio about yourself"
+    },
+    "settings": {
+      "profileUpdated": "Profile updated successfully!",
+      "profileError": "Failed to update profile",
+      "accountUpdated": "Account settings updated!",
+      "accountError": "Failed to update account settings",
+      "serviceUpdated": "Service settings updated successfully!",
+      "serviceError": "Failed to update service settings",
+      "notificationsUpdated": "Notification preferences updated!",
+      "notificationsError": "Failed to update notification preferences"
+    },
+    "common": {
+      "success": "Operation successful!",
+      "error": "An error occurred",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "tryAgain": "Try again"
+    }
+  },
   "footer": {
     "tagline": "Your partner for services in your own language in Sweden",
     "browseServices": "Browse Services",

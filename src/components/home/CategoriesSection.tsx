@@ -88,13 +88,11 @@ export default function CategoriesSection() {
                   alt={category.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-90 group-hover:opacity-95 transition-opacity`}></div>
               </div>
 
               {/* Content */}
               <div className="relative p-8 h-64 flex flex-col justify-between text-white">
                 <div>
-                  <div className="text-5xl mb-4">{category.icon}</div>
                   <h3 className="text-2xl font-bold mb-2 group-hover:scale-105 transition-transform">
                     {category.name}
                   </h3>

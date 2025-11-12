@@ -9,6 +9,8 @@ import { useBooking, useToast } from '@/hooks';
 export default function DashboardBookingsPage() {
     const t = useTranslations('dashboard.bookings');
     const tCommon = useTranslations('common');
+    const tToast = useTranslations('toast');
+    const { showToast } = useToast();
 
     const {
         bookings,
@@ -32,27 +34,34 @@ export default function DashboardBookingsPage() {
     const handleAccept = async (bookingId: string) => {
         const result = await acceptBooking(bookingId);
         if (result.success) {
-            // TODO: Show success toast
-            console.log('Booking accepted!');
+            showToast(tToast('booking.accepted'), 'success');
+        } else {
+            showToast(result.error || tToast('booking.acceptError'), 'error');
         }
     };
 
     const handleReject = async (bookingId: string) => {
-        const confirmed = window.confirm(t('confirmDecline'));
-        if (!confirmed) return;
-
-        const result = await rejectBooking(bookingId);
-        if (result.success) {
-            // TODO: Show success toast
-            console.log('Booking rejected');
-        }
+        showToast(tToast('booking.confirmDecline'), 'warning', {
+            action: {
+                label: tToast('common.confirm'),
+                onClick: async () => {
+                    const result = await rejectBooking(bookingId);
+                    if (result.success) {
+                        showToast(tToast('booking.rejected'), 'success');
+                    } else {
+                        showToast(result.error || tToast('booking.rejectError'), 'error');
+                    }
+                }
+            }
+        });
     };
 
     const handleComplete = async (bookingId: string) => {
         const result = await completeBooking(bookingId);
         if (result.success) {
-            // TODO: Show success toast
-            console.log('Booking completed!');
+            showToast(tToast('booking.completed'), 'success');
+        } else {
+            showToast(result.error || tToast('booking.completeError'), 'error');
         }
     };
 
@@ -130,198 +139,214 @@ export default function DashboardBookingsPage() {
                 </button>
             </div>
 
-            {/* Loading State */}
-            {loading ? (
-                <div className="space-y-4">
-                    {[...Array(3)].map((_, i) => (
-                        <div key={i} className="bg-white rounded-xl p-6 h-48 animate-pulse"></div>
-                    ))}
-                </div>
-            ) : (
-                /* Bookings List */
-                <div className="space-y-4">
-                    {activeTab === 'pending' && pendingBookings.length === 0 && (
-                        <div className="bg-white rounded-xl p-12 text-center">
-                            <div className="text-6xl mb-4">📭</div>
-                            <h3 className="text-xl font-semibold text-neutral-900 mb-2">
-                                {t('noBookings')}
-                            </h3>
-                            <p className="text-neutral-600">
-                                {t('noBookingsDesc')}
-                            </p>
-                        </div>
-                    )}
+            {/* Content */}
+            <div className="space-y-4">
+                {activeTab === 'pending' && (
+                    <>
+                        {pendingBookings.length === 0 ? (
+                            <div className="text-center py-12 bg-neutral-50 rounded-lg">
+                                <p className="text-neutral-600">{t('noPendingBookings')}</p>
+                            </div>
+                        ) : (
+                            pendingBookings.map((booking) => (
+                                <div
+                                    key={booking.id}
+                                    className="bg-white border border-neutral-200 rounded-lg p-6 hover:shadow-md transition-shadow"
+                                >
+                                    <div className="flex items-start justify-between mb-4">
+                                        <div className="flex gap-4">
+                                            <img
+                                                src={booking.customerAvatar}
+                                                alt={booking.customerName}
+                                                className="w-12 h-12 rounded-full"
+                                            />
+                                            <div>
+                                                <h3 className="font-semibold text-neutral-900">
+                                                    {booking.customerName}
+                                                </h3>
+                                                <p className="text-sm text-neutral-600">
+                                                    {booking.serviceName}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <span className={`px-3 py-1 rounded-full text-sm font-medium border ${getStatusColor(booking.status)}`}>
+                                            {t(booking.status.toLowerCase())}
+                                        </span>
+                                    </div>
 
-                    {activeTab === 'upcoming' && upcomingBookings.length === 0 && (
-                        <div className="bg-white rounded-xl p-12 text-center">
-                            <div className="text-6xl mb-4">📅</div>
-                            <h3 className="text-xl font-semibold text-neutral-900 mb-2">
-                                {t('noBookings')}
-                            </h3>
-                            <p className="text-neutral-600">
-                                {t('noBookingsDesc')}
-                            </p>
-                        </div>
-                    )}
+                                    <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
+                                        <div>
+                                            <span className="text-neutral-600">{t('date')}:</span>
+                                            <span className="ml-2 font-medium">{booking.date}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">{t('time')}:</span>
+                                            <span className="ml-2 font-medium">{booking.time}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">{t('duration')}:</span>
+                                            <span className="ml-2 font-medium">{booking.duration} {t('minutes')}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">{t('price')}:</span>
+                                            <span className="ml-2 font-medium">{booking.totalAmount} SEK</span>
+                                        </div>
+                                    </div>
 
-                    {activeTab === 'past' && pastBookings.length === 0 && (
-                        <div className="bg-white rounded-xl p-12 text-center">
-                            <div className="text-6xl mb-4">🕐</div>
-                            <h3 className="text-xl font-semibold text-neutral-900 mb-2">
-                                {t('noBookings')}
-                            </h3>
-                            <p className="text-neutral-600">
-                                {t('noBookingsDesc')}
-                            </p>
-                        </div>
-                    )}
+                                    {booking.message && (
+                                        <div className="mb-4 p-4 bg-neutral-50 rounded-lg">
+                                            <p className="text-sm text-neutral-700">{booking.message}</p>
+                                        </div>
+                                    )}
 
-                    {/* Pending Bookings */}
-                    {activeTab === 'pending' && pendingBookings.map(booking => (
-                        <div key={booking.id} className="bg-white rounded-xl shadow-sm border border-neutral-200 p-6 hover:shadow-md transition-shadow">
-                            <div className="flex items-start justify-between mb-4">
-                                <div className="flex gap-4">
-                                    <img
-                                        src={booking.customerAvatar || 'https://i.pravatar.cc/150?img=10'}
-                                        alt={booking.customerName}
-                                        className="w-12 h-12 rounded-full"
-                                    />
-                                    <div>
-                                        <h3 className="font-semibold text-neutral-900">
-                                            {booking.serviceName}
-                                        </h3>
-                                        <p className="text-sm text-neutral-600">
-                                            Customer: {booking.customerName || 'New Customer'}
-                                        </p>
+                                    <div className="flex gap-3">
+                                        <Button
+                                            onClick={() => handleAccept(booking.id)}
+                                            variant="primary"
+                                            size="sm"
+                                        >
+                                            {t('accept')}
+                                        </Button>
+                                        <Button
+                                            onClick={() => handleReject(booking.id)}
+                                            variant="outline"
+                                            size="sm"
+                                        >
+                                            {t('decline')}
+                                        </Button>
                                     </div>
                                 </div>
-                                <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(booking.status)}`}>
-                  {t(booking.status.toLowerCase())}
-                </span>
+                            ))
+                        )}
+                    </>
+                )}
+
+                {activeTab === 'upcoming' && (
+                    <>
+                        {upcomingBookings.length === 0 ? (
+                            <div className="text-center py-12 bg-neutral-50 rounded-lg">
+                                <p className="text-neutral-600">{t('noUpcomingBookings')}</p>
                             </div>
-
-                            <div className="grid grid-cols-3 gap-4 mb-4 text-sm">
-                                <div>
-                                    <span className="text-neutral-500">{t('date')}</span>
-                                    <p className="font-medium">{new Date(booking.date).toLocaleDateString()}</p>
-                                </div>
-                                <div>
-                                    <span className="text-neutral-500">{t('time')}</span>
-                                    <p className="font-medium">{booking.time}</p>
-                                </div>
-                                <div>
-                                    <span className="text-neutral-500">{t('price')}</span>
-                                    <p className="font-medium">{booking.totalAmount} SEK</p>
-                                </div>
-                            </div>
-
-                            {booking.message && (
-                                <div className="bg-neutral-50 rounded-lg p-4 mb-4">
-                                    <p className="text-sm text-neutral-600 font-medium mb-1">{t('notes')}</p>
-                                    <p className="text-sm text-neutral-700">{booking.message}</p>
-                                </div>
-                            )}
-
-                            <div className="flex gap-3">
-                                <Button
-                                    onClick={() => handleAccept(booking.id)}
-                                    disabled={loading}
-                                    className="flex-1"
+                        ) : (
+                            upcomingBookings.map((booking) => (
+                                <div
+                                    key={booking.id}
+                                    className="bg-white border border-neutral-200 rounded-lg p-6 hover:shadow-md transition-shadow"
                                 >
-                                    {t('accept')}
-                                </Button>
-                                <Button
-                                    variant="outline"
-                                    onClick={() => handleReject(booking.id)}
-                                    disabled={loading}
-                                    className="flex-1"
-                                >
-                                    {t('decline')}
-                                </Button>
-                            </div>
-                        </div>
-                    ))}
+                                    <div className="flex items-start justify-between mb-4">
+                                        <div className="flex gap-4">
+                                            <img
+                                                src={booking.customerAvatar}
+                                                alt={booking.customerName}
+                                                className="w-12 h-12 rounded-full"
+                                            />
+                                            <div>
+                                                <h3 className="font-semibold text-neutral-900">
+                                                    {booking.customerName}
+                                                </h3>
+                                                <p className="text-sm text-neutral-600">
+                                                    {booking.serviceName}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <span className={`px-3 py-1 rounded-full text-sm font-medium border ${getStatusColor(booking.status)}`}>
+                                            {t(booking.status.toLowerCase())}
+                                        </span>
+                                    </div>
 
-                    {/* Upcoming Bookings */}
-                    {activeTab === 'upcoming' && upcomingBookings.map(booking => (
-                        <div key={booking.id} className="bg-white rounded-xl shadow-sm border border-neutral-200 p-6">
-                            <div className="flex items-start justify-between mb-4">
-                                <div className="flex gap-4">
-                                    <img
-                                        src={booking.customerAvatar || 'https://i.pravatar.cc/150?img=10'}
-                                        alt={booking.customerName}
-                                        className="w-12 h-12 rounded-full"
-                                    />
-                                    <div>
-                                        <h3 className="font-semibold text-neutral-900">
-                                            {booking.serviceName}
-                                        </h3>
-                                        <p className="text-sm text-neutral-600">
-                                            {booking.customerName || 'Customer'}
-                                        </p>
+                                    <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
+                                        <div>
+                                            <span className="text-neutral-600">{t('date')}:</span>
+                                            <span className="ml-2 font-medium">{booking.date}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">{t('time')}:</span>
+                                            <span className="ml-2 font-medium">{booking.time}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">{t('duration')}:</span>
+                                            <span className="ml-2 font-medium">{booking.duration} {t('minutes')}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">{t('price')}:</span>
+                                            <span className="ml-2 font-medium">{booking.totalAmount} SEK</span>
+                                        </div>
+                                    </div>
+
+                                    <Button
+                                        onClick={() => handleComplete(booking.id)}
+                                        variant="primary"
+                                        size="sm"
+                                    >
+                                        {t('markComplete')}
+                                    </Button>
+                                </div>
+                            ))
+                        )}
+                    </>
+                )}
+
+                {activeTab === 'past' && (
+                    <>
+                        {pastBookings.length === 0 ? (
+                            <div className="text-center py-12 bg-neutral-50 rounded-lg">
+                                <p className="text-neutral-600">{t('noPastBookings')}</p>
+                            </div>
+                        ) : (
+                            pastBookings.map((booking) => (
+                                <div
+                                    key={booking.id}
+                                    className="bg-white border border-neutral-200 rounded-lg p-6"
+                                >
+                                    <div className="flex items-start justify-between mb-4">
+                                        <div className="flex gap-4">
+                                            <img
+                                                src={booking.customerAvatar}
+                                                alt={booking.customerName}
+                                                className="w-12 h-12 rounded-full"
+                                            />
+                                            <div>
+                                                <h3 className="font-semibold text-neutral-900">
+                                                    {booking.customerName}
+                                                </h3>
+                                                <p className="text-sm text-neutral-600">
+                                                    {booking.serviceName}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <span className={`px-3 py-1 rounded-full text-sm font-medium border ${getStatusColor(booking.status)}`}>
+                                            {t(booking.status.toLowerCase())}
+                                        </span>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-4 text-sm">
+                                        <div>
+                                            <span className="text-neutral-600">{t('date')}:</span>
+                                            <span className="ml-2 font-medium">{booking.date}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">{t('time')}:</span>
+                                            <span className="ml-2 font-medium">{booking.time}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">{t('duration')}:</span>
+                                            <span className="ml-2 font-medium">{booking.duration} {t('minutes')}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">{t('price')}:</span>
+                                            <span className="ml-2 font-medium">{booking.totalAmount} SEK</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(booking.status)}`}>
-                  {t(booking.status.toLowerCase())}
-                </span>
-                            </div>
+                            ))
+                        )}
+                    </>
+                )}
+            </div>
 
-                            <div className="grid grid-cols-3 gap-4 mb-4 text-sm">
-                                <div>
-                                    <span className="text-neutral-500">{t('date')}</span>
-                                    <p className="font-medium">{new Date(booking.date).toLocaleDateString()}</p>
-                                </div>
-                                <div>
-                                    <span className="text-neutral-500">{t('time')}</span>
-                                    <p className="font-medium">{booking.time}</p>
-                                </div>
-                                <div>
-                                    <span className="text-neutral-500">{t('duration')}</span>
-                                    <p className="font-medium">{booking.duration} min</p>
-                                </div>
-                            </div>
-
-                            {booking.status === 'ACCEPTED' && (
-                                <Button
-                                    onClick={() => handleComplete(booking.id)}
-                                    disabled={loading}
-                                    fullWidth
-                                >
-                                    {t('markComplete')}
-                                </Button>
-                            )}
-                        </div>
-                    ))}
-
-                    {/* Past Bookings */}
-                    {activeTab === 'past' && pastBookings.map(booking => (
-                        <div key={booking.id} className="bg-white rounded-xl shadow-sm border border-neutral-200 p-6">
-                            <div className="flex items-start justify-between">
-                                <div className="flex gap-4 flex-1">
-                                    <img
-                                        src={booking.customerAvatar || 'https://i.pravatar.cc/150?img=10'}
-                                        alt={booking.customerName}
-                                        className="w-12 h-12 rounded-full"
-                                    />
-                                    <div className="flex-1">
-                                        <h3 className="font-semibold text-neutral-900">
-                                            {booking.serviceName}
-                                        </h3>
-                                        <p className="text-sm text-neutral-600 mb-2">
-                                            {booking.customerName || 'Customer'} • {new Date(booking.date).toLocaleDateString()}
-                                        </p>
-                                        <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(booking.status)}`}>
-                      {t(booking.status.toLowerCase())}
-                    </span>
-                                    </div>
-                                </div>
-                                <div className="text-right">
-                                    <p className="text-sm text-neutral-500">{t('price')}</p>
-                                    <p className="font-semibold text-lg">{booking.totalAmount} SEK</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+            {loading && (
+                <div className="flex justify-center py-8">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
                 </div>
             )}
         </div>

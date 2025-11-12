@@ -10,6 +10,8 @@ import { useBooking, useToast } from '@/hooks';
 export default function CustomerBookingsPage() {
     const t = useTranslations('customer.bookings');
     const tCommon = useTranslations('common');
+    const tToast = useTranslations('toast');
+    const { showToast } = useToast();
 
     const {
         bookings,
@@ -26,14 +28,19 @@ export default function CustomerBookingsPage() {
     const pastBookings = getPastBookings();
 
     const handleCancelBooking = async (bookingId: string) => {
-        const confirmed = window.confirm('Are you sure you want to cancel this booking?');
-        if (!confirmed) return;
-
-        const result = await cancelBooking(bookingId);
-        if (result.success) {
-            // TODO: Show success toast
-            console.log('Booking cancelled successfully');
-        }
+        showToast(tToast('booking.confirmCancel'), 'warning', {
+            action: {
+                label: tToast('common.confirm'),
+                onClick: async () => {
+                    const result = await cancelBooking(bookingId);
+                    if (result.success) {
+                        showToast(tToast('booking.cancelled'), 'success');
+                    } else {
+                        showToast(result.error || tToast('booking.cancelError'), 'error');
+                    }
+                }
+            }
+        });
     };
 
     const getStatusColor = (status: string) => {
@@ -100,159 +107,162 @@ export default function CustomerBookingsPage() {
                 </button>
             </div>
 
-            {/* Loading State */}
-            {loading ? (
-                <div className="space-y-4">
-                    {[...Array(3)].map((_, i) => (
-                        <div key={i} className="bg-white rounded-xl p-6 h-48 animate-pulse"></div>
-                    ))}
-                </div>
-            ) : (
-                /* Bookings List */
-                <div className="space-y-4">
-
-                    {/* Upcoming Bookings */}
-                    {activeTab === 'upcoming' && (
-                        <>
-                            {upcomingBookings.length === 0 ? (
-                                <div className="bg-white rounded-xl p-12 text-center">
-                                    <div className="text-6xl mb-4">📅</div>
-                                    <h3 className="text-xl font-semibold text-neutral-900 mb-2">
-                                        No upcoming bookings
-                                    </h3>
-                                    <p className="text-neutral-600 mb-6">
-                                        Start exploring services and book your first appointment
-                                    </p>
-                                    <Link href="/services">
-                                        <Button>Browse Services</Button>
-                                    </Link>
-                                </div>
-                            ) : (
-                                upcomingBookings.map(booking => (
-                                    <div key={booking.id} className="bg-white rounded-xl shadow-sm border border-neutral-200 p-6 hover:shadow-md transition-shadow">
-                                        <div className="flex items-start justify-between mb-4">
-                                            <div className="flex gap-4">
-                                                <img
-                                                    src={booking.providerAvatar}
-                                                    alt={booking.providerName}
-                                                    className="w-16 h-16 rounded-full"
-                                                />
-                                                <div>
-                                                    <h3 className="font-semibold text-lg text-neutral-900">
-                                                        {booking.serviceName}
-                                                    </h3>
-                                                    <p className="text-sm text-neutral-600">
-                                                        with {booking.providerName}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(booking.status)}`}>
-                        {booking.status}
-                      </span>
-                                        </div>
-
-                                        <div className="grid grid-cols-4 gap-4 mb-4 text-sm">
+            {/* Content */}
+            <div className="space-y-4">
+                {activeTab === 'upcoming' && (
+                    <>
+                        {upcomingBookings.length === 0 ? (
+                            <div className="text-center py-12 bg-neutral-50 rounded-lg">
+                                <p className="text-neutral-600 mb-4">You don't have any upcoming bookings</p>
+                                <Link href="/services">
+                                    <Button>Browse Services</Button>
+                                </Link>
+                            </div>
+                        ) : (
+                            upcomingBookings.map((booking) => (
+                                <div
+                                    key={booking.id}
+                                    className="bg-white border border-neutral-200 rounded-lg p-6 hover:shadow-md transition-shadow"
+                                >
+                                    <div className="flex items-start justify-between mb-4">
+                                        <div className="flex gap-4">
+                                            <img
+                                                src={booking.providerAvatar}
+                                                alt={booking.providerName}
+                                                className="w-12 h-12 rounded-full"
+                                            />
                                             <div>
-                                                <span className="text-neutral-500 block mb-1">Date</span>
-                                                <p className="font-medium">{new Date(booking.date).toLocaleDateString()}</p>
-                                            </div>
-                                            <div>
-                                                <span className="text-neutral-500 block mb-1">Time</span>
-                                                <p className="font-medium">{booking.time}</p>
-                                            </div>
-                                            <div>
-                                                <span className="text-neutral-500 block mb-1">Duration</span>
-                                                <p className="font-medium">{booking.duration} min</p>
-                                            </div>
-                                            <div>
-                                                <span className="text-neutral-500 block mb-1">Price</span>
-                                                <p className="font-medium">{booking.totalAmount} SEK</p>
+                                                <h3 className="font-semibold text-neutral-900">
+                                                    {booking.providerName}
+                                                </h3>
+                                                <p className="text-sm text-neutral-600">
+                                                    {booking.serviceName}
+                                                </p>
                                             </div>
                                         </div>
+                                        <span className={`px-3 py-1 rounded-full text-sm font-medium border ${getStatusColor(booking.status)}`}>
+                                            {booking.status}
+                                        </span>
+                                    </div>
 
-                                        {booking.message && (
-                                            <div className="bg-neutral-50 rounded-lg p-4 mb-4">
-                                                <p className="text-sm font-medium text-neutral-600 mb-1">Your message:</p>
-                                                <p className="text-sm text-neutral-700">{booking.message}</p>
-                                            </div>
-                                        )}
+                                    <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
+                                        <div>
+                                            <span className="text-neutral-600">Date:</span>
+                                            <span className="ml-2 font-medium">{booking.date}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">Time:</span>
+                                            <span className="ml-2 font-medium">{booking.time}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">Duration:</span>
+                                            <span className="ml-2 font-medium">{booking.duration} minutes</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">Total:</span>
+                                            <span className="ml-2 font-medium">{booking.totalAmount} SEK</span>
+                                        </div>
+                                    </div>
 
+                                    {booking.status === 'PENDING' && (
                                         <div className="flex gap-3">
-                                            <Link href={`/providers/${booking.providerId}`} className="flex-1">
-                                                <Button variant="outline" fullWidth>
-                                                    View Provider
+                                            <Button
+                                                onClick={() => handleCancelBooking(booking.id)}
+                                                variant="outline"
+                                                size="sm"
+                                            >
+                                                Cancel Booking
+                                            </Button>
+                                            <Link href={`/customer/messages?conversation=${booking.providerId}`}>
+                                                <Button variant="primary" size="sm">
+                                                    Message Provider
                                                 </Button>
                                             </Link>
-                                            {booking.status === 'PENDING' && (
-                                                <Button
-                                                    variant="outline"
-                                                    onClick={() => handleCancelBooking(booking.id)}
-                                                    disabled={loading}
-                                                    className="flex-1 text-red-600 border-red-300 hover:bg-red-50"
-                                                >
-                                                    Cancel Request
-                                                </Button>
-                                            )}
                                         </div>
-                                    </div>
-                                ))
-                            )}
-                        </>
-                    )}
+                                    )}
 
-                    {/* Past Bookings */}
-                    {activeTab === 'past' && (
-                        <>
-                            {pastBookings.length === 0 ? (
-                                <div className="bg-white rounded-xl p-12 text-center">
-                                    <div className="text-6xl mb-4">🕐</div>
-                                    <h3 className="text-xl font-semibold text-neutral-900 mb-2">
-                                        No past bookings
-                                    </h3>
-                                    <p className="text-neutral-600">
-                                        Your completed bookings will appear here
-                                    </p>
+                                    {booking.status === 'ACCEPTED' && (
+                                        <Link href={`/customer/messages?conversation=${booking.providerId}`}>
+                                            <Button variant="primary" size="sm">
+                                                Message Provider
+                                            </Button>
+                                        </Link>
+                                    )}
                                 </div>
-                            ) : (
-                                pastBookings.map(booking => (
-                                    <div key={booking.id} className="bg-white rounded-xl shadow-sm border border-neutral-200 p-6">
-                                        <div className="flex items-start justify-between">
-                                            <div className="flex gap-4 flex-1">
-                                                <img
-                                                    src={booking.providerAvatar}
-                                                    alt={booking.providerName}
-                                                    className="w-12 h-12 rounded-full"
-                                                />
-                                                <div className="flex-1">
-                                                    <h3 className="font-semibold text-neutral-900">
-                                                        {booking.serviceName}
-                                                    </h3>
-                                                    <p className="text-sm text-neutral-600 mb-2">
-                                                        {booking.providerName} • {new Date(booking.date).toLocaleDateString()}
-                                                    </p>
-                                                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(booking.status)}`}>
-                            {booking.status}
-                          </span>
-                                                </div>
-                                            </div>
-                                            <div className="text-right">
-                                                <p className="text-sm text-neutral-500">Total</p>
-                                                <p className="font-semibold text-lg">{booking.totalAmount} SEK</p>
+                            ))
+                        )}
+                    </>
+                )}
+
+                {activeTab === 'past' && (
+                    <>
+                        {pastBookings.length === 0 ? (
+                            <div className="text-center py-12 bg-neutral-50 rounded-lg">
+                                <p className="text-neutral-600">You don't have any past bookings</p>
+                            </div>
+                        ) : (
+                            pastBookings.map((booking) => (
+                                <div
+                                    key={booking.id}
+                                    className="bg-white border border-neutral-200 rounded-lg p-6"
+                                >
+                                    <div className="flex items-start justify-between mb-4">
+                                        <div className="flex gap-4">
+                                            <img
+                                                src={booking.providerAvatar}
+                                                alt={booking.providerName}
+                                                className="w-12 h-12 rounded-full"
+                                            />
+                                            <div>
+                                                <h3 className="font-semibold text-neutral-900">
+                                                    {booking.providerName}
+                                                </h3>
+                                                <p className="text-sm text-neutral-600">
+                                                    {booking.serviceName}
+                                                </p>
                                             </div>
                                         </div>
-
-                                        {booking.status === 'COMPLETED' && (
-                                            <div className="mt-4 pt-4 border-t border-neutral-200">
-                                                <Button variant="outline" fullWidth size="sm">
-                                                    Leave a Review
-                                                </Button>
-                                            </div>
-                                        )}
+                                        <span className={`px-3 py-1 rounded-full text-sm font-medium border ${getStatusColor(booking.status)}`}>
+                                            {booking.status}
+                                        </span>
                                     </div>
-                                ))
-                            )}
-                        </>
-                    )}
+
+                                    <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
+                                        <div>
+                                            <span className="text-neutral-600">Date:</span>
+                                            <span className="ml-2 font-medium">{booking.date}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">Time:</span>
+                                            <span className="ml-2 font-medium">{booking.time}</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">Duration:</span>
+                                            <span className="ml-2 font-medium">{booking.duration} minutes</span>
+                                        </div>
+                                        <div>
+                                            <span className="text-neutral-600">Total:</span>
+                                            <span className="ml-2 font-medium">{booking.totalAmount} SEK</span>
+                                        </div>
+                                    </div>
+
+                                    {booking.status === 'COMPLETED' && (
+                                        <Link href={`/provider/${booking.providerId}?review=true`}>
+                                            <Button variant="primary" size="sm">
+                                                Leave a Review
+                                            </Button>
+                                        </Link>
+                                    )}
+                                </div>
+                            ))
+                        )}
+                    </>
+                )}
+            </div>
+
+            {loading && (
+                <div className="flex justify-center py-8">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
                 </div>
             )}
         </div>

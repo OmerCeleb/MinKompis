@@ -596,6 +596,49 @@
     "sending": "Gönderiliyor...",
     "messageSent": "Mesaj başarıyla gönderildi! Yanıtlar için mesajlarınızı kontrol edin."
   },
+  "toast": {
+    "booking": {
+      "accepted": "Rezervasyon kabul edildi!",
+      "rejected": "Rezervasyon reddedildi",
+      "completed": "Rezervasyon tamamlandı!",
+      "cancelled": "Rezervasyon iptal edildi",
+      "confirmDecline": "Bu rezervasyonu reddetmek istediğinizden emin misiniz?",
+      "confirmCancel": "Bu rezervasyonu iptal etmek istediğinizden emin misiniz?",
+      "acceptError": "Rezervasyon kabul edilemedi",
+      "rejectError": "Rezervasyon reddedilemedi",
+      "completeError": "Rezervasyon tamamlanamadı",
+      "cancelError": "Rezervasyon iptal edilemedi"
+    },
+    "auth": {
+      "registerSuccess": "Hesap başarıyla oluşturuldu!",
+      "registerError": "Kayıt başarısız oldu",
+      "loginSuccess": "Giriş başarılı!",
+      "loginError": "Giriş başarısız oldu",
+      "logoutSuccess": "Çıkış yapıldı",
+      "passwordMismatch": "Şifreler eşleşmiyor",
+      "fillAllFields": "Lütfen tüm gerekli alanları doldurun",
+      "selectLanguage": "Lütfen en az bir dil seçin",
+      "selectCategory": "Lütfen en az bir kategori seçin",
+      "addBio": "Lütfen kendiniz hakkında bilgi ekleyin"
+    },
+    "settings": {
+      "profileUpdated": "Profil başarıyla güncellendi!",
+      "profileError": "Profil güncellenemedi",
+      "accountUpdated": "Hesap ayarları güncellendi!",
+      "accountError": "Hesap ayarları güncellenemedi",
+      "serviceUpdated": "Hizmet ayarları başarıyla güncellendi!",
+      "serviceError": "Hizmet ayarları güncellenemedi",
+      "notificationsUpdated": "Bildirim tercihleri güncellendi!",
+      "notificationsError": "Bildirim tercihleri güncellenemedi"
+    },
+    "common": {
+      "success": "İşlem başarılı!",
+      "error": "Bir hata oluştu",
+      "confirm": "Onayla",
+      "cancel": "İptal",
+      "tryAgain": "Tekrar deneyin"
+    }
+  },
   "footer": {
     "tagline": "İsveç'te kendi dilinde hizmetler için ortağınız",
     "browseServices": "Hizmetlere Göz At",

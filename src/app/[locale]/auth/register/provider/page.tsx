@@ -5,47 +5,45 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Button } from '@/components/shared';
-import { useAuth } from '@/hooks';
+import { useAuth, useToast } from '@/hooks';
 
 export default function ProviderRegisterPage() {
-    const t = useTranslations('auth');
+    const t = useTranslations('auth.register');
     const tCommon = useTranslations('common');
-
-    const { register, loginWithBankID, loading, error } = useAuth();
+    const tCat = useTranslations('categories');
+    const tToast = useTranslations('toast');
+    const { register, loginWithBankID, loading } = useAuth();
+    const { showToast } = useToast();
 
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
-        // Step 1: Basic Info
-        firstName: '',
-        lastName: '',
         email: '',
-        phone: '',
         password: '',
         confirmPassword: '',
-
-        // Step 2: Service Details
+        firstName: '',
+        lastName: '',
+        phone: '',
         languages: [] as string[],
         categories: [] as string[],
-
-        // Step 3: Profile
         bio: '',
-        profilePhoto: null as File | null
+        hourlyRate: 300
     });
 
     const availableLanguages = [
         { code: 'sv', name: 'Svenska', flag: '🇸🇪' },
         { code: 'en', name: 'English', flag: '🇬🇧' },
         { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
-        { code: 'ar', name: 'العربية', flag: '🇸🇦' }
+        { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+        { code: 'so', name: 'Soomaali', flag: '🇸🇴' }
     ];
 
     const categories = [
-        { id: 'education', name: 'Education & Tutoring', icon: '📚' },
-        { id: 'home', name: 'Home Services', icon: '🏠' },
-        { id: 'official', name: 'Official Procedures', icon: '📋' },
-        { id: 'health', name: 'Health & Fitness', icon: '💪' },
-        { id: 'business', name: 'Business Services', icon: '💼' },
-        { id: 'creative', name: 'Creative Services', icon: '🎨' }
+        { id: 'education', name: tCat('education'), icon: '📚' },
+        { id: 'home', name: tCat('home'), icon: '🏠' },
+        { id: 'official', name: tCat('official'), icon: '📋' },
+        { id: 'health', name: tCat('health'), icon: '💪' },
+        { id: 'business', name: tCat('business'), icon: '💼' },
+        { id: 'creative', name: tCat('creative'), icon: '🎨' }
     ];
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -77,21 +75,21 @@ export default function ProviderRegisterPage() {
         // Validate current step
         if (step === 1) {
             if (!formData.email || !formData.password || !formData.firstName || !formData.lastName) {
-                alert('Please fill in all required fields');
+                showToast(tToast('auth.fillAllFields'), 'error');
                 return;
             }
             if (formData.password !== formData.confirmPassword) {
-                alert('Passwords do not match');
+                showToast(tToast('auth.passwordMismatch'), 'error');
                 return;
             }
         }
         if (step === 2) {
             if (formData.languages.length === 0) {
-                alert('Please select at least one language');
+                showToast(tToast('auth.selectLanguage'), 'warning');
                 return;
             }
             if (formData.categories.length === 0) {
-                alert('Please select at least one category');
+                showToast(tToast('auth.selectCategory'), 'warning');
                 return;
             }
         }
@@ -100,11 +98,11 @@ export default function ProviderRegisterPage() {
 
     const handleSubmit = async () => {
         if (!formData.bio) {
-            alert('Please add a bio about yourself');
+            showToast(tToast('auth.addBio'), 'warning');
             return;
         }
 
-        await register({
+        const result = await register({
             email: formData.email,
             password: formData.password,
             firstName: formData.firstName,
@@ -113,6 +111,12 @@ export default function ProviderRegisterPage() {
             phone: formData.phone,
             languages: formData.languages
         });
+
+        if (!result.success) {
+            showToast(result.error || tToast('auth.registerError'), 'error');
+        } else {
+            showToast(tToast('auth.registerSuccess'), 'success');
+        }
     };
 
     const handleBankID = async () => {
@@ -149,216 +153,280 @@ export default function ProviderRegisterPage() {
                                     {num}
                                 </div>
                                 {num < 3 && (
-                                    <div className={`w-12 h-0.5 mx-1 ${step > num ? 'bg-primary-600' : 'bg-neutral-200'}`} />
+                                    <div className={`w-12 h-1 mx-1 transition-colors ${
+                                        step > num ? 'bg-primary-600' : 'bg-neutral-200'
+                                    }`} />
                                 )}
                             </div>
                         ))}
                     </div>
-                    <div className="text-sm text-neutral-600 mt-2">
-                        {step === 1 && t('step1Title')}
-                        {step === 2 && t('step2Title')}
-                        {step === 3 && t('step3Title')}
-                    </div>
                 </div>
 
-                {/* Error Message */}
-                {error && (
-                    <div className="mx-8 mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                        <p className="text-red-600 text-sm">{error}</p>
-                    </div>
-                )}
-
-                {/* Step 1: Basic Info */}
+                {/* BankID Option (Step 1) */}
                 {step === 1 && (
-                    <div className="p-8 space-y-4">
+                    <div className="p-8 border-b border-neutral-200">
                         <button
                             onClick={handleBankID}
                             disabled={loading}
-                            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl py-3 font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                         >
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
                             </svg>
-                            Register with BankID
+                            {t('signUpBankID')}
                         </button>
-
-                        <div className="flex items-center my-4">
-                            <div className="flex-1 h-px bg-neutral-200"></div>
-                            <span className="px-3 text-xs text-neutral-500">or with email</span>
-                            <div className="flex-1 h-px bg-neutral-200"></div>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-3">
-                            <input
-                                type="text"
-                                name="firstName"
-                                value={formData.firstName}
-                                onChange={handleChange}
-                                placeholder={t('firstName')}
-                                required
-                                disabled={loading}
-                                className="px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 disabled:bg-neutral-100"
-                            />
-                            <input
-                                type="text"
-                                name="lastName"
-                                value={formData.lastName}
-                                onChange={handleChange}
-                                placeholder={t('lastName')}
-                                required
-                                disabled={loading}
-                                className="px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 disabled:bg-neutral-100"
-                            />
-                        </div>
-
-                        <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            placeholder={t('email')}
-                            required
-                            disabled={loading}
-                            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 disabled:bg-neutral-100"
-                        />
-
-                        <input
-                            type="tel"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            placeholder={t('phone')}
-                            disabled={loading}
-                            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 disabled:bg-neutral-100"
-                        />
-
-                        <input
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            placeholder={t('password')}
-                            required
-                            disabled={loading}
-                            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 disabled:bg-neutral-100"
-                        />
-
-                        <input
-                            type="password"
-                            name="confirmPassword"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                            placeholder={t('confirmPassword')}
-                            required
-                            disabled={loading}
-                            className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 disabled:bg-neutral-100"
-                        />
-
-                        <Button onClick={handleNext} fullWidth disabled={loading}>
-                            {tCommon('continue')} →
-                        </Button>
-                    </div>
-                )}
-
-                {/* Step 2: Service Details */}
-                {step === 2 && (
-                    <div className="p-8 space-y-6">
-                        <div>
-                            <label className="block text-sm font-medium text-neutral-900 mb-3">
-                                {t('languagesYouSpeak')} *
-                            </label>
-                            <div className="grid grid-cols-2 gap-2">
-                                {availableLanguages.map(lang => (
-                                    <button
-                                        key={lang.code}
-                                        type="button"
-                                        onClick={() => toggleLanguage(lang.code)}
-                                        className={`p-3 rounded-lg border-2 transition-all ${
-                                            formData.languages.includes(lang.code)
-                                                ? 'border-primary-600 bg-primary-50'
-                                                : 'border-neutral-200 hover:border-neutral-300'
-                                        }`}
-                                    >
-                                        <span className="text-2xl">{lang.flag}</span>
-                                        <span className="ml-2 font-medium">{lang.name}</span>
-                                    </button>
-                                ))}
+                        <div className="relative my-6">
+                            <div className="absolute inset-0 flex items-center">
+                                <div className="w-full border-t border-neutral-300"></div>
+                            </div>
+                            <div className="relative flex justify-center text-sm">
+                                <span className="px-4 bg-white text-neutral-600">{t('orContinueWith')}</span>
                             </div>
                         </div>
+                    </div>
+                )}
 
-                        <div>
-                            <label className="block text-sm font-medium text-neutral-900 mb-3">
-                                {t('primaryCategory')} *
-                            </label>
-                            <div className="grid grid-cols-2 gap-2">
-                                {categories.map(cat => (
-                                    <button
-                                        key={cat.id}
-                                        type="button"
-                                        onClick={() => toggleCategory(cat.id)}
-                                        className={`p-3 rounded-lg border-2 transition-all text-left ${
-                                            formData.categories.includes(cat.id)
-                                                ? 'border-primary-600 bg-primary-50'
-                                                : 'border-neutral-200 hover:border-neutral-300'
-                                        }`}
-                                    >
-                                        <span className="text-xl">{cat.icon}</span>
-                                        <span className="ml-2 text-sm font-medium">{cat.name}</span>
-                                    </button>
-                                ))}
+                {/* Step Content */}
+                <div className="p-8">
+                    {/* Step 1: Basic Information */}
+                    {step === 1 && (
+                        <div className="space-y-4">
+                            <h2 className="text-xl font-bold text-neutral-900 mb-4">
+                                Basic Information
+                            </h2>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-neutral-700 mb-1.5">
+                                        {t('firstName')}
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        value={formData.firstName}
+                                        onChange={handleChange}
+                                        required
+                                        disabled={loading}
+                                        className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-neutral-100"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-neutral-700 mb-1.5">
+                                        {t('lastName')}
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        value={formData.lastName}
+                                        onChange={handleChange}
+                                        required
+                                        disabled={loading}
+                                        className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-neutral-100"
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-neutral-700 mb-1.5">
+                                    {t('email')}
+                                </label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                    disabled={loading}
+                                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-neutral-100"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-neutral-700 mb-1.5">
+                                    {t('phone')}
+                                </label>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    placeholder="+46 70 123 4567"
+                                    disabled={loading}
+                                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-neutral-100"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-neutral-700 mb-1.5">
+                                    {t('password')}
+                                </label>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    required
+                                    disabled={loading}
+                                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-neutral-100"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-neutral-700 mb-1.5">
+                                    {t('confirmPassword')}
+                                </label>
+                                <input
+                                    type="password"
+                                    name="confirmPassword"
+                                    value={formData.confirmPassword}
+                                    onChange={handleChange}
+                                    required
+                                    disabled={loading}
+                                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-neutral-100"
+                                />
+                            </div>
+
+                            <Button
+                                onClick={handleNext}
+                                fullWidth
+                                disabled={loading}
+                                className="mt-6"
+                            >
+                                {t('continue')}
+                            </Button>
+                        </div>
+                    )}
+
+                    {/* Step 2: Languages & Categories */}
+                    {step === 2 && (
+                        <div className="space-y-6">
+                            <h2 className="text-xl font-bold text-neutral-900">
+                                Languages & Services
+                            </h2>
+
+                            <div>
+                                <label className="block text-sm font-medium text-neutral-700 mb-3">
+                                    Languages you speak
+                                </label>
+                                <div className="grid grid-cols-2 gap-3">
+                                    {availableLanguages.map(lang => (
+                                        <button
+                                            key={lang.code}
+                                            type="button"
+                                            onClick={() => toggleLanguage(lang.code)}
+                                            className={`p-3 rounded-lg border-2 transition-all ${
+                                                formData.languages.includes(lang.code)
+                                                    ? 'border-primary-600 bg-primary-50'
+                                                    : 'border-neutral-200 hover:border-neutral-300'
+                                            }`}
+                                        >
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-2xl">{lang.flag}</span>
+                                                <span className="font-medium text-neutral-900">{lang.name}</span>
+                                            </div>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-neutral-700 mb-3">
+                                    Service categories
+                                </label>
+                                <div className="grid grid-cols-2 gap-3">
+                                    {categories.map(cat => (
+                                        <button
+                                            key={cat.id}
+                                            type="button"
+                                            onClick={() => toggleCategory(cat.id)}
+                                            className={`p-3 rounded-lg border-2 transition-all ${
+                                                formData.categories.includes(cat.id)
+                                                    ? 'border-primary-600 bg-primary-50'
+                                                    : 'border-neutral-200 hover:border-neutral-300'
+                                            }`}
+                                        >
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-2xl">{cat.icon}</span>
+                                                <span className="font-medium text-neutral-900">{cat.name}</span>
+                                            </div>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="flex gap-3">
+                                <Button
+                                    onClick={() => setStep(1)}
+                                    variant="outline"
+                                    fullWidth
+                                >
+                                    {tCommon('back')}
+                                </Button>
+                                <Button
+                                    onClick={handleNext}
+                                    fullWidth
+                                >
+                                    {t('continue')}
+                                </Button>
                             </div>
                         </div>
+                    )}
 
-                        <div className="flex gap-3 pt-4">
-                            <Button variant="outline" onClick={() => setStep(1)} fullWidth>
-                                ← {tCommon('back')}
-                            </Button>
-                            <Button onClick={handleNext} fullWidth>
-                                {tCommon('continue')} →
-                            </Button>
-                        </div>
-                    </div>
-                )}
+                    {/* Step 3: Profile Details */}
+                    {step === 3 && (
+                        <div className="space-y-6">
+                            <h2 className="text-xl font-bold text-neutral-900">
+                                Profile Details
+                            </h2>
 
-                {/* Step 3: Profile & Bio */}
-                {step === 3 && (
-                    <div className="p-8 space-y-6">
-                        <div>
-                            <label className="block text-sm font-medium text-neutral-900 mb-2">
-                                {t('aboutYou')} *
-                            </label>
-                            <textarea
-                                name="bio"
-                                value={formData.bio}
-                                onChange={handleChange}
-                                placeholder={t('aboutYouPlaceholder')}
-                                rows={6}
-                                className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 resize-none"
-                            />
-                            <p className="text-xs text-neutral-500 mt-2">
-                                {formData.bio.length}/500 {t('characterCount')}
-                            </p>
-                        </div>
+                            <div>
+                                <label className="block text-sm font-medium text-neutral-700 mb-1.5">
+                                    About yourself
+                                </label>
+                                <textarea
+                                    name="bio"
+                                    value={formData.bio}
+                                    onChange={handleChange}
+                                    rows={4}
+                                    placeholder="Tell us about your experience and what services you offer..."
+                                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                />
+                            </div>
 
-                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                            <p className="text-sm font-semibold text-blue-900 mb-1">
-                                {t('completeProfileTitle')}
-                            </p>
-                            <p className="text-sm text-blue-800">
-                                {t('completeProfileDesc')}
-                            </p>
-                        </div>
+                            <div>
+                                <label className="block text-sm font-medium text-neutral-700 mb-1.5">
+                                    Hourly rate (SEK)
+                                </label>
+                                <input
+                                    type="number"
+                                    name="hourlyRate"
+                                    value={formData.hourlyRate}
+                                    onChange={handleChange}
+                                    min="0"
+                                    step="50"
+                                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                />
+                            </div>
 
-                        <div className="flex gap-3 pt-4">
-                            <Button variant="outline" onClick={() => setStep(2)} fullWidth disabled={loading}>
-                                ← {tCommon('back')}
-                            </Button>
-                            <Button onClick={handleSubmit} fullWidth disabled={loading}>
-                                {loading ? t('creatingAccount') : t('createAccount')}
-                            </Button>
+                            <div className="flex gap-3">
+                                <Button
+                                    onClick={() => setStep(2)}
+                                    variant="outline"
+                                    fullWidth
+                                >
+                                    {tCommon('back')}
+                                </Button>
+                                <Button
+                                    onClick={handleSubmit}
+                                    fullWidth
+                                    disabled={loading}
+                                >
+                                    {loading ? t('creatingAccount') : t('createAccount')}
+                                </Button>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
 
                 {/* Login Link */}
                 <div className="p-6 border-t border-neutral-200 text-center">
