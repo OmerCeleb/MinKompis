@@ -287,7 +287,13 @@
     "bookAppointment": "Boka Tid",
     "responseTime": "Svarstid",
     "verifiedProvider": "Verifierad Leverantör",
-    "unverified": "Overifierad"
+    "unverified": "Overifierad",
+    "memberSince": "Medlem sedan",
+    "servicesOffered": "Erbjudna Tjänster",
+    "perSession": "per session",
+    "averageResponse": "Genomsnittlig respons",
+    "identityVerified": "Identitet verifierad",
+    "verifiedDescription": "Denna leverantör har verifierats av MinKompis och har slutfört våra säkerhets- och förtroendekontrollen."
   },
   "dashboard": {
     "overview": "Översikt",

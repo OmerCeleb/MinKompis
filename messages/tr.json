@@ -287,7 +287,13 @@
     "bookAppointment": "Randevu Al",
     "responseTime": "Cevap süresi",
     "verifiedProvider": "Doğrulanmış Sağlayıcı",
-    "unverified": "Doğrulanmamış"
+    "unverified": "Doğrulanmamış",
+    "memberSince": "Üyelik tarihi",
+    "servicesOffered": "Sunulan Hizmetler",
+    "perSession": "seans başı",
+    "averageResponse": "Ortalama yanıt",
+    "identityVerified": "Kimlik doğrulandı",
+    "verifiedDescription": "Bu sağlayıcı MinKompis tarafından doğrulanmış ve güven & güvenlik kontrollerini tamamlamıştır."
   },
   "dashboard": {
     "myBookings" : "Rezervasyonlarım",

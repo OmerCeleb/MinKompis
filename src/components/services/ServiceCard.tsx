@@ -2,7 +2,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { type Provider } from '@/lib/mockData';
 
 interface ServiceCardProps {
@@ -11,6 +11,7 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ provider }: ServiceCardProps) {
     const t = useTranslations('services');
+    const locale = useLocale();
 
     const languageFlags: Record<string, string> = {
         'sv': '🇸🇪',
@@ -34,7 +35,7 @@ export default function ServiceCard({ provider }: ServiceCardProps) {
     };
 
     return (
-        <Link href={`/providers/${provider.id}`}>
+        <Link href={`/${locale}/providers/${provider.id}`} className="block h-full">
             <div className="bg-white rounded-xl shadow-sm border border-neutral-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group h-full flex flex-col">
 
                 {/* Provider Avatar & Status */}
@@ -78,8 +79,8 @@ export default function ServiceCard({ provider }: ServiceCardProps) {
                     <div className="flex items-center gap-1.5 flex-wrap mb-3">
                         {provider.languages.slice(0, 4).map((lang) => (
                             <span key={lang} className="text-lg" title={lang}>
-                {languageFlags[lang] || '🌍'}
-              </span>
+                                {languageFlags[lang] || '🌍'}
+                            </span>
                         ))}
                         {provider.languages.length > 4 && (
                             <span className="text-xs text-neutral-500">+{provider.languages.length - 4}</span>
@@ -102,37 +103,40 @@ export default function ServiceCard({ provider }: ServiceCardProps) {
                         </div>
                         <div className="flex items-center gap-1">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
-                            <span>{provider.completedJobs} jobs</span>
+                            <span>{provider.completedJobs} {t('jobs')}</span>
                         </div>
                     </div>
 
-                    {/* Availability & Response Time */}
-                    <div className="flex items-center gap-2 mb-4">
-            <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${availabilityColors[provider.availability]}`}>
-              {availabilityText[provider.availability]}
-            </span>
+                    {/* Availability Status */}
+                    <div className="flex items-center justify-between mb-4">
+                        <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${availabilityColors[provider.availability]}`}>
+                            {availabilityText[provider.availability]}
+                        </span>
                         <span className="text-xs text-neutral-500">
-             {t('repliesIn')}{provider.responseTime}
-            </span>
+                            {t('repliesIn')} {provider.responseTime}
+                        </span>
                     </div>
                 </div>
 
-                {/* Footer - Price & Action */}
-                <div className="mt-auto border-t border-neutral-200 p-4 bg-neutral-50 flex items-center justify-between">
-                    <div>
-                        <div className="text-sm text-neutral-600"> {t('from')} </div>
-                        <div className="text-2xl font-bold text-neutral-900">
-                            {provider.hourlyRate} <span className="text-sm font-normal text-neutral-600">SEK/h</span>
+                {/* Footer with pricing */}
+                <div className="mt-auto border-t border-neutral-200 p-6 pt-4 bg-neutral-50">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <div className="text-sm text-neutral-500 mb-1">{t('from')}</div>
+                            <div className="text-2xl font-bold text-primary-600">
+                                {provider.hourlyRate} {t('sek')}
+                                <span className="text-sm text-neutral-500 font-normal ml-1">/ {t('hour')}</span>
+                            </div>
+                        </div>
+                        <div className="text-primary-600 group-hover:translate-x-1 transition-transform">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
                         </div>
                     </div>
-
-                    <button className="px-5 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium text-sm group-hover:shadow-lg">
-                        {t('viewProfile')}
-                    </button>
                 </div>
-
             </div>
         </Link>
     );

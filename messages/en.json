@@ -287,7 +287,13 @@
     "bookAppointment": "Book Appointment",
     "responseTime": "Response time",
     "verifiedProvider": "Verified Provider",
-    "unverified": "Unverified"
+    "unverified": "Unverified",
+    "memberSince": "Member since",
+    "servicesOffered": "Services Offered",
+    "perSession": "per session",
+    "averageResponse": "Average response",
+    "identityVerified": "Identity verified",
+    "verifiedDescription": "This provider has been verified by MinKompis and has completed our trust & safety checks."
   },
   "dashboard": {
     "overview": "Overview",
