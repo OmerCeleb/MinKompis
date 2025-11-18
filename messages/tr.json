@@ -24,7 +24,55 @@
     "optional": "Opsiyonel",
     "close": "Kapat"
   },
-    "booking": {
+  "customer": {
+    "favorites": {
+      "title": "Favori Sağlayıcılar",
+      "subtitle": "Hızlı erişim için kaydettiğiniz sağlayıcılar",
+      "savedProviders": "kayıtlı sağlayıcı",
+      "remove": "Favorilerden kaldır",
+      "removeSuccess": "Favorilerden kaldırıldı",
+      "removeError": "Favorilerden kaldırılamadı",
+      "viewProfile": "Profile Git",
+      "bookNow": "Şimdi Rezerve Et",
+      "savedOn": "Kaydedildi",
+      "noFavorites": "Henüz favori yok",
+      "noFavoritesDesc": "Beğendiğiniz sağlayıcıları kaydederek daha sonra kolayca bulun",
+      "browseProviders": "Sağlayıcılara Göz At",
+      "tipTitle": "İpucu",
+      "tipDesc": "Herhangi bir sağlayıcının profilindeki kalp ikonuna tıklayarak favorilerinize ekleyin"
+    },
+    "bookings": {
+      "title": "Rezervasyonlarım",
+      "subtitle": "Randevularınızı ve rezervasyonlarınızı yönetin",
+      "newBooking": "Yeni Rezervasyon",
+      "upcoming": "Yaklaşan",
+      "past": "Geçmiş",
+      "date": "Tarih",
+      "time": "Saat",
+      "price": "Fiyat",
+      "status": {
+        "pending": "Beklemede",
+        "confirmed": "Onaylandı",
+        "completed": "Tamamlandı",
+        "cancelled": "İptal Edildi"
+      },
+      "cancel": "İptal Et",
+      "reschedule": "Yeniden Planla",
+      "message": "Mesaj",
+      "contactProvider": "Sağlayıcıyla İletişime Geç",
+      "leaveReview": "Yorum Yaz",
+      "bookAgain": "Tekrar Rezerve Et",
+      "confirmCancel": "Bu rezervasyonu iptal etmek istediğinizden emin misiniz?",
+      "cancelSuccess": "Rezervasyon başarıyla iptal edildi",
+      "cancelError": "Rezervasyon iptal edilemedi",
+      "noUpcoming": "Yaklaşan rezervasyon yok",
+      "noUpcomingDesc": "Henüz yaklaşan rezervasyonunuz bulunmuyor",
+      "noPast": "Geçmiş rezervasyon yok",
+      "noPastDesc": "Henüz tamamlanmış rezervasyonunuz bulunmuyor",
+      "findServices": "Hizmet Bul"
+    }
+  },
+  "booking": {
       "bookAppointment": "Randevu Al",
       "selectDate": "Tarih Seçin",
       "selectTime": "Saat Seçin",

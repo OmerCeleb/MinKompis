@@ -24,7 +24,54 @@
     "optional": "Optional",
     "close": "Close"
   },
-  "booking": {
+  "customer": {
+    "favorites": {
+      "title": "Favorite Providers",
+      "subtitle": "Providers you've saved for quick access",
+      "savedProviders": "saved providers",
+      "remove": "Remove from favorites",
+      "removeSuccess": "Removed from favorites",
+      "removeError": "Failed to remove from favorites",
+      "viewProfile": "View Profile",
+      "bookNow": "Book Now",
+      "savedOn": "Saved on",
+      "noFavorites": "No favorites yet",
+      "noFavoritesDesc": "Save providers you like to easily find them later",
+      "browseProviders": "Browse Providers",
+      "tipTitle": "Quick Tip",
+      "tipDesc": "Click the heart icon on any provider's profile to add them to your favorites"
+    },
+    "bookings": {
+      "title": "My Bookings",
+      "subtitle": "Manage your appointments and bookings",
+      "newBooking": "New Booking",
+      "upcoming": "Upcoming",
+      "past": "Past",
+      "date": "Date",
+      "time": "Time",
+      "price": "Price",
+      "status": {
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "cancel": "Cancel",
+      "reschedule": "Reschedule",
+      "message": "Message",
+      "contactProvider": "Contact Provider",
+      "leaveReview": "Leave Review",
+      "bookAgain": "Book Again",
+      "confirmCancel": "Are you sure you want to cancel this booking?",
+      "cancelSuccess": "Booking cancelled successfully",
+      "cancelError": "Failed to cancel booking",
+      "noUpcoming": "No upcoming bookings",
+      "noUpcomingDesc": "You don't have any upcoming bookings yet",
+      "noPast": "No past bookings",
+      "noPastDesc": "You haven't completed any bookings yet",
+      "findServices": "Find Services"
+    },
+    "booking": {
     "bookAppointment": "Book Appointment",
     "selectDate": "Select Date",
     "selectTime": "Select Time",
@@ -704,4 +751,4 @@
     "cookies": "Cookies",
     "allRightsReserved": "All rights reserved"
   }
-}
+}}

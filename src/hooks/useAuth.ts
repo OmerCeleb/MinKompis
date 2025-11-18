@@ -47,6 +47,8 @@ export function useAuth() {
         checkAuth();
     }, []);
 
+// src/hooks/useAuth.ts içinde checkAuth fonksiyonunu bulun ve mock user'ı değiştirin:
+
     const checkAuth = async () => {
         try {
             setState(prev => ({ ...prev, loading: true, error: null }));
@@ -59,15 +61,15 @@ export function useAuth() {
                 return;
             }
 
-            // Mock user data - Backend'den gelecek
+            // Mock user data - CUSTOMER olarak değiştirildi
             const mockUser: User = {
-                id: '1',
-                email: 'user@example.com',
-                firstName: 'Ayşe',
-                lastName: 'Yılmaz',
-                role: 'PROVIDER',
-                avatar: 'https://i.pravatar.cc/150?img=1',
-                languages: ['tr', 'sv']
+                id: '2', // Farklı ID
+                email: 'customer@example.com',
+                firstName: 'Ahmet',
+                lastName: 'Kaya',
+                role: 'CUSTOMER', // ← BURADA DEĞİŞTİRİN
+                avatar: 'https://i.pravatar.cc/150?img=68',
+                languages: ['tr', 'en']
             };
 
             setState({ user: mockUser, loading: false, error: null });
@@ -76,6 +78,7 @@ export function useAuth() {
             setState({ user: null, loading: false, error: 'Authentication failed' });
         }
     };
+
 
     const login = useCallback(async (credentials: LoginCredentials) => {
         try {

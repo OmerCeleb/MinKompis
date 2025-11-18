@@ -24,7 +24,54 @@
     "optional": "Valfritt",
     "close": "Stäng"
   },
-  "booking": {
+  "customer": {
+    "favorites": {
+      "title": "Favoritleverantörer",
+      "subtitle": "Leverantörer du har sparat för snabb åtkomst",
+      "savedProviders": "sparade leverantörer",
+      "remove": "Ta bort från favoriter",
+      "removeSuccess": "Borttagen från favoriter",
+      "removeError": "Kunde inte ta bort från favoriter",
+      "viewProfile": "Visa Profil",
+      "bookNow": "Boka Nu",
+      "savedOn": "Sparad",
+      "noFavorites": "Inga favoriter än",
+      "noFavoritesDesc": "Spara leverantörer du gillar för att enkelt hitta dem senare",
+      "browseProviders": "Bläddra Leverantörer",
+      "tipTitle": "Snabbtips",
+      "tipDesc": "Klicka på hjärtikonen på valfri leverantörs profil för att lägga till dem i dina favoriter"
+    },
+    "bookings": {
+      "title": "Mina Bokningar",
+      "subtitle": "Hantera dina möten och bokningar",
+      "newBooking": "Ny Bokning",
+      "upcoming": "Kommande",
+      "past": "Tidigare",
+      "date": "Datum",
+      "time": "Tid",
+      "price": "Pris",
+      "status": {
+        "pending": "Väntande",
+        "confirmed": "Bekräftad",
+        "completed": "Slutförd",
+        "cancelled": "Avbokad"
+      },
+      "cancel": "Avboka",
+      "reschedule": "Omboka",
+      "message": "Meddelande",
+      "contactProvider": "Kontakta Leverantör",
+      "leaveReview": "Lämna Omdöme",
+      "bookAgain": "Boka Igen",
+      "confirmCancel": "Är du säker på att du vill avboka denna bokning?",
+      "cancelSuccess": "Bokning avbokad",
+      "cancelError": "Kunde inte avboka bokning",
+      "noUpcoming": "Inga kommande bokningar",
+      "noUpcomingDesc": "Du har inga kommande bokningar ännu",
+      "noPast": "Inga tidigare bokningar",
+      "noPastDesc": "Du har inte slutfört några bokningar ännu",
+      "findServices": "Hitta Tjänster"
+    }
+  },  "booking": {
     "bookAppointment": "Boka Tid",
     "selectDate": "Välj Datum",
     "selectTime": "Välj Tid",
