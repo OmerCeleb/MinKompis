@@ -1,8 +1,9 @@
 // src/app/[locale]/services/page.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import ServiceCard from '@/components/services/ServiceCard';
 import Pagination from '@/components/services/Pagination';
@@ -12,12 +13,19 @@ export default function ServicesPage() {
     const t = useTranslations('services');
     const tCommon = useTranslations('common');
     const tCat = useTranslations('categories');
+    const searchParams = useSearchParams();
 
-    // Search state
-    const [searchTerm, setSearchTerm] = useState('');
+    // Get URL parameters
+    const urlSearch = searchParams.get('search') || '';
+    const urlCategory = searchParams.get('category') || undefined;
+    const urlLanguage = searchParams.get('language') || undefined;
+    const urlLocation = searchParams.get('location') || undefined;
+
+    // Search state - initialize with URL parameter
+    const [searchTerm, setSearchTerm] = useState(urlSearch);
     const debouncedSearch = useDebouncedValue(searchTerm, 500);
 
-    // Get providers with filters
+    // Get providers with filters - initialize with URL parameters
     const {
         providers,
         loading,
@@ -29,8 +37,19 @@ export default function ServicesPage() {
         sortBy,
         setSortBy
     } = useProviders({
-        searchTerm: debouncedSearch
+        searchTerm: debouncedSearch,
+        category: urlCategory,
+        language: urlLanguage,
+        location: urlLocation
     });
+
+    // Update search term when URL changes
+    useEffect(() => {
+        const newSearch = searchParams.get('search') || '';
+        if (newSearch !== searchTerm) {
+            setSearchTerm(newSearch);
+        }
+    }, [searchParams]);
 
     // Pagination
     const {
@@ -59,48 +78,30 @@ export default function ServicesPage() {
         { code: 'sv', name: 'Svenska', flag: '🇸🇪' },
         { code: 'en', name: 'English', flag: '🇬🇧' },
         { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
-        { code: 'ar', name: 'العربية', flag: '🇸🇦' }
+        { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+    ];
+
+    // Locations
+    const locations = [
+        { id: 'all', name: t('allLocations') },
+        { id: 'Stockholm', name: 'Stockholm' },
+        { id: 'Göteborg', name: 'Göteborg' },
+        { id: 'Malmö', name: 'Malmö' },
+        { id: 'Uppsala', name: 'Uppsala' },
     ];
 
     // Sort options
     const sortOptions = [
         { value: 'recommended', label: t('recommended') },
-        { value: 'rating', label: t('highestRated') },
-        { value: 'price-low', label: t('lowestPrice') },
-        { value: 'price-high', label: t('highestPrice') },
-        { value: 'reviews', label: t('mostReviews') }
+        { value: 'highestRated', label: t('highestRated') },
+        { value: 'lowestPrice', label: t('lowestPrice') },
+        { value: 'highestPrice', label: t('highestPrice') },
+        { value: 'mostReviews', label: t('mostReviews') },
     ];
 
-    const handleSortChange = (value: string) => {
-        if (value === 'price-low') {
-            setSortBy({ field: 'price', order: 'asc' });
-        } else if (value === 'price-high') {
-            setSortBy({ field: 'price', order: 'desc' });
-        } else if (value === 'rating') {
-            setSortBy({ field: 'rating', order: 'desc' });
-        } else if (value === 'reviews') {
-            setSortBy({ field: 'reviewCount', order: 'desc' });
-        } else {
-            setSortBy({ field: 'recommended', order: 'desc' });
-        }
-    };
-
-    if (error) {
-        return (
-            <div className="min-h-screen bg-neutral-50 pt-24 pb-12">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-                        <p className="text-red-600 font-semibold">Error loading providers</p>
-                        <p className="text-red-500 mt-2">{error}</p>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div className="min-h-screen bg-neutral-50 pt-24 pb-12">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-neutral-50 pt-20">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
                 {/* Header */}
                 <div className="mb-8">
@@ -133,6 +134,16 @@ export default function ServicesPage() {
                             >
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
+                            {searchTerm && (
+                                <button
+                                    onClick={() => setSearchTerm('')}
+                                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-neutral-400 hover:text-neutral-600"
+                                >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            )}
                         </div>
                     </div>
 
@@ -165,64 +176,88 @@ export default function ServicesPage() {
                             ))}
                         </select>
 
+                        {/* Location Filter */}
+                        <select
+                            value={filters.location || 'all'}
+                            onChange={(e) => updateFilters({ location: e.target.value === 'all' ? undefined : e.target.value })}
+                            className="px-4 py-2 border border-neutral-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
+                        >
+                            {locations.map(loc => (
+                                <option key={loc.id} value={loc.id}>
+                                    📍 {loc.name}
+                                </option>
+                            ))}
+                        </select>
+
                         {/* Verified Only */}
                         <label className="flex items-center gap-2 px-4 py-2 border border-neutral-300 rounded-lg text-sm cursor-pointer hover:bg-neutral-50">
                             <input
                                 type="checkbox"
                                 checked={filters.verifiedOnly || false}
-                                onChange={(e) => updateFilters({ verifiedOnly: e.target.checked || undefined })}
-                                className="w-4 h-4 text-primary-600 rounded"
+                                onChange={(e) => updateFilters({ verifiedOnly: e.target.checked })}
+                                className="rounded text-primary-500 focus:ring-primary-500"
                             />
-                            <span>{t('verifiedOnly')}</span>
+                            <span>✓ {t('verifiedOnly')}</span>
                         </label>
 
                         {/* Clear Filters */}
-                        {(filters.category || filters.language || filters.verifiedOnly) && (
+                        {(filters.category || filters.language || filters.location || filters.verifiedOnly || searchTerm) && (
                             <button
-                                onClick={clearFilters}
-                                className="px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                onClick={() => {
+                                    clearFilters();
+                                    setSearchTerm('');
+                                }}
+                                className="px-4 py-2 text-sm text-primary-600 hover:text-primary-700 font-medium"
                             >
                                 {t('clearAll')}
                             </button>
                         )}
                     </div>
 
-                    {/* Sort & Results Count */}
-                    <div className="flex items-center justify-between">
-                        <p className="text-sm text-neutral-600">
-                            {total > 0 ? (
-                                <>
-                                    {t('showing')} {startIndex}-{endIndex}  <strong>{total}</strong> {total === 1 ? t('providerFound') : t('providersFound')}
-                                </>
-                            ) : (
-                                t('noProvidersFound')
-                            )}
-                        </p>
+                    {/* Results Count & Sort */}
+                    <div className="flex items-center justify-between pt-4 border-t border-neutral-200">
+                        <div className="text-sm text-neutral-600">
+                            {t('showing')} <span className="font-semibold">{startIndex + 1}-{Math.min(endIndex, total)}</span> {t('of')} <span className="font-semibold">{total}</span> {total === 1 ? t('providerFound') : t('providersFound')}
+                        </div>
 
-                        <select
-                            value={`${sortBy.field}${sortBy.field === 'price' ? `-${sortBy.order === 'asc' ? 'low' : 'high'}` : ''}`}
-                            onChange={(e) => handleSortChange(e.target.value)}
-                            className="px-4 py-2 border border-neutral-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
-                        >
-                            {sortOptions.map(option => (
-                                <option key={option.value} value={option.value}>
-                                    {t('sortBy')}: {option.label}
-                                </option>
-                            ))}
-                        </select>
+                        {/* Sort */}
+                        <div className="flex items-center gap-2">
+                            <span className="text-sm text-neutral-600">{t('sortBy')}:</span>
+                            <select
+                                value={`${sortBy.field}-${sortBy.order}`}
+                                onChange={(e) => {
+                                    const [field, order] = e.target.value.split('-');
+                                    setSortBy({ field: field as any, order: order as 'asc' | 'desc' });
+                                }}
+                                className="px-3 py-1.5 border border-neutral-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
+                            >
+                                {sortOptions.map(opt => (
+                                    <option key={opt.value} value={opt.value}>
+                                        {opt.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
                 </div>
 
                 {/* Loading State */}
-                {loading ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {[...Array(6)].map((_, i) => (
-                            <div key={i} className="bg-white rounded-xl h-96 animate-pulse"></div>
-                        ))}
+                {loading && (
+                    <div className="flex justify-center items-center py-20">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
                     </div>
-                ) : total === 0 ? (
-                    /* Empty State */
-                    <div className="text-center py-16">
+                )}
+
+                {/* Error State */}
+                {error && (
+                    <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
+                        <p className="text-red-600">{error}</p>
+                    </div>
+                )}
+
+                {/* Empty State */}
+                {!loading && !error && currentItems.length === 0 && (
+                    <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
                         <div className="text-6xl mb-4">🔍</div>
                         <h3 className="text-2xl font-bold text-neutral-900 mb-2">
                             {t('noProvidersFound')}
@@ -231,17 +266,22 @@ export default function ServicesPage() {
                             {t('tryAdjusting')}
                         </p>
                         <button
-                            onClick={clearFilters}
-                            className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+                            onClick={() => {
+                                clearFilters();
+                                setSearchTerm('');
+                            }}
+                            className="px-6 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
                         >
                             {t('clearAll')}
                         </button>
                     </div>
-                ) : (
+                )}
+
+                {/* Services Grid */}
+                {!loading && !error && currentItems.length > 0 && (
                     <>
-                        {/* Provider Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                            {currentItems.map(provider => (
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            {currentItems.map((provider) => (
                                 <ServiceCard key={provider.id} provider={provider} />
                             ))}
                         </div>
