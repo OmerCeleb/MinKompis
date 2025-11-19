@@ -22,7 +22,46 @@ export default function ProviderProfilePage() {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     // Mock provider data - Backend'den gelecek
-    const provider = {
+    // Provider interface'ine uygun şekilde tanımlandı
+    interface ProviderService {
+        id: string;
+        title: string;
+        name: string;
+        category: string;
+        price: number;
+        duration: number;
+        description: string;
+    }
+
+    interface ProviderReview {
+        id: string;
+        author: string;
+        rating: number;
+        date: string;
+        text: string;
+        avatar: string;
+    }
+
+    interface ProviderDetails {
+        id: string;
+        name: string;
+        title: string;
+        avatar: string;
+        rating: number;
+        reviewCount: number;
+        completedJobs: number;
+        responseTime: string;
+        languages: string[];
+        location: string;
+        verified: boolean;
+        memberSince: string;
+        about: string;
+        services: ProviderService[];
+        portfolio?: string[];
+        reviews: ProviderReview[];
+    }
+
+    const provider: ProviderDetails = {
         id: params.id as string,
         name: 'Ayşe Yılmaz',
         title: 'Swedish Language Teacher & Immigration Consultant',
@@ -43,144 +82,96 @@ I also offer consultation on residence permits, work permits, and navigating Swe
         services: [
             {
                 id: '1',
-                title: 'Swedish Language Lessons - Beginner',
+                title: 'Swedish Language Lessons',
+                name: 'Swedish Language Lessons',
+                category: 'Education',
                 price: 450,
                 duration: 60,
-                category: 'Education'
+                description: 'Beginner to advanced Swedish language instruction'
             },
             {
                 id: '2',
-                title: 'Swedish Language Lessons - Intermediate',
-                price: 500,
-                duration: 60,
-                category: 'Education'
-            },
-            {
-                id: '3',
-                title: 'Residence Permit Consultation',
+                title: 'Immigration Consultation',
+                name: 'Immigration Consultation',
+                category: 'Official',
                 price: 600,
                 duration: 90,
-                category: 'Official Services'
+                description: 'Expert guidance on residence permits and Swedish bureaucracy'
             }
         ],
         portfolio: [
-            'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800',
-            'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800',
             'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800',
-            'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800',
-            'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800',
-            'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800'
+            'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800',
+            'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800'
         ],
         reviews: [
             {
                 id: '1',
-                customer: {
-                    name: 'Mehmet Kaya',
-                    avatar: 'https://i.pravatar.cc/150?img=33'
-                },
+                author: 'Mehmet K.',
                 rating: 5,
-                comment: 'Excellent teacher! Very patient and explains everything clearly. My Swedish improved dramatically in just 3 months.',
-                date: '2024-11-01',
-                service: 'Swedish Language Lessons - Beginner'
+                date: '2024-02-15',
+                text: 'Excellent teacher! Very patient and professional.',
+                avatar: 'https://i.pravatar.cc/150?img=12'
             },
             {
                 id: '2',
-                customer: {
-                    name: 'Fatma Öztürk',
-                    avatar: 'https://i.pravatar.cc/150?img=45'
-                },
+                author: 'Sarah L.',
                 rating: 5,
-                comment: 'Helped me get my permanent residence permit. Very knowledgeable and supportive throughout the process!',
-                date: '2024-10-28',
-                service: 'Residence Permit Consultation'
-            },
-            {
-                id: '3',
-                customer: {
-                    name: 'Ali Demir',
-                    avatar: 'https://i.pravatar.cc/150?img=12'
-                },
-                rating: 5,
-                comment: 'Best investment I made! Now I can speak Swedish confidently at work and with neighbors.',
-                date: '2024-10-20',
-                service: 'Swedish Language Lessons - Intermediate'
-            },
-            {
-                id: '4',
-                customer: {
-                    name: 'Zeynep Aydın',
-                    avatar: 'https://i.pravatar.cc/150?img=44'
-                },
-                rating: 4,
-                comment: 'Very good teacher. Flexible with scheduling and always prepared for lessons.',
-                date: '2024-10-15',
-                service: 'Swedish Language Lessons - Beginner'
+                date: '2024-02-10',
+                text: 'Helped me get my residence permit without any issues.',
+                avatar: 'https://i.pravatar.cc/150?img=45'
             }
-        ],
-        availability: {
-            monday: ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'],
-            tuesday: ['09:00', '10:00', '11:00', '14:00', '15:00'],
-            wednesday: ['09:00', '10:00', '14:00', '15:00', '16:00', '17:00'],
-            thursday: ['09:00', '10:00', '11:00', '14:00', '15:00'],
-            friday: ['09:00', '10:00', '11:00', '14:00'],
-            saturday: [],
-            sunday: []
-        }
+        ]
     };
 
     const renderStars = (rating: number) => {
-        return (
-            <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map((star) => (
-                    <svg
-                        key={star}
-                        className={`w-5 h-5 ${
-                            star <= rating ? 'text-yellow-400 fill-current' : 'text-neutral-300 fill-current'
-                        }`}
-                        viewBox="0 0 20 20"
-                    >
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                ))}
-            </div>
-        );
+        return Array.from({ length: 5 }, (_, index) => (
+            <svg
+                key={index}
+                className={`w-5 h-5 ${index < Math.floor(rating) ? 'text-yellow-400' : 'text-neutral-300'}`}
+                fill="currentColor"
+                viewBox="0 0 20 20"
+            >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+        ));
     };
 
     return (
-        <div className="min-h-screen bg-neutral-50">
+        <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-primary-50/30">
             {/* Back Button */}
             <div className="bg-white border-b border-neutral-200">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                    <button
-                        onClick={() => router.back()}
-                        className="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 transition-colors"
+                <div className="container-custom py-4">
+                    <Link
+                        href="/services"
+                        className="inline-flex items-center gap-2 text-neutral-600 hover:text-primary-600 transition-colors"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
-                        <span className="font-medium">{t('backToServices')}</span>
-                    </button>
+                        {t('backToServices')}
+                    </Link>
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
-                <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
-
-                    {/* Left Column - Profile Info */}
+            <div className="container-custom py-8">
+                <div className="grid lg:grid-cols-3 gap-8">
+                    {/* Main Content */}
                     <div className="lg:col-span-2 space-y-6">
-
-                        {/* Profile Card */}
+                        {/* Provider Header */}
                         <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-6 sm:p-8">
                             <div className="flex flex-col sm:flex-row gap-6">
                                 {/* Avatar */}
                                 <div className="relative flex-shrink-0">
-                                    <Image
-                                        src={provider.avatar}
-                                        alt={provider.name}
-                                        width={120}
-                                        height={120}
-                                        className="w-24 h-24 sm:w-32 sm:h-32 rounded-2xl object-cover"
-                                    />
+                                    <div className="w-32 h-32 rounded-2xl overflow-hidden ring-4 ring-primary-100">
+                                        <Image
+                                            src={provider.avatar}
+                                            alt={provider.name}
+                                            width={128}
+                                            height={128}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
                                     {provider.verified && (
                                         <div className="absolute -bottom-2 -right-2 bg-green-500 text-white p-2 rounded-full shadow-lg">
                                             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -220,14 +211,14 @@ I also offer consultation on residence permits, work permits, and navigating Swe
                                                 </svg>
                                             </div>
                                             <div>
-                                                <div className="text-sm text-neutral-500">{tCommon('location')}</div>
+                                                <div className="text-sm text-neutral-500">{t('location')}</div>
                                                 <div className="font-medium text-neutral-900">{provider.location}</div>
                                             </div>
                                         </div>
 
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                 </svg>
                                             </div>
@@ -238,8 +229,8 @@ I also offer consultation on residence permits, work permits, and navigating Swe
                                         </div>
 
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                                <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                                                 </svg>
                                             </div>
@@ -256,7 +247,7 @@ I also offer consultation on residence permits, work permits, and navigating Swe
                                                 </svg>
                                             </div>
                                             <div>
-                                                <div className="text-sm text-neutral-500">Member since</div>
+                                                <div className="text-sm text-neutral-500">{t('memberSince')}</div>
                                                 <div className="font-medium text-neutral-900">{provider.memberSince}</div>
                                             </div>
                                         </div>
@@ -275,38 +266,47 @@ I also offer consultation on residence permits, work permits, and navigating Swe
 
                         {/* Services */}
                         <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-6 sm:p-8">
-                            <h2 className="text-xl font-bold text-neutral-900 mb-6">Services Offered</h2>
+                            <h2 className="text-xl font-bold text-neutral-900 mb-6">{t('servicesOffered')}</h2>
                             <div className="space-y-4">
                                 {provider.services.map((service) => (
                                     <div
                                         key={service.id}
-                                        className="border border-neutral-200 rounded-xl p-4 hover:border-primary-300 hover:shadow-sm transition-all"
+                                        className="border border-neutral-200 rounded-xl p-6 hover:border-primary-300 hover:shadow-md transition-all group"
                                     >
                                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                                             <div className="flex-1">
-                                                <h3 className="font-semibold text-neutral-900 mb-1">
-                                                    {service.title}
-                                                </h3>
-                                                <div className="flex items-center gap-3 text-sm text-neutral-500">
-                                                    <span className="flex items-center gap-1">
-                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                        </svg>
-                                                        {service.duration} min
-                                                    </span>
-                                                    <span>•</span>
-                                                    <span className="px-2 py-0.5 bg-neutral-100 rounded-full text-xs">
+                                                <div className="flex items-center gap-3 mb-2">
+                                                    <h3 className="text-lg font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">
+                                                        {service.name}
+                                                    </h3>
+                                                    <span className="text-xs px-2 py-1 bg-primary-100 text-primary-700 rounded-full font-medium">
                                                         {service.category}
                                                     </span>
                                                 </div>
+                                                <p className="text-neutral-600 text-sm mb-3">{service.description}</p>
+                                                <div className="flex items-center gap-4 text-sm text-neutral-500">
+                                                    <div className="flex items-center gap-1">
+                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                        </svg>
+                                                        <span>{service.duration} {t('minutes')}</span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="flex items-center gap-4">
+                                            <div className="flex sm:flex-col items-center sm:items-end gap-3">
                                                 <div className="text-right">
                                                     <div className="text-2xl font-bold text-primary-600">
                                                         {service.price} {tServices('sek')}
                                                     </div>
-                                                    <div className="text-sm text-neutral-500">per session</div>
+                                                    <div className="text-xs text-neutral-500">{t('perSession')}</div>
                                                 </div>
+                                                <Button
+                                                    size="sm"
+                                                    onClick={() => setShowBookingModal(true)}
+                                                    className="whitespace-nowrap"
+                                                >
+                                                    {t('bookService')}
+                                                </Button>
                                             </div>
                                         </div>
                                     </div>
@@ -315,64 +315,65 @@ I also offer consultation on residence permits, work permits, and navigating Swe
                         </div>
 
                         {/* Portfolio */}
-                        <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-6 sm:p-8">
-                            <h2 className="text-xl font-bold text-neutral-900 mb-6">{t('portfolio')}</h2>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                                {provider.portfolio.map((image, index) => (
-                                    <div
-                                        key={index}
-                                        onClick={() => setSelectedImage(image)}
-                                        className="relative aspect-square rounded-xl overflow-hidden cursor-pointer group"
-                                    >
-                                        <Image
-                                            src={image}
-                                            alt={`Portfolio ${index + 1}`}
-                                            fill
-                                            className="object-cover group-hover:scale-110 transition-transform duration-300"
-                                        />
-                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                                            <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                ))}
+                        {provider.portfolio && provider.portfolio.length > 0 && (
+                            <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-6 sm:p-8">
+                                <h2 className="text-xl font-bold text-neutral-900 mb-6">{t('portfolio')}</h2>
+                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                    {provider.portfolio.map((image, index) => (
+                                        <button
+                                            key={index}
+                                            onClick={() => setSelectedImage(image)}
+                                            className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer"
+                                        >
+                                            <Image
+                                                src={image}
+                                                alt={`Portfolio ${index + 1}`}
+                                                fill
+                                                className="object-cover group-hover:scale-110 transition-transform duration-300"
+                                            />
+                                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                                                <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
+                        )}
 
                         {/* Reviews */}
                         <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-6 sm:p-8">
-                            <h2 className="text-xl font-bold text-neutral-900 mb-6">
-                                Reviews ({provider.reviewCount})
-                            </h2>
+                            <div className="flex items-center justify-between mb-6">
+                                <h2 className="text-xl font-bold text-neutral-900">{t('reviews')} ({provider.reviewCount})</h2>
+                                <div className="flex items-center gap-2">
+                                    {renderStars(provider.rating)}
+                                    <span className="font-semibold text-neutral-900">{provider.rating}</span>
+                                </div>
+                            </div>
+
                             <div className="space-y-6">
                                 {provider.reviews.map((review) => (
                                     <div key={review.id} className="border-b border-neutral-200 last:border-0 pb-6 last:pb-0">
                                         <div className="flex items-start gap-4">
                                             <Image
-                                                src={review.customer.avatar}
-                                                alt={review.customer.name}
+                                                src={review.avatar}
+                                                alt={review.author}
                                                 width={48}
                                                 height={48}
-                                                className="w-12 h-12 rounded-full object-cover"
+                                                className="w-12 h-12 rounded-full"
                                             />
-                                            <div className="flex-1 min-w-0">
-                                                <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                            <div className="flex-1">
+                                                <div className="flex items-center justify-between mb-2">
                                                     <div>
-                                                        <h4 className="font-semibold text-neutral-900">
-                                                            {review.customer.name}
-                                                        </h4>
-                                                        <p className="text-sm text-neutral-500">{review.date}</p>
+                                                        <div className="font-semibold text-neutral-900">{review.author}</div>
+                                                        <div className="text-sm text-neutral-500">{review.date}</div>
                                                     </div>
-                                                    {renderStars(review.rating)}
+                                                    <div className="flex items-center gap-1">
+                                                        {renderStars(review.rating)}
+                                                    </div>
                                                 </div>
-                                                <p className="text-neutral-600 mb-2">{review.comment}</p>
-                                                <div className="inline-flex items-center gap-2 px-3 py-1 bg-neutral-100 rounded-full text-xs text-neutral-600">
-                                                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                                                    </svg>
-                                                    {review.service}
-                                                </div>
+                                                <p className="text-neutral-600">{review.text}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -381,17 +382,17 @@ I also offer consultation on residence permits, work permits, and navigating Swe
                         </div>
                     </div>
 
-                    {/* Right Column - Booking Card (Sticky) */}
+                    {/* Sidebar */}
                     <div className="lg:col-span-1">
-                        <div className="sticky top-24 space-y-4">
-                            {/* Price Card */}
+                        <div className="sticky top-8 space-y-6">
+                            {/* Pricing Card */}
                             <div className="bg-white rounded-2xl shadow-lg border border-neutral-200 p-6">
                                 <div className="text-center mb-6">
-                                    <div className="text-sm text-neutral-500 mb-1">{tCommon('from')}</div>
+                                    <div className="text-sm text-neutral-500 mb-2">{tServices('from')}</div>
                                     <div className="text-4xl font-bold text-primary-600">
-                                        450 <span className="text-xl text-neutral-500">{tServices('sek')}</span>
+                                        450 {tServices('sek')}
                                     </div>
-                                    <div className="text-sm text-neutral-500">{tCommon('perHour')}</div>
+                                    <div className="text-sm text-neutral-500">{t('perSession')}</div>
                                 </div>
 
                                 <div className="space-y-3">
@@ -399,44 +400,40 @@ I also offer consultation on residence permits, work permits, and navigating Swe
                                         fullWidth
                                         size="lg"
                                         onClick={() => setShowBookingModal(true)}
-                                        className="font-semibold"
                                     >
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
                                         {t('bookAppointment')}
                                     </Button>
-
                                     <Button
                                         fullWidth
-                                        variant="outline"
                                         size="lg"
+                                        variant="outline"
                                         onClick={() => setShowContactModal(true)}
                                     >
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                                        </svg>
                                         {t('contactProvider')}
                                     </Button>
                                 </div>
+                            </div>
 
-                                <div className="mt-6 pt-6 border-t border-neutral-200 space-y-3">
+                            {/* Stats Card */}
+                            <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-6">
+                                <h3 className="font-semibold text-neutral-900 mb-4">Stats</h3>
+                                <div className="space-y-3">
                                     <div className="flex items-center justify-between text-sm">
-                                        <span className="text-neutral-600">Average response</span>
+                                        <span className="text-neutral-600">{t('averageResponse')}</span>
                                         <span className="font-medium text-neutral-900">{provider.responseTime}</span>
                                     </div>
                                     <div className="flex items-center justify-between text-sm">
-                                        <span className="text-neutral-600">Completed jobs</span>
+                                        <span className="text-neutral-600">{t('completedJobsStats')}</span>
                                         <span className="font-medium text-neutral-900">{provider.completedJobs}</span>
                                     </div>
                                     <div className="flex items-center justify-between text-sm">
-                                        <span className="text-neutral-600">Member since</span>
+                                        <span className="text-neutral-600">{t('memberSince')}</span>
                                         <span className="font-medium text-neutral-900">{provider.memberSince}</span>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Trust Badges */}
+                            {/* Trust Badge */}
                             <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-4 border border-green-200">
                                 <div className="flex items-center gap-3 mb-3">
                                     <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
@@ -446,11 +443,11 @@ I also offer consultation on residence permits, work permits, and navigating Swe
                                     </div>
                                     <div className="flex-1">
                                         <div className="font-semibold text-green-900">{t('verifiedProvider')}</div>
-                                        <div className="text-sm text-green-700">Identity verified</div>
+                                        <div className="text-sm text-green-700">{t('identityVerified')}</div>
                                     </div>
                                 </div>
                                 <div className="text-xs text-green-700 leading-relaxed">
-                                    This provider has been verified by MinKompis and has completed our trust & safety checks.
+                                    {t('verifiedDescription')}
                                 </div>
                             </div>
                         </div>
@@ -458,7 +455,7 @@ I also offer consultation on residence permits, work permits, and navigating Swe
                 </div>
             </div>
 
-            {/* Booking Modal */}
+            {/* Modals */}
             {showBookingModal && (
                 <BookingModal
                     provider={{
@@ -472,7 +469,6 @@ I also offer consultation on residence permits, work permits, and navigating Swe
                 />
             )}
 
-            {/* Contact Modal */}
             {showContactModal && (
                 <ContactModal
                     provider={{
@@ -492,21 +488,21 @@ I also offer consultation on residence permits, work permits, and navigating Swe
                     onClick={() => setSelectedImage(null)}
                 >
                     <button
-                        onClick={() => setSelectedImage(null)}
                         className="absolute top-4 right-4 text-white hover:text-neutral-300 transition-colors"
+                        onClick={() => setSelectedImage(null)}
                     >
                         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
-                    <Image
-                        src={selectedImage}
-                        alt="Portfolio"
-                        width={1200}
-                        height={1200}
-                        className="max-w-full max-h-full object-contain rounded-lg"
-                        onClick={(e) => e.stopPropagation()}
-                    />
+                    <div className="relative max-w-5xl w-full aspect-video">
+                        <Image
+                            src={selectedImage}
+                            alt="Portfolio"
+                            fill
+                            className="object-contain"
+                        />
+                    </div>
                 </div>
             )}
         </div>

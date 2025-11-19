@@ -689,11 +689,30 @@
       "notificationsError": "Kunde inte uppdatera notifieringar"
     },
     "common": {
-      "success": "Åtgärden lyckades!",
-      "error": "Ett fel uppstod",
-      "confirm": "Bekräfta",
+      "appName": "MinKompis",
+      "welcome": "Välkommen",
+      "login": "Logga in",
+      "register": "Registrera",
+      "logout": "Logga ut",
+      "submit": "Skicka",
       "cancel": "Avbryt",
-      "tryAgain": "Försök igen"
+      "save": "Spara",
+      "search": "Sök",
+      "filter": "Filtrera",
+      "loading": "Laddar...",
+      "error": "Ett fel uppstod",
+      "success": "Lyckades",
+      "viewProfile": "Visa Profil",
+      "seeAll": "Se Alla",
+      "verified": "Verifierad",
+      "back": "Tillbaka",
+      "next": "Nästa",
+      "previous": "Föregående",
+      "close": "Stäng",
+      "edit": "Redigera",
+      "delete": "Ta bort",
+      "confirm": "Bekräfta",
+      "continue": "Fortsätt"
     }
   },
   "footer": {

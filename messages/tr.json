@@ -342,8 +342,22 @@
     "servicesOffered": "Sunulan Hizmetler",
     "perSession": "seans başı",
     "averageResponse": "Ortalama yanıt",
+    "completedJobsStats": "Tamamlanan İşler",
     "identityVerified": "Kimlik doğrulandı",
-    "verifiedDescription": "Bu sağlayıcı MinKompis tarafından doğrulanmış ve güven & güvenlik kontrollerini tamamlamıştır."
+    "verifiedDescription": "Bu sağlayıcı MinKompis tarafından doğrulanmış ve güven & güvenlik kontrollerini tamamlamıştır.",
+    "location": "Konum",
+    "viewFullImage": "Tam boyutta görüntüle",
+    "closeImage": "Kapat",
+    "bookService": "Hizmeti Rezerve Et",
+    "contactForDetails": "Detaylar için iletişime geç",
+    "perHour": "saat başı",
+    "duration": "Süre",
+    "minutes": "dakika",
+    "noReviews": "Henüz yorum yok",
+    "noReviewsDesc": "Bu sağlayıcı henüz yorum almamış",
+    "allReviews": "Tüm Yorumlar",
+    "helpful": "Yardımcı",
+    "reportReview": "Yorumu Bildir"
   },
   "dashboard": {
     "myBookings": "Rezervasyonlarım",
@@ -681,11 +695,30 @@
       "notificationsError": "Bildirim tercihleri güncellenemedi"
     },
     "common": {
-      "success": "İşlem başarılı!",
-      "error": "Bir hata oluştu",
-      "confirm": "Onayla",
+      "appName": "MinKompis",
+      "welcome": "Hoş geldiniz",
+      "login": "Giriş Yap",
+      "register": "Kayıt Ol",
+      "logout": "Çıkış Yap",
+      "submit": "Gönder",
       "cancel": "İptal",
-      "tryAgain": "Tekrar deneyin"
+      "save": "Kaydet",
+      "search": "Ara",
+      "filter": "Filtrele",
+      "loading": "Yükleniyor...",
+      "error": "Hata oluştu",
+      "success": "Başarılı",
+      "viewProfile": "Profile Git",
+      "seeAll": "Tümünü Gör",
+      "verified": "Doğrulanmış",
+      "back": "Geri",
+      "next": "İleri",
+      "previous": "Önceki",
+      "close": "Kapat",
+      "edit": "Düzenle",
+      "delete": "Sil",
+      "confirm": "Onayla",
+      "continue": "Devam Et"
     }
   },
   "footer": {
