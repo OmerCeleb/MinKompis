@@ -73,30 +73,30 @@
     }
   },
   "booking": {
-      "bookAppointment": "Randevu Al",
-      "selectDate": "Tarih Seçin",
-      "selectTime": "Saat Seçin",
-      "chooseTime": "Bir saat seçin",
-      "duration": "Süre",
-      "minutes": "dakika",
-      "hour": "saat",
-      "message": "Mesaj",
-      "messagePlaceholder": "Sağlayıcıya ihtiyaçlarınız, tercihleriniz veya sorularınız hakkında bilgi verin...",
-      "messageHint": "Mesaj eklemek sağlayıcının ihtiyaçlarınızı daha iyi anlamasına yardımcı olur",
-      "sessionDuration": "Seans Süresi",
-      "hourlyRate": "Saat Ücreti",
-      "totalPrice": "Toplam Fiyat",
-      "agreeToTerms": "Kabul ediyorum",
-      "termsAndConditions": "Şartlar ve Koşulları",
-      "and": "ve",
-      "privacyPolicy": "Gizlilik Politikasını",
-      "mustAgreeToTerms": "Devam etmek için şartları kabul etmelisiniz",
-      "sendRequest": "Rezervasyon Talebi Gönder",
-      "sending": "Gönderiliyor...",
-      "bookingSuccess": "Rezervasyon talebi başarıyla gönderildi! Sağlayıcı yakında yanıt verecek.",
-      "importantNotice": "Önemli Bilgi",
-      "bookingNotice": "Bu bir rezervasyon talebidir. Sağlayıcı rezervasyonunuzu inceleyecek ve onaylayacaktır. Onaylandığında bildirim alacaksınız."
-    },
+    "bookAppointment": "Randevu Al",
+    "selectDate": "Tarih Seçin",
+    "selectTime": "Saat Seçin",
+    "chooseTime": "Bir saat seçin",
+    "duration": "Süre",
+    "minutes": "dakika",
+    "hour": "saat",
+    "message": "Mesaj",
+    "messagePlaceholder": "Sağlayıcıya ihtiyaçlarınız, tercihleriniz veya sorularınız hakkında bilgi verin...",
+    "messageHint": "Mesaj eklemek sağlayıcının ihtiyaçlarınızı daha iyi anlamasına yardımcı olur",
+    "sessionDuration": "Seans Süresi",
+    "hourlyRate": "Saat Ücreti",
+    "totalPrice": "Toplam Fiyat",
+    "agreeToTerms": "Kabul ediyorum",
+    "termsAndConditions": "Şartlar ve Koşulları",
+    "and": "ve",
+    "privacyPolicy": "Gizlilik Politikasını",
+    "mustAgreeToTerms": "Devam etmek için şartları kabul etmelisiniz",
+    "sendRequest": "Rezervasyon Talebi Gönder",
+    "sending": "Gönderiliyor...",
+    "bookingSuccess": "Rezervasyon talebi başarıyla gönderildi! Sağlayıcı yakında yanıt verecek.",
+    "importantNotice": "Önemli Bilgi",
+    "bookingNotice": "Bu bir rezervasyon talebidir. Sağlayıcı rezervasyonunuzu inceleyecek ve onaylayacaktır. Onaylandığında bildirim alacaksınız."
+  },
   "nav": {
     "home": "Ana Sayfa",
     "findServices": "Hizmet Bul",
@@ -174,7 +174,7 @@
         "providers": "Hizmet sağlayıcı",
         "languages": "Dil",
         "rating": "Ort. puan",
-        "support" : "Destek"
+        "support": "Destek"
       }
     },
     "categories": {
@@ -185,7 +185,7 @@
       "providers": "sağlayıcı"
     },
     "featured": {
-      "topRated" : "En yüksek puanlı",
+      "topRated": "En yüksek puanlı",
       "title": "Öne çıkan hizmet sağlayıcılar",
       "subtitle": "Sana yardım etmeye hazır yüksek puanlı profesyoneller"
     },
@@ -218,11 +218,11 @@
       }
     },
     "howItWorks": {
-      "simpleProcess" : "Basit adımlar",
+      "simpleProcess": "Basit Süreç",
       "title": "Nasıl çalışır",
       "subtitle": "İhtiyacın olan yardımı almak için basit adımlar",
       "forCustomers": "Müşteriler için",
-      "forProviders": "Hizmet sağlayıcılar için",
+      "forProviders": "Hizmet Sağlayıcılar için",
       "step1Customer": {
         "title": "Hizmet ara",
         "desc": "Kendi dilini konuşan sağlayıcıları bul"
@@ -257,7 +257,7 @@
       }
     },
     "testimonials": {
-      "averageRating" : "Ortalama Değerlendirme: 5,0",
+      "averageRating": "Ortalama Değerlendirme 5.0",
       "title": "Kullanıcılarımız ne diyor",
       "subtitle": "Binlerce memnun kullanıcı MinKompis üzerinden yardım buldu"
     },
@@ -286,7 +286,7 @@
   },
   "services": {
     "title": "Hizmetlere Göz At",
-    "showing" : "Gösteriliyor",
+    "showing": "Gösteriliyor",
     "subtitle": "Kendi dilinde güvenilir hizmet sağlayıcılar bul",
     "searchPlaceholder": "İsim, hizmet veya kelime ile ara...",
     "filters": "Filtreler",
@@ -320,7 +320,9 @@
     "jobs": "iş",
     "previous": "Önceki",
     "next": "Sonraki",
-    "sek": "SEK"
+    "sek": "SEK",
+    "hour": "saat",
+    "of": "/"
   },
   "profile": {
     "backToServices": "Hizmetlere dön",
@@ -344,7 +346,7 @@
     "verifiedDescription": "Bu sağlayıcı MinKompis tarafından doğrulanmış ve güven & güvenlik kontrollerini tamamlamıştır."
   },
   "dashboard": {
-    "myBookings" : "Rezervasyonlarım",
+    "myBookings": "Rezervasyonlarım",
     "overview": "Genel Bakış",
     "myServices": "Hizmetlerim",
     "myMessages": "Mesajlarim",
@@ -397,7 +399,6 @@
     "settings": {
       "title": "Ayarlar",
       "subtitle": "Hesap ayarlarınızı ve tercihlerinizi yönetin",
-
       "tabs": {
         "profile": "Profil Ayarları",
         "account": "Hesap Güvenliği",
@@ -422,7 +423,6 @@
         "charactersLeft": "karakter kaldı",
         "saveChanges": "Değişiklikler kaydet"
       },
-
       "account": {
         "title": "Hesap Güvenliği",
         "subtitle": "Giriş bilgilerinizi ve güvenlik ayarlarınızı yönetin",
@@ -452,7 +452,6 @@
         "deleteAccountDesc": "Hesabınızı kalıcı olarak silin. Bu işlem geri alınamaz.",
         "deleteAccountButton": "Hesabımı Sil"
       },
-
       "service": {
         "title": "Hizmet Ayarları",
         "subtitle": "Hizmet tercihlerinizi ve müsaitliğinizi yapılandırın",
@@ -493,7 +492,6 @@
           "autoAcceptDesc": "Yeni rezervasyonlar otomatik olarak kabul edilir"
         }
       },
-
       "notifications": {
         "title": "Bildirim Tercihleri",
         "subtitle": "Bildirim almak istediğiniz durumları seçin",
@@ -523,7 +521,6 @@
           "marketingDesc": "İpuçları, trendler ve en iyi uygulamalar"
         }
       },
-
       "actions": {
         "save": "Değişiklikleri Kaydet",
         "cancel": "İptal",
@@ -533,7 +530,6 @@
         "unsavedChanges": "Kaydedilmemiş değişiklikler var",
         "discardChanges": "Değişiklikleri iptal et"
       },
-
       "messages": {
         "profileUpdated": "Profil başarıyla güncellendi!",
         "accountUpdated": "Hesap ayarları güncellendi!",
@@ -547,7 +543,6 @@
         "allSessionsEnded": "Tüm oturumlar sonlandırıldı",
         "error": "Bir hata oluştu. Lütfen tekrar deneyin."
       },
-
       "confirmations": {
         "deleteAccount": {
           "title": "Hesabı Sil",

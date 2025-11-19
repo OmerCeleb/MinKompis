@@ -71,9 +71,9 @@ export default function HeroSection() {
     };
 
     return (
-        <section className="relative min-h-[800px] flex items-center overflow-hidden pt-16">
+        <section className="relative min-h-[800px] flex items-center pt-16" style={{ overflow: 'visible', zIndex: 20 }}>
             {/* Background Image with Overlay */}
-            <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 z-0 overflow-hidden">
                 <img
                     src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80"
                     alt="People working together"
@@ -102,103 +102,105 @@ export default function HeroSection() {
                         </p>
 
                         {/* Search Bar with Dropdown */}
-                        <div ref={dropdownRef} className="mb-8 relative">
+                        <div className="mb-8">
                             <form onSubmit={handleSearch}>
-                                <div className="flex flex-col sm:flex-row gap-3 bg-white rounded-2xl p-2 shadow-2xl">
-                                    <div className="flex-1 flex items-center gap-3 px-4">
-                                        <svg className="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                        </svg>
-                                        <input
-                                            type="text"
-                                            value={searchQuery}
-                                            onChange={handleInputChange}
-                                            onFocus={() => searchQuery.trim().length > 0 && setShowDropdown(true)}
-                                            placeholder={t('searchPlaceholder')}
-                                            className="flex-1 py-4 text-lg border-0 focus:outline-none bg-transparent text-neutral-800 placeholder-neutral-400"
-                                        />
-                                        {searchQuery && (
+                                <div ref={dropdownRef} className="relative">
+                                    <div className="flex flex-col sm:flex-row gap-3 bg-white rounded-2xl p-2 shadow-2xl">
+                                        <div className="flex-1 flex items-center gap-3 px-4">
+                                            <svg className="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                            </svg>
+                                            <input
+                                                type="text"
+                                                value={searchQuery}
+                                                onChange={handleInputChange}
+                                                onFocus={() => searchQuery.trim().length > 0 && setShowDropdown(true)}
+                                                placeholder={t('searchPlaceholder')}
+                                                className="flex-1 py-4 text-lg border-0 focus:outline-none bg-transparent text-neutral-800 placeholder-neutral-400"
+                                            />
+                                            {searchQuery && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setSearchQuery('');
+                                                        setShowDropdown(false);
+                                                    }}
+                                                    className="text-neutral-400 hover:text-neutral-600 transition-colors"
+                                                >
+                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                                    </svg>
+                                                </button>
+                                            )}
+                                        </div>
+                                        <Button
+                                            type="submit"
+                                            size="lg"
+                                            className="px-8 py-4 text-lg font-semibold whitespace-nowrap shadow-lg hover:shadow-xl transition-all"
+                                        >
+                                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                            </svg>
+                                            {t('searchButton')}
+                                        </Button>
+                                    </div>
+
+                                    {/* Dropdown Results */}
+                                    {showDropdown && filteredServices.length > 0 && (
+                                        <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl overflow-hidden border border-neutral-200" style={{ zIndex: 9999 }}>
+                                            <div className="max-h-96 overflow-y-auto">
+                                                {filteredServices.map((service) => (
+                                                    <button
+                                                        key={service.id}
+                                                        onClick={() => handleServiceClick(service)}
+                                                        className="w-full flex items-center gap-4 px-6 py-4 hover:bg-neutral-50 transition-colors text-left border-b border-neutral-100 last:border-b-0"
+                                                    >
+                                                        <div className="text-3xl">{service.icon}</div>
+                                                        <div className="flex-1">
+                                                            <div className="font-semibold text-neutral-900 text-lg">
+                                                                {service.name}
+                                                            </div>
+                                                            <div className="text-sm text-neutral-500">
+                                                                {service.keywords.slice(0, 3).join(', ')}
+                                                            </div>
+                                                        </div>
+                                                        <svg className="w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                        </svg>
+                                                    </button>
+                                                ))}
+                                            </div>
+
+                                            {/* Show All Results Button */}
                                             <button
-                                                type="button"
-                                                onClick={() => {
-                                                    setSearchQuery('');
-                                                    setShowDropdown(false);
-                                                }}
-                                                className="text-neutral-400 hover:text-neutral-600 transition-colors"
+                                                onClick={handleSearch}
+                                                className="w-full px-6 py-4 bg-neutral-50 hover:bg-neutral-100 transition-colors flex items-center justify-center gap-2 text-primary-600 font-semibold border-t-2 border-neutral-200"
                                             >
                                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                                 </svg>
+                                                Tüm sonuçları göster "{searchQuery}"
                                             </button>
-                                        )}
-                                    </div>
-                                    <Button
-                                        type="submit"
-                                        size="lg"
-                                        className="px-8 py-4 text-lg font-semibold whitespace-nowrap shadow-lg hover:shadow-xl transition-all"
-                                    >
-                                        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                        </svg>
-                                        {t('searchButton')}
-                                    </Button>
+                                        </div>
+                                    )}
+
+                                    {/* No Results Message */}
+                                    {showDropdown && searchQuery.trim().length > 0 && filteredServices.length === 0 && (
+                                        <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl p-6 border border-neutral-200 text-center" style={{ zIndex: 9999 }}>
+                                            <div className="text-4xl mb-2">🔍</div>
+                                            <p className="text-neutral-600 mb-4">
+                                                "{searchQuery}" için önceden tanımlı kategori bulunamadı
+                                            </p>
+                                            <button
+                                                onClick={handleSearch}
+                                                className="px-6 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors font-semibold"
+                                            >
+                                                Yine de ara
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                             </form>
-
-                            {/* Dropdown Results */}
-                            {showDropdown && filteredServices.length > 0 && (
-                                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl overflow-hidden z-50 border border-neutral-200">
-                                    <div className="max-h-96 overflow-y-auto">
-                                        {filteredServices.map((service) => (
-                                            <button
-                                                key={service.id}
-                                                onClick={() => handleServiceClick(service)}
-                                                className="w-full flex items-center gap-4 px-6 py-4 hover:bg-neutral-50 transition-colors text-left border-b border-neutral-100 last:border-b-0"
-                                            >
-                                                <div className="text-3xl">{service.icon}</div>
-                                                <div className="flex-1">
-                                                    <div className="font-semibold text-neutral-900 text-lg">
-                                                        {service.name}
-                                                    </div>
-                                                    <div className="text-sm text-neutral-500">
-                                                        {service.keywords.slice(0, 3).join(', ')}
-                                                    </div>
-                                                </div>
-                                                <svg className="w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-                                        ))}
-                                    </div>
-
-                                    {/* Show All Results Button */}
-                                    <button
-                                        onClick={handleSearch}
-                                        className="w-full px-6 py-4 bg-neutral-50 hover:bg-neutral-100 transition-colors flex items-center justify-center gap-2 text-primary-600 font-semibold border-t-2 border-neutral-200"
-                                    >
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                        </svg>
-                                        Tüm sonuçları göster "{searchQuery}"
-                                    </button>
-                                </div>
-                            )}
-
-                            {/* No Results Message */}
-                            {showDropdown && searchQuery.trim().length > 0 && filteredServices.length === 0 && (
-                                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl p-6 z-50 border border-neutral-200 text-center">
-                                    <div className="text-4xl mb-2">🔍</div>
-                                    <p className="text-neutral-600 mb-4">
-                                        "{searchQuery}" için önceden tanımlı kategori bulunamadı
-                                    </p>
-                                    <button
-                                        onClick={handleSearch}
-                                        className="px-6 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors font-semibold"
-                                    >
-                                        Yine de ara
-                                    </button>
-                                </div>
-                            )}
                         </div>
 
                         {/* Trust Indicators */}
