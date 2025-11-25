@@ -59,7 +59,7 @@ export default function CTASection() {
                         <Link href="/services" className="block">
                             <Button
                                 size="lg"
-                                className="w-full bg-white text-neutral-900 hover:bg-neutral-100 group-hover:shadow-xl transition-all"
+                                className="w-full border-2 border-white/30 text-white hover:bg-white hover:text-neutral-900 group-hover:shadow-xl transition-all backdrop-blur-sm"
                             >
                                 {t('customerButton')}
                                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
