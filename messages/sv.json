@@ -188,6 +188,10 @@
       "title": "Utvalda tjänsteleverantörer",
       "subtitle": "Högt rankade proffs redo att hjälpa dig"
     },
+    "featuredProviders": {
+      "title": "Utvalda Tjänsteleverantörer",
+      "subtitle": "Möt erfarna och pålitliga yrkespersoner som talar ditt språk"
+    },
     "features": {
       "title": "Varför MinKompis?",
       "subtitle": "Vi gör det enkelt att hitta den perfekta proffsen för dina behov",
@@ -261,12 +265,14 @@
       "subtitle": "Tusentals nöjda användare har hittat hjälp genom MinKompis"
     },
     "cta": {
-      "customerTitle": "Behöver du en tjänst?",
-      "customerDesc": "Hitta pålitliga leverantörer på ditt eget språk",
-      "customerButton": "Bläddra bland tjänster",
-      "providerTitle": "Vill du erbjuda dina tjänster?",
-      "providerDesc": "Gå med i vår plattform och nå kunder",
-      "providerButton": "Bli leverantör"
+      "title": "Redo att komma igång?",
+      "subtitle": "Upptäck pålitliga tjänster på ditt språk eller börja erbjuda din expertis",
+      "customerTitle": "Hitta Tjänster",
+      "customerDesc": "Anslut med professionella tjänsteleverantörer som talar ditt språk. Från lärare till städare, översättningskonsulter till coacher.",
+      "customerButton": "Bläddra bland Tjänster",
+      "providerTitle": "Erbjud Tjänster",
+      "providerDesc": "Dela dina färdigheter och börja tjäna pengar. Anslut din expertis med kunder som talar ditt språk.",
+      "providerButton": "Börja Erbjuda"
     }
   },
   "categories": {
@@ -653,79 +659,100 @@
     "sending": "Skickar...",
     "messageSent": "Meddelandet skickades! Kolla dina meddelanden för svar."
   },
-  "toast": {
-    "booking": {
-      "accepted": "Bokning godkänd!",
-      "rejected": "Bokning avvisad",
-      "completed": "Bokning slutförd!",
-      "cancelled": "Bokning avbokad",
-      "confirmDecline": "Är du säker på att du vill avvisa denna bokning?",
-      "confirmCancel": "Är du säker på att du vill avboka denna bokning?",
-      "acceptError": "Kunde inte godkänna bokning",
-      "rejectError": "Kunde inte avvisa bokning",
-      "completeError": "Kunde inte slutföra bokning",
-      "cancelError": "Kunde inte avboka bokning"
+  "about": {
+    "hero": {
+      "title": "Om Oss",
+      "subtitle": "Upptäck hur enkelt det är att hitta och erbjuda tjänster på ditt eget språk med MinKompis"
     },
-    "auth": {
-      "registerSuccess": "Konto skapat!",
-      "registerError": "Registrering misslyckades",
-      "loginSuccess": "Inloggning lyckades!",
-      "loginError": "Inloggning misslyckades",
-      "logoutSuccess": "Utloggad",
-      "passwordMismatch": "Lösenorden matchar inte",
-      "fillAllFields": "Vänligen fyll i alla obligatoriska fält",
-      "selectLanguage": "Välj minst ett språk",
-      "selectCategory": "Välj minst en kategori",
-      "addBio": "Lägg till en presentation om dig själv"
+    "stats": {
+      "providers": "Tjänsteleverantörer",
+      "customers": "Kunder",
+      "bookings": "Bokningar",
+      "languages": "Språk",
+      "satisfaction": "Nöjdhet",
+      "responseTime": "Genomsnittlig Svarstid"
     },
-    "settings": {
-      "profileUpdated": "Profil uppdaterad!",
-      "profileError": "Kunde inte uppdatera profil",
-      "accountUpdated": "Kontoinställningar uppdaterade!",
-      "accountError": "Kunde inte uppdatera kontoinställningar",
-      "serviceUpdated": "Tjänstinställningar uppdaterade!",
-      "serviceError": "Kunde inte uppdatera tjänstinställningar",
-      "notificationsUpdated": "Notifieringsinställningar uppdaterade!",
-      "notificationsError": "Kunde inte uppdatera notifieringar"
+    "mission": {
+      "badge": "Vårt Uppdrag",
+      "title": "Lika Möjligheter för Alla i Sverige",
+      "description": "MinKompis är en plattform som gör det möjligt för invandrare i Sverige att få tillgång till kvalitetstjänster genom att övervinna språkbarriärer. Den ger också flerspråkiga yrkesverksamma möjlighet att visa sina talanger och tjäna pengar.",
+      "points": {
+        "point1": {
+          "title": "Bryt Språkbarriärer",
+          "description": "Anslut enkelt med pålitliga tjänsteleverantörer som talar ditt språk"
+        },
+        "point2": {
+          "title": "Pålitlig Tjänst",
+          "description": "Alla leverantörer är verifierade och betygsatta av communityn"
+        },
+        "point3": {
+          "title": "Communityfokuserad",
+          "description": "En plattform som stärker invandrarcommunityn"
+        }
+      }
     },
-    "common": {
-      "appName": "MinKompis",
-      "welcome": "Välkommen",
-      "login": "Logga in",
-      "register": "Registrera",
-      "logout": "Logga ut",
-      "submit": "Skicka",
-      "cancel": "Avbryt",
-      "save": "Spara",
-      "search": "Sök",
-      "filter": "Filtrera",
-      "loading": "Laddar...",
-      "error": "Ett fel uppstod",
-      "success": "Lyckades",
-      "viewProfile": "Visa Profil",
-      "seeAll": "Se Alla",
-      "verified": "Verifierad",
-      "back": "Tillbaka",
-      "next": "Nästa",
-      "previous": "Föregående",
-      "close": "Stäng",
-      "edit": "Redigera",
-      "delete": "Ta bort",
-      "confirm": "Bekräfta",
-      "continue": "Fortsätt"
+    "story": {
+      "badge": "Vår Historia",
+      "title": "Hur MinKompis Föddes?",
+      "paragraph1": "Som grundare av MinKompis minns jag tydligt de utmaningar jag mötte när jag först kom till Sverige. Även att hitta en enkel städtjänst blev en stor utmaning på grund av språkbarriären.",
+      "paragraph2": "Jag insåg att många invandrare stod inför samma problem. Å andra sidan fanns det begåvade yrkesverksamma vars modersmål var turkiska, arabiska eller andra språk som ville tillhandahålla tjänster i Sverige men inte kunde nå kunder.",
+      "paragraph3": "Det var då idén om MinKompis föddes. Jag ville skapa en plattform som gör det möjligt för invandrare att hitta tjänster på sitt eget språk och för flerspråkiga yrkesverksamma att förverkliga sin potential."
+    },
+    "milestones": {
+      "milestone1": {
+        "year": "2023",
+        "title": "Plattformslansering",
+        "description": "MinKompis beta lanserades i Stockholm"
+      },
+      "milestone2": {
+        "year": "2024 Q1",
+        "title": "500+ Leverantörer",
+        "description": "Plattformen expanderade till 500+ verifierade leverantörer"
+      },
+      "milestone3": {
+        "year": "2024 Q2",
+        "title": "Hela Sverige",
+        "description": "Tjänsteområdet expanderade till hela Sverige"
+      },
+      "milestone4": {
+        "year": "2024 Q4",
+        "title": "5 000+ Bokningar",
+        "description": "Communityn växte med 5 000+ lyckade bokningar"
+      }
+    },
+    "values": {
+      "badge": "Våra Värderingar",
+      "title": "Vad Vi Tror På",
+      "value1": {
+        "title": "Pålitlighet",
+        "description": "Varje leverantör verifieras noggrant och tillförlitligheten övervakas kontinuerligt genom communityrecensioner"
+      },
+      "value2": {
+        "title": "Transparens",
+        "description": "Tydlig prissättning, ärliga recensioner och transparent kommunikation är alltid vår prioritet"
+      },
+      "value3": {
+        "title": "Community",
+        "description": "Vi skapar ett bättre Sverige för alla genom att stärka invandrarcommunityn"
+      },
+      "value4": {
+        "title": "Säkerhet",
+        "description": "Användarintegritet och datasäkerhet är vår högsta prioritet"
+      }
+    },
+    "cta": {
+      "title": "Redo att komma igång?",
+      "subtitle": "Upptäck pålitliga tjänster på ditt språk eller börja erbjuda din expertis",
+      "customer": {
+        "title": "Hitta Tjänster",
+        "description": "Upptäck pålitliga tjänsteleverantörer som talar ditt språk",
+        "button": "Bläddra bland Tjänster"
+      },
+      "provider": {
+        "title": "Erbjud Tjänster",
+        "description": "Dela dina färdigheter och nå kunder som talar ditt språk",
+        "button": "Bli Leverantör"
+      }
     }
-  },
-  "footer": {
-    "tagline": "Din partner för tjänster på ditt eget språk i Sverige",
-    "browseServices": "Bläddra bland Tjänster",
-    "becomeProvider": "Bli Leverantör",
-    "aboutUs": "Om Oss",
-    "helpCenter": "Hjälpcenter",
-    "safety": "Säkerhet",
-    "contact": "Kontakt",
-    "privacy": "Integritet",
-    "terms": "Villkor",
-    "cookies": "Cookies",
-    "allRightsReserved": "Alla rättigheter reserverade"
   }
 }

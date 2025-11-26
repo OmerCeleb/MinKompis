@@ -189,6 +189,10 @@
       "title": "Öne çıkan hizmet sağlayıcılar",
       "subtitle": "Sana yardım etmeye hazır yüksek puanlı profesyoneller"
     },
+    "featuredProviders": {
+      "title": "Öne Çıkan Hizmet Sağlayıcılar",
+      "subtitle": "Kendi dilinde konuşan, deneyimli ve güvenilir profesyonellerle tanış"
+    },
     "features": {
       "title": "Neden MinKompis?",
       "subtitle": "İhtiyaçlarınız için mükemmel profesyoneli bulmanızı kolaylaştırıyoruz",
@@ -262,12 +266,14 @@
       "subtitle": "Binlerce memnun kullanıcı MinKompis üzerinden yardım buldu"
     },
     "cta": {
-      "customerTitle": "Bir hizmete mi ihtiyacın var?",
-      "customerDesc": "Kendi dilinde güvenilir sağlayıcılar bul",
-      "customerButton": "Hizmetlere göz at",
-      "providerTitle": "Hizmetlerini sunmak ister misin?",
-      "providerDesc": "Platformumuza katıl ve müşterilere ulaş",
-      "providerButton": "Sağlayıcı ol"
+      "title": "Başlamaya hazır mısın?",
+      "subtitle": "Kendi dilinde güvenilir hizmetler keşfet veya sunmaya başla",
+      "customerTitle": "Hizmet Ara",
+      "customerDesc": "Kendi dilinde konuşan profesyonel hizmet sağlayıcıları bul. Öğretmenlerden temizlik hizmetlerine, tercüme danışmanlığından koçluğa kadar.",
+      "customerButton": "Hizmetlere Göz At",
+      "providerTitle": "Hizmet Sağla",
+      "providerDesc": "Yeteneklerini paylaş ve kazanmaya başla. Uzmanlığını aynı dili konuşan müşterilerle buluştur.",
+      "providerButton": "Hizmet Vermeye Başla"
     }
   },
   "categories": {
@@ -659,79 +665,103 @@
     "sending": "Gönderiliyor...",
     "messageSent": "Mesaj başarıyla gönderildi! Yanıtlar için mesajlarınızı kontrol edin."
   },
-  "toast": {
-    "booking": {
-      "accepted": "Rezervasyon kabul edildi!",
-      "rejected": "Rezervasyon reddedildi",
-      "completed": "Rezervasyon tamamlandı!",
-      "cancelled": "Rezervasyon iptal edildi",
-      "confirmDecline": "Bu rezervasyonu reddetmek istediğinizden emin misiniz?",
-      "confirmCancel": "Bu rezervasyonu iptal etmek istediğinizden emin misiniz?",
-      "acceptError": "Rezervasyon kabul edilemedi",
-      "rejectError": "Rezervasyon reddedilemedi",
-      "completeError": "Rezervasyon tamamlanamadı",
-      "cancelError": "Rezervasyon iptal edilemedi"
+  "about": {
+    "hero": {
+      "title": "Hakkımızda",
+      "subtitle": "MinKompis ile kendi dilinde hizmet almanın ve sunmanın ne kadar kolay olduğunu keşfet",
+      "badge": "Aktif ve Büyüyoruz"
     },
-    "auth": {
-      "registerSuccess": "Hesap başarıyla oluşturuldu!",
-      "registerError": "Kayıt başarısız oldu",
-      "loginSuccess": "Giriş başarılı!",
-      "loginError": "Giriş başarısız oldu",
-      "logoutSuccess": "Çıkış yapıldı",
-      "passwordMismatch": "Şifreler eşleşmiyor",
-      "fillAllFields": "Lütfen tüm gerekli alanları doldurun",
-      "selectLanguage": "Lütfen en az bir dil seçin",
-      "selectCategory": "Lütfen en az bir kategori seçin",
-      "addBio": "Lütfen kendiniz hakkında bilgi ekleyin"
+    "stats": {
+      "providers": "Hizmet Sağlayıcı",
+      "customers": "Müşteri",
+      "bookings": "Rezervasyon",
+      "languages": "Dil",
+      "satisfaction": "Memnuniyet",
+      "responseTime": "Ortalama Yanıt"
     },
-    "settings": {
-      "profileUpdated": "Profil başarıyla güncellendi!",
-      "profileError": "Profil güncellenemedi",
-      "accountUpdated": "Hesap ayarları güncellendi!",
-      "accountError": "Hesap ayarları güncellenemedi",
-      "serviceUpdated": "Hizmet ayarları başarıyla güncellendi!",
-      "serviceError": "Hizmet ayarları güncellenemedi",
-      "notificationsUpdated": "Bildirim tercihleri güncellendi!",
-      "notificationsError": "Bildirim tercihleri güncellenemedi"
+    "mission": {
+      "badge": "Misyonumuz",
+      "title": "İsveç'te Herkes İçin Eşit Fırsatlar",
+      "description": "MinKompis, İsveç'e gelen göçmenlerin dil engelini aşarak kaliteli hizmetlere ulaşmasını sağlayan bir platformdur. Aynı zamanda çok dilli profesyonellerin yeteneklerini sergileyerek gelir elde etmelerini mümkün kılar.",
+      "foundingYear": "2023",
+      "foundingLabel": "Kuruluş Yılı",
+      "points": {
+        "point1": {
+          "title": "Dil Engelini Aş",
+          "description": "Kendi dilinde konuşan güvenilir hizmet sağlayıcılara kolayca ulaş"
+        },
+        "point2": {
+          "title": "Güvenilir Hizmet",
+          "description": "Tüm sağlayıcılar doğrulanmış ve değerlendirilmiştir"
+        },
+        "point3": {
+          "title": "Topluluk Odaklı",
+          "description": "Göçmen topluluğunu güçlendiren bir platform"
+        }
+      }
     },
-    "common": {
-      "appName": "MinKompis",
-      "welcome": "Hoş geldiniz",
-      "login": "Giriş Yap",
-      "register": "Kayıt Ol",
-      "logout": "Çıkış Yap",
-      "submit": "Gönder",
-      "cancel": "İptal",
-      "save": "Kaydet",
-      "search": "Ara",
-      "filter": "Filtrele",
-      "loading": "Yükleniyor...",
-      "error": "Hata oluştu",
-      "success": "Başarılı",
-      "viewProfile": "Profile Git",
-      "seeAll": "Tümünü Gör",
-      "verified": "Doğrulanmış",
-      "back": "Geri",
-      "next": "İleri",
-      "previous": "Önceki",
-      "close": "Kapat",
-      "edit": "Düzenle",
-      "delete": "Sil",
-      "confirm": "Onayla",
-      "continue": "Devam Et"
+    "story": {
+      "badge": "Hikayemiz",
+      "title": "MinKompis Nasıl Doğdu?",
+      "paragraph1": "MinKompis'in kurucusu olarak, İsveç'e yeni geldiğimde yaşadığım zorlukları çok iyi hatırlıyorum. Basit bir temizlik hizmeti bulmak bile, dil engeli yüzünden büyük bir challenge haline geliyordu.",
+      "paragraph2": "Birçok göçmenin aynı sorunu yaşadığını fark ettim. Diğer taraftan, anadili Türkçe, Arapça veya diğer dillerde olan ve İsveç'te hizmet vermek isteyen yetenekli profesyoneller vardı ama müşterilere ulaşamıyorlardı.",
+      "paragraph3": "İşte o zaman MinKompis fikri doğdu. Göçmenlerin kendi dillerinde hizmet bulmalarını ve çok dilli profesyonellerin potansiyellerini gerçekleştirmelerini sağlayan bir platform yaratmak istedim."
+    },
+    "milestones": {
+      "milestone1": {
+        "year": "2023",
+        "title": "Platform Lansmanı",
+        "description": "MinKompis beta versiyonu Stockholm'de başladı"
+      },
+      "milestone2": {
+        "year": "2024 Q1",
+        "title": "500+ Sağlayıcı",
+        "description": "Platform genişledi ve 500+ doğrulanmış sağlayıcıya ulaştı"
+      },
+      "milestone3": {
+        "year": "2024 Q2",
+        "title": "Tüm İsveç",
+        "description": "Hizmet alanı tüm İsveç'e genişletildi"
+      },
+      "milestone4": {
+        "year": "2024 Q4",
+        "title": "5,000+ Rezervasyon",
+        "description": "Topluluk büyüdü ve 5,000+ başarılı rezervasyon yapıldı"
+      }
+    },
+    "values": {
+      "badge": "Değerlerimiz",
+      "title": "Nelere İnanıyoruz",
+      "value1": {
+        "title": "Güvenilirlik",
+        "description": "Her sağlayıcı titizlikle doğrulanır ve topluluk değerlendirmelerine göre güvenilirliği sürekli izlenir"
+      },
+      "value2": {
+        "title": "Şeffaflık",
+        "description": "Net fiyatlandırma, açık değerlendirmeler ve dürüst iletişim her zaman önceliğimizdir"
+      },
+      "value3": {
+        "title": "Topluluk",
+        "description": "Göçmen topluluğunu güçlendirerek herkes için daha iyi bir İsveç yaratıyoruz"
+      },
+      "value4": {
+        "title": "Güvenlik",
+        "description": "Kullanıcı gizliliği ve veri güvenliği en yüksek önceliğimizdir"
+      }
+    },
+    "cta": {
+      "title": "Başlamaya Hazır Mısın?",
+      "subtitle": "Kendi dilinde güvenilir hizmetler keşfet veya sunmaya başla",
+      "customer": {
+        "title": "Hizmet Ara",
+        "description": "Kendi dilinde konuşan güvenilir hizmet sağlayıcılarını keşfet",
+        "button": "Hizmetlere Göz At"
+      },
+      "provider": {
+        "title": "Hizmet Ver",
+        "description": "Yeteneklerini paylaş ve aynı dili konuşan müşterilere ulaş",
+        "button": "Sağlayıcı Ol"
+      }
     }
-  },
-  "footer": {
-    "tagline": "İsveç'te kendi dilinde hizmetler için ortağınız",
-    "browseServices": "Hizmetlere Göz At",
-    "becomeProvider": "Sağlayıcı Ol",
-    "aboutUs": "Hakkımızda",
-    "helpCenter": "Yardım Merkezi",
-    "safety": "Güvenlik",
-    "contact": "İletişim",
-    "privacy": "Gizlilik",
-    "terms": "Koşullar",
-    "cookies": "Çerezler",
-    "allRightsReserved": "Tüm hakları saklıdır"
   }
 }

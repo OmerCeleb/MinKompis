@@ -205,6 +205,10 @@
         "title": "Multilingual",
         "desc": "Find service providers in your own language"
       },
+      "featuredProviders": {
+        "title": "Featured Service Providers",
+        "subtitle": "Meet experienced and trusted professionals who speak your language"
+      },
       "verified": {
         "title": "Verified Providers",
         "desc": "All providers are verified and trustworthy"
@@ -271,12 +275,14 @@
       "subtitle": "Thousands of happy users have found help through MinKompis"
     },
     "cta": {
-      "customerTitle": "Need a service?",
-      "customerDesc": "Find trustworthy providers in your own language",
-      "customerButton": "Browse services",
-      "providerTitle": "Want to offer your services?",
-      "providerDesc": "Join our platform and reach customers",
-      "providerButton": "Become a provider"
+      "title": "Ready to get started?",
+      "subtitle": "Discover reliable services in your language or start offering your expertise",
+      "customerTitle": "Find Services",
+      "customerDesc": "Connect with professional service providers who speak your language. From teachers to cleaners, translation consultants to coaches.",
+      "customerButton": "Browse Services",
+      "providerTitle": "Provide Services",
+      "providerDesc": "Share your skills and start earning. Connect your expertise with clients who speak your language.",
+      "providerButton": "Start Providing"
     }
   },
   "categories": {
@@ -642,6 +648,100 @@
       "duration": "Duration",
       "price": "Price",
       "status": "Status"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "About Us",
+      "subtitle": "Discover how easy it is to find and offer services in your own language with MinKompis"
+    },
+    "stats": {
+      "providers": "Service Providers",
+      "customers": "Customers",
+      "bookings": "Bookings",
+      "languages": "Languages",
+      "satisfaction": "Satisfaction",
+      "responseTime": "Avg Response"
+    },
+    "mission": {
+      "badge": "Our Mission",
+      "title": "Equal Opportunities for Everyone in Sweden",
+      "description": "MinKompis is a platform that enables immigrants in Sweden to access quality services by overcoming language barriers. It also empowers multilingual professionals to showcase their talents and earn income.",
+      "points": {
+        "point1": {
+          "title": "Break Language Barriers",
+          "description": "Easily connect with trusted service providers who speak your language"
+        },
+        "point2": {
+          "title": "Trusted Service",
+          "description": "All providers are verified and rated by the community"
+        },
+        "point3": {
+          "title": "Community Focused",
+          "description": "A platform that empowers the immigrant community"
+        }
+      }
+    },
+    "story": {
+      "badge": "Our Story",
+      "title": "How MinKompis Was Born?",
+      "paragraph1": "As the founder of MinKompis, I vividly remember the challenges I faced when I first arrived in Sweden. Even finding a simple cleaning service became a major challenge due to the language barrier.",
+      "paragraph2": "I realized many immigrants faced the same problem. On the other hand, there were talented professionals whose native language was Turkish, Arabic, or other languages who wanted to provide services in Sweden but couldn't reach customers.",
+      "paragraph3": "That's when the idea of MinKompis was born. I wanted to create a platform that enables immigrants to find services in their own language and multilingual professionals to realize their potential."
+    },
+    "milestones": {
+      "milestone1": {
+        "year": "2023",
+        "title": "Platform Launch",
+        "description": "MinKompis beta launched in Stockholm"
+      },
+      "milestone2": {
+        "year": "2024 Q1",
+        "title": "500+ Providers",
+        "description": "Platform expanded to 500+ verified providers"
+      },
+      "milestone3": {
+        "year": "2024 Q2",
+        "title": "All of Sweden",
+        "description": "Service area expanded to all of Sweden"
+      },
+      "milestone4": {
+        "year": "2024 Q4",
+        "title": "5,000+ Bookings",
+        "description": "Community grew with 5,000+ successful bookings"
+      }
+    },
+    "values": {
+      "badge": "Our Values",
+      "title": "What We Believe In",
+      "value1": {
+        "title": "Trustworthiness",
+        "description": "Every provider is carefully verified and reliability is continuously monitored through community reviews"
+      },
+      "value2": {
+        "title": "Transparency",
+        "description": "Clear pricing, honest reviews, and transparent communication are always our priority"
+      },
+      "value3": {
+        "title": "Community",
+        "description": "We're creating a better Sweden for everyone by empowering the immigrant community"
+      },
+      "value4": {
+        "title": "Security",
+        "description": "User privacy and data security are our highest priority"
+      }
+    },
+    "cta": {
+      "customer": {
+        "title": "Find Services",
+        "description": "Discover trusted service providers who speak your language",
+        "button": "Browse Services"
+      },
+      "provider": {
+        "title": "Provide Services",
+        "description": "Share your skills and reach customers who speak your language",
+        "button": "Become a Provider"
+      }
     }
   },
   "contact": {

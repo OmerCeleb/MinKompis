@@ -60,42 +60,27 @@ export default function AboutPage() {
         },
     ];
 
-    const team = [
-        {
-            name: 'Ömer Yılmaz',
-            role: 'Kurucu & CEO',
-            image: 'https://i.pravatar.cc/400?img=12',
-            bio: 'İsveç\'e göç eden bir girişimci. Dil engellerini ortadan kaldırma misyonuyla MinKompis\'i kurdu.',
-            linkedin: '#',
-        },
-        {
-            name: 'Sarah Johnson',
-            role: 'Ürün Müdürü',
-            image: 'https://i.pravatar.cc/400?img=45',
-            bio: '10+ yıllık teknoloji deneyimi. Kullanıcı deneyimi ve topluluk odaklı ürün geliştirme uzmanı.',
-            linkedin: '#',
-        },
-        {
-            name: 'Ahmed Hassan',
-            role: 'Topluluk Yöneticisi',
-            image: 'https://i.pravatar.cc/400?img=33',
-            bio: '5 dil konuşan topluluk lideri. Göçmen topluluklarıyla güçlü bağlantıları var.',
-            linkedin: '#',
-        },
-        {
-            name: 'Elena Popov',
-            role: 'Baş Mühendis',
-            image: 'https://i.pravatar.cc/400?img=47',
-            bio: 'Full-stack geliştirici ve sistem mimarı. Ölçeklenebilir platformlar inşa etme konusunda uzman.',
-            linkedin: '#',
-        },
-    ];
-
     const milestones = [
-        { year: '2023', title: 'Platform Lansmanı', description: 'MinKompis İsveç\'te hizmete girdi' },
-        { year: '2023', title: '100+ Sağlayıcı', description: 'İlk 100 doğrulanmış sağlayıcıya ulaştık' },
-        { year: '2024', title: '1,000 Müşteri', description: '1,000\'inci mutlu müşterimizi karşıladık' },
-        { year: '2024', title: '15 Dil Desteği', description: 'Platformu 15 dilde kullanıma açtık' },
+        {
+            year: t('milestones.milestone1.year'),
+            title: t('milestones.milestone1.title'),
+            description: t('milestones.milestone1.description')
+        },
+        {
+            year: t('milestones.milestone2.year'),
+            title: t('milestones.milestone2.title'),
+            description: t('milestones.milestone2.description')
+        },
+        {
+            year: t('milestones.milestone3.year'),
+            title: t('milestones.milestone3.title'),
+            description: t('milestones.milestone3.description')
+        },
+        {
+            year: t('milestones.milestone4.year'),
+            title: t('milestones.milestone4.title'),
+            description: t('milestones.milestone4.description')
+        },
     ];
 
     return (
@@ -118,7 +103,7 @@ export default function AboutPage() {
                         {/* Badge */}
                         <div className="inline-flex items-center gap-2 bg-white shadow-sm border border-neutral-200 px-4 py-2 rounded-full mb-8">
                             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                            <span className="text-sm font-medium text-neutral-700">Aktif ve Büyüyoruz</span>
+                            <span className="text-sm font-medium text-neutral-700">{t('hero.badge')}</span>
                         </div>
 
                         <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-700 bg-clip-text text-transparent leading-tight">
@@ -186,8 +171,8 @@ export default function AboutPage() {
                             {/* Floating Badge */}
                             <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-primary-500 to-orange-500 text-white px-8 py-4 rounded-2xl shadow-xl">
                                 <div className="text-center">
-                                    <div className="text-2xl font-bold">2023</div>
-                                    <div className="text-sm">Kuruluş Yılı</div>
+                                    <div className="text-2xl font-bold">{t('mission.foundingYear')}</div>
+                                    <div className="text-sm">{t('mission.foundingLabel')}</div>
                                 </div>
                             </div>
                         </div>
@@ -317,125 +302,97 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Team - Professional Cards */}
-            <section className="py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <div className="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-full mb-6 font-semibold text-sm">
-                            👥 {t('team.badge')}
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
-                            {t('team.title')}
+            {/* CTA Section - Homepage Style */}
+            <section className="relative py-32 overflow-hidden">
+                {/* Dark Gradient Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900"></div>
+
+                {/* Subtle Pattern Overlay */}
+                <div
+                    className="absolute inset-0 opacity-5"
+                    style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+                    }}
+                ></div>
+
+                {/* Minimal Glows */}
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+
+                <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                    {/* Clean Header */}
+                    <div className="text-center mb-20">
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+                            {t('cta.title')}
                         </h2>
-                        <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
-                            {t('team.description')}
+                        <p className="text-xl text-neutral-300 max-w-2xl mx-auto">
+                            {t('cta.subtitle')}
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {team.map((member, index) => (
-                            <div
-                                key={index}
-                                className="group relative bg-white rounded-2xl overflow-hidden border border-neutral-200 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-                            >
-                                <div className="relative overflow-hidden">
-                                    <img
-                                        src={member.image}
-                                        alt={member.name}
-                                        className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                </div>
+                    {/* Two Clean Cards */}
+                    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
 
-                                <div className="p-6">
-                                    <h3 className="text-xl font-bold text-neutral-900 mb-1">
-                                        {member.name}
-                                    </h3>
-                                    <p className="text-primary-600 font-semibold mb-4 text-sm">
-                                        {member.role}
-                                    </p>
-                                    <p className="text-neutral-600 text-sm leading-relaxed mb-4">
-                                        {member.bio}
-                                    </p>
-
-                                    {/* LinkedIn Icon */}
-                                    <a href={member.linkedin} className="inline-flex items-center gap-2 text-neutral-500 hover:text-primary-600 transition-colors text-sm font-medium">
-                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                                        </svg>
-                                        LinkedIn
-                                    </a>
+                        {/* Customer Card */}
+                        <div className="group relative bg-white/5 backdrop-blur-sm rounded-3xl p-10 hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20 hover:shadow-2xl">
+                            <div className="mb-8">
+                                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-500/20 text-blue-400 mb-6 backdrop-blur-sm border border-blue-500/20">
+                                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
                                 </div>
+                                <h3 className="text-2xl font-bold text-white mb-3">
+                                    {t('cta.customer.title')}
+                                </h3>
+                                <p className="text-neutral-300 leading-relaxed">
+                                    {t('cta.customer.description')}
+                                </p>
                             </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
-            {/* CTA Section - Premium Design */}
-            <section className="py-24 bg-gradient-to-br from-neutral-50 to-orange-50/30">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid md:grid-cols-2 gap-8">
-
-                        {/* Customer CTA */}
-                        <div className="relative group">
-                            <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl transform group-hover:scale-105 transition-transform shadow-2xl"></div>
-                            <div className="relative bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl p-10 md:p-12 text-white overflow-hidden">
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-32 translate-x-32"></div>
-                                <div className="relative">
-                                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6 text-4xl">
-                                        🔍
-                                    </div>
-                                    <h3 className="text-3xl md:text-4xl font-bold mb-4">
-                                        {t('cta.customer.title')}
-                                    </h3>
-                                    <p className="text-blue-100 mb-8 text-lg leading-relaxed">
-                                        {t('cta.customer.description')}
-                                    </p>
-                                    <Link href="/services">
-                                        <Button
-                                            size="lg"
-                                            className="bg-white text-blue-600 hover:bg-blue-50 shadow-xl hover:shadow-2xl transition-all group"
-                                        >
-                                            {t('cta.customer.button')}
-                                            <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                            </svg>
-                                        </Button>
-                                    </Link>
-                                </div>
-                            </div>
+                            <Link href="/services" className="block">
+                                <Button
+                                    size="lg"
+                                    className="w-full border-2 border-white/30 text-white hover:bg-white hover:text-neutral-900 group-hover:shadow-xl transition-all backdrop-blur-sm"
+                                >
+                                    {t('cta.customer.button')}
+                                    <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                    </svg>
+                                </Button>
+                            </Link>
                         </div>
 
-                        {/* Provider CTA */}
-                        <div className="relative group">
-                            <div className="absolute inset-0 bg-gradient-to-br from-orange-600 to-amber-600 rounded-3xl transform group-hover:scale-105 transition-transform shadow-2xl"></div>
-                            <div className="relative bg-gradient-to-br from-orange-600 to-amber-600 rounded-3xl p-10 md:p-12 text-white overflow-hidden">
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-32 translate-x-32"></div>
-                                <div className="relative">
-                                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6 text-4xl">
-                                        💼
-                                    </div>
-                                    <h3 className="text-3xl md:text-4xl font-bold mb-4">
-                                        {t('cta.provider.title')}
-                                    </h3>
-                                    <p className="text-orange-100 mb-8 text-lg leading-relaxed">
-                                        {t('cta.provider.description')}
-                                    </p>
-                                    <Link href="/register?type=provider">
-                                        <Button
-                                            size="lg"
-                                            className="bg-white text-orange-600 hover:bg-orange-50 shadow-xl hover:shadow-2xl transition-all group"
-                                        >
-                                            {t('cta.provider.button')}
-                                            <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                            </svg>
-                                        </Button>
-                                    </Link>
+                        {/* Provider Card */}
+                        <div className="group relative bg-white/5 backdrop-blur-sm rounded-3xl p-10 hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20 hover:shadow-2xl">
+                            <div className="mb-8">
+                                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary-500/20 text-primary-400 mb-6 backdrop-blur-sm border border-primary-500/20">
+                                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
                                 </div>
+                                <h3 className="text-2xl font-bold text-white mb-3">
+                                    {t('cta.provider.title')}
+                                </h3>
+                                <p className="text-neutral-300 leading-relaxed">
+                                    {t('cta.provider.description')}
+                                </p>
                             </div>
+
+                            <Link href="/auth/register/provider" className="block">
+                                <Button
+                                    size="lg"
+                                    variant="primary"
+                                    className="w-full group-hover:shadow-xl transition-all"
+                                >
+                                    {t('cta.provider.button')}
+                                    <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                    </svg>
+                                </Button>
+                            </Link>
                         </div>
+
                     </div>
                 </div>
             </section>
