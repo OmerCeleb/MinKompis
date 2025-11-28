@@ -50,15 +50,15 @@ export default function LoginPage() {
         };
 
         if (!formData.email) {
-            newErrors.email = 'Email is required';
+            newErrors.email = t('emailRequired');
         } else if (!validateEmail(formData.email)) {
-            newErrors.email = 'Please enter a valid email';
+            newErrors.email = t('emailInvalid');
         }
 
         if (!formData.password) {
-            newErrors.password = 'Password is required';
+            newErrors.password = t('passwordRequired');
         } else if (formData.password.length < 6) {
-            newErrors.password = 'Password must be at least 6 characters';
+            newErrors.password = t('passwordTooShort');
         }
 
         if (newErrors.email || newErrors.password) {
@@ -69,16 +69,16 @@ export default function LoginPage() {
         const result = await login(formData);
 
         if (result.success) {
-            showToast('Welcome back! 🎉', 'success');
+            showToast(t('loginSuccess'), 'success');
         } else {
-            showToast(result.error || 'Login failed', 'error');
+            showToast(result.error || t('loginFailed'), 'error');
         }
     };
 
     const handleBankID = async () => {
         const result = await loginWithBankID();
         if (!result.success) {
-            showToast('BankID login not available yet', 'info');
+            showToast(t('bankIdNotAvailable'), 'info');
         }
     };
 
@@ -95,72 +95,52 @@ export default function LoginPage() {
                                 <span className="text-white text-2xl font-bold">M</span>
                             </div>
                             <span className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
-                                MinKompis
+                                {tCommon('appName')}
                             </span>
                         </Link>
 
                         {/* Hero Text */}
                         <div className="space-y-4">
                             <h1 className="text-4xl xl:text-5xl font-bold text-neutral-900 leading-tight">
-                                Welcome back to your trusted service marketplace
+                                {t('welcomeBackHero')}
                             </h1>
                             <p className="text-lg text-neutral-600">
-                                Connect with verified professionals in your own language. Your next helper is just a click away.
+                                {t('welcomeBackSubtitle')}
                             </p>
                         </div>
 
                         {/* Features */}
                         <div className="space-y-4">
                             <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-neutral-900">Verified Providers</h3>
-                                    <p className="text-sm text-neutral-600">All service providers are verified and trusted</p>
+                                    <h3 className="font-semibold text-neutral-900 mb-1">
+                                        {t('customerBenefit1')}
+                                    </h3>
+                                    <p className="text-sm text-neutral-600">
+                                        {t('customerDesc')}
+                                    </p>
                                 </div>
                             </div>
 
                             <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 className="font-semibold text-neutral-900">Multilingual Support</h3>
-                                    <p className="text-sm text-neutral-600">Find services in your preferred language</p>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-neutral-900">Secure Payments</h3>
-                                    <p className="text-sm text-neutral-600">Safe and encrypted payment processing</p>
+                                    <h3 className="font-semibold text-neutral-900 mb-1">
+                                        {t('customerBenefit2')}
+                                    </h3>
+                                    <p className="text-sm text-neutral-600">
+                                        {t('findServicesInLanguage')}
+                                    </p>
                                 </div>
-                            </div>
-                        </div>
-
-                        {/* Stats */}
-                        <div className="grid grid-cols-3 gap-6 pt-8 border-t border-neutral-200">
-                            <div>
-                                <div className="text-3xl font-bold text-primary-600">500+</div>
-                                <div className="text-sm text-neutral-600">Providers</div>
-                            </div>
-                            <div>
-                                <div className="text-3xl font-bold text-primary-600">15+</div>
-                                <div className="text-sm text-neutral-600">Languages</div>
-                            </div>
-                            <div>
-                                <div className="text-3xl font-bold text-primary-600">4.9</div>
-                                <div className="text-sm text-neutral-600">Rating</div>
                             </div>
                         </div>
                     </div>
@@ -176,7 +156,7 @@ export default function LoginPage() {
                                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
                                     <span className="text-white text-xl font-bold">M</span>
                                 </div>
-                                <span className="text-2xl font-bold text-neutral-900">MinKompis</span>
+                                <span className="text-2xl font-bold text-neutral-900">{tCommon('appName')}</span>
                             </Link>
                         </div>
 
@@ -199,8 +179,8 @@ export default function LoginPage() {
                             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
                             </svg>
-                            <span>{t('loginWith')} BankID</span>
-                            <span className="text-xs bg-blue-800 px-2 py-0.5 rounded-full">{t('recommended')}</span>
+                            <span>{t('loginBankID')}</span>
+                            <span className="text-xs opacity-90">({t('recommended')})</span>
                         </button>
 
                         {/* Divider */}
@@ -208,56 +188,49 @@ export default function LoginPage() {
                             <div className="absolute inset-0 flex items-center">
                                 <div className="w-full border-t border-neutral-300"></div>
                             </div>
-                            <div className="relative flex justify-center text-sm">
-                                <span className="px-4 bg-white text-neutral-500 font-medium">
-                                    {t('orContinueWith')}
+                            <div className="relative flex justify-center">
+                                <span className="px-4 bg-white text-neutral-600 text-sm">
+                                    {t('orLoginWith')}
                                 </span>
                             </div>
                         </div>
 
-                        {/* Email/Password Form */}
+                        {/* Login Form */}
                         <form onSubmit={handleSubmit} className="space-y-5">
                             {/* Email */}
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-2">
+                                <label className="block text-sm font-medium text-neutral-700 mb-1.5">
                                     {t('email')}
                                 </label>
                                 <input
-                                    id="email"
-                                    name="email"
                                     type="email"
+                                    name="email"
                                     value={formData.email}
                                     onChange={handleChange}
                                     disabled={loading}
-                                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all disabled:bg-neutral-100 disabled:cursor-not-allowed ${
+                                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all disabled:bg-neutral-100 ${
                                         errors.email ? 'border-red-500' : 'border-neutral-300'
                                     }`}
-                                    placeholder="your.email@example.com"
+                                    placeholder="you@example.com"
                                 />
                                 {errors.email && (
-                                    <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
-                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                                        </svg>
-                                        {errors.email}
-                                    </p>
+                                    <p className="mt-1.5 text-sm text-red-600">{errors.email}</p>
                                 )}
                             </div>
 
                             {/* Password */}
                             <div>
-                                <label htmlFor="password" className="block text-sm font-medium text-neutral-700 mb-2">
+                                <label className="block text-sm font-medium text-neutral-700 mb-1.5">
                                     {t('password')}
                                 </label>
                                 <div className="relative">
                                     <input
-                                        id="password"
+                                        type={showPassword ? 'text' : 'password'}
                                         name="password"
-                                        type={showPassword ? "text" : "password"}
                                         value={formData.password}
                                         onChange={handleChange}
                                         disabled={loading}
-                                        className={`w-full px-4 py-3 pr-12 border rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all disabled:bg-neutral-100 disabled:cursor-not-allowed ${
+                                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all disabled:bg-neutral-100 pr-12 ${
                                             errors.password ? 'border-red-500' : 'border-neutral-300'
                                         }`}
                                         placeholder="••••••••"
@@ -265,7 +238,7 @@ export default function LoginPage() {
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 transition-colors"
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 transition-colors"
                                     >
                                         {showPassword ? (
                                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -280,17 +253,12 @@ export default function LoginPage() {
                                     </button>
                                 </div>
                                 {errors.password && (
-                                    <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
-                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                                        </svg>
-                                        {errors.password}
-                                    </p>
+                                    <p className="mt-1.5 text-sm text-red-600">{errors.password}</p>
                                 )}
                             </div>
 
-                            {/* Remember & Forgot */}
-                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                            {/* Remember Me & Forgot Password */}
+                            <div className="flex items-center justify-between text-sm">
                                 <label className="flex items-center cursor-pointer">
                                     <input
                                         type="checkbox"
@@ -316,17 +284,7 @@ export default function LoginPage() {
                                 disabled={loading}
                                 className="font-semibold h-12 sm:h-13"
                             >
-                                {loading ? (
-                                    <div className="flex items-center gap-2">
-                                        <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                        </svg>
-                                        {t('signingIn')}
-                                    </div>
-                                ) : (
-                                    tCommon('login')
-                                )}
+                                {loading ? t('loggingIn') : t('loginButton')}
                             </Button>
                         </form>
 
@@ -334,27 +292,9 @@ export default function LoginPage() {
                         <p className="mt-6 text-center text-sm text-neutral-600">
                             {t('noAccount')}{' '}
                             <Link href="/auth/register" className="text-primary-600 hover:text-primary-700 font-semibold transition-colors">
-                                {tCommon('register')}
+                                {t('register.title')}
                             </Link>
                         </p>
-
-                        {/* Mobile Stats (Visible only on mobile) */}
-                        <div className="lg:hidden mt-8 pt-6 border-t border-neutral-200">
-                            <div className="grid grid-cols-3 gap-4 text-center">
-                                <div>
-                                    <div className="text-2xl font-bold text-primary-600">500+</div>
-                                    <div className="text-xs text-neutral-600">Providers</div>
-                                </div>
-                                <div>
-                                    <div className="text-2xl font-bold text-primary-600">15+</div>
-                                    <div className="text-xs text-neutral-600">Languages</div>
-                                </div>
-                                <div>
-                                    <div className="text-2xl font-bold text-primary-600">4.9</div>
-                                    <div className="text-xs text-neutral-600">Rating</div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
