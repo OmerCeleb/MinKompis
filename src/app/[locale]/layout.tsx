@@ -1,37 +1,42 @@
 // src/app/[locale]/layout.tsx
+'use client';
+
 import { NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
+import { notFound, usePathname } from 'next/navigation';
 import { Inter } from 'next/font/google';
 import '../globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { ToastProvider } from '@/contexts/ToastContext';
 import ToastContainer from '@/components/shared/ToastContainer';
+import ErrorBoundary from '@/components/shared/ErrorBoundary';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata = {
-    title: 'MinKompis - Find Services in Your Language',
-    description: 'Connect with verified service providers who speak your language in Sweden',
-};
+const locales = ['en', 'sv', 'tr'];
 
-const locales = ['en', 'sv', 'tr', 'ar'];
-
-export default async function RootLayout({
-                                             children,
-                                             params: { locale }
-                                         }: {
+export default function RootLayout({
+                                       children,
+                                       params: { locale }
+                                   }: {
     children: React.ReactNode;
     params: { locale: string };
 }) {
+    const pathname = usePathname();
+
     // Validate locale
     if (!locales.includes(locale)) {
         notFound();
     }
 
+    // Check if we're on customer or dashboard pages
+    const isCustomerPage = pathname?.includes('/customer');
+    const isDashboardPage = pathname?.includes('/dashboard');
+    const hideHeaderFooter = isCustomerPage || isDashboardPage;
+
     let messages;
     try {
-        messages = (await import(`../../../messages/${locale}.json`)).default;
+        messages = require(`../../../messages/${locale}.json`);
     } catch (error) {
         notFound();
     }
@@ -41,14 +46,16 @@ export default async function RootLayout({
         <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
             <ToastProvider>
-                <div className="min-h-screen flex flex-col">
-                    <Header />
-                    <main className="flex-1">
-                        {children}
-                    </main>
-                    <Footer />
-                </div>
-                <ToastContainer />
+                <ErrorBoundary>
+                    <div className="min-h-screen flex flex-col">
+                        {!hideHeaderFooter && <Header />}
+                        <main className="flex-1">
+                            {children}
+                        </main>
+                        {!hideHeaderFooter && <Footer />}
+                    </div>
+                    <ToastContainer />
+                </ErrorBoundary>
             </ToastProvider>
         </NextIntlClientProvider>
         </body>

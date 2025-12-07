@@ -1,3 +1,4 @@
+// src/components/shared/index.ts
 export { default as Button } from './Button';
 export type { ButtonProps } from './Button';
 
@@ -15,3 +16,10 @@ export type { SelectProps, SelectOption } from './Select';
 
 export { default as LanguageSwitcher } from './LanguageSwitcher';
 export { default as MobileMenu } from './MobileMenu';
+
+// New exports
+export { default as ErrorBoundary } from './ErrorBoundary';
+export { default as LoadingSpinner } from './LoadingSpinner';
+export { default as PageLoader } from './PageLoader';
+export { default as EmptyState } from './EmptyState';
+export { default as SkeletonCard } from './SkeletonCard';

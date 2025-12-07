@@ -31,9 +31,41 @@
     "error": "An error occurred",
     "success": "Success",
     "next": "Next",
-    "previous": "Previous"
+    "previous": "Previous",
+    "saving": "Saving..."
   },
   "customer": {
+    "customerAccount": "Customer Account",
+    "overview": "Overview",
+    "myBookings": "My Bookings",
+    "myMessages": "Messages",
+    "myReviews": "Reviews",
+    "settings": "Settings",
+    "findServices": "Find Services",
+    "welcomeBack": "Welcome back",
+    "overviewSubtitle": "Here's what's happening with your services",
+    "viewAll": "View All",
+    "viewAllBookings": "View All Bookings",
+    "upcomingBookings": "Upcoming Bookings",
+    "recentMessages": "Recent Messages",
+    "noUpcomingBookings": "No upcoming bookings",
+    "noUpcomingBookingsDesc": "You don't have any upcoming bookings yet",
+    "browseServices": "Browse Services",
+    "stats": {
+      "totalBookings": "Total Bookings",
+      "activeBookings": "Active Bookings",
+      "completedBookings": "Completed",
+      "favorites": "Favorites"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "findService": "Find a Service",
+      "findServiceDesc": "Browse available services",
+      "viewBookings": "View Bookings",
+      "viewBookingsDesc": "Manage your appointments",
+      "messages": "Messages",
+      "messagesDesc": "Chat with providers"
+    },
     "favorites": {
       "title": "Favorite Providers",
       "subtitle": "Providers you've saved for quick access",
@@ -181,6 +213,7 @@
     "loginSuccess": "Welcome back! 🎉",
     "loginFailed": "Login failed",
     "bankIdNotAvailable": "BankID login not available yet",
+    "signUpBankID": "Sign up with BankID",
     "login": {
       "title": "Login",
       "subtitle": "Welcome back! Please login to your account",
@@ -262,16 +295,16 @@
       "title": "Featured service providers",
       "subtitle": "Highly-rated professionals ready to help you"
     },
+    "featuredProviders": {
+      "title": "Featured Service Providers",
+      "subtitle": "Meet experienced and trusted professionals who speak your language"
+    },
     "features": {
       "title": "Why MinKompis?",
       "subtitle": "We make it easy to find the perfect professional for your needs",
       "multilingual": {
         "title": "Multilingual",
         "desc": "Find service providers in your own language"
-      },
-      "featuredProviders": {
-        "title": "Featured Service Providers",
-        "subtitle": "Meet experienced and trusted professionals who speak your language"
       },
       "verified": {
         "title": "Verified Providers",
@@ -508,7 +541,7 @@
         "phone": "Phone Number",
         "location": "Location",
         "bio": "About You",
-        "bioHint": "Tell us about yourself and your services (max. 500 characters)",
+        "bioHint": "Tell us about yourself and your services (max 500 characters)",
         "profilePhoto": "Profile Photo",
         "changePhoto": "Change Photo",
         "uploadPhoto": "Upload Photo",
@@ -548,113 +581,19 @@
       "service": {
         "title": "Service Settings",
         "subtitle": "Configure your service preferences and availability",
-        "languages": {
-          "title": "Languages You Speak",
-          "subtitle": "Select languages you can provide services in",
-          "addLanguage": "Add Language",
-          "removeLanguage": "Remove Language"
-        },
-        "categories": {
-          "title": "Service Categories",
-          "subtitle": "Select the categories of services you offer",
-          "selectCategories": "Select categories"
-        },
-        "pricing": {
-          "title": "Pricing",
-          "subtitle": "Set your hourly rate",
-          "hourlyRate": "Hourly Rate",
-          "currency": "SEK",
-          "priceHint": "Recommended range: 200-800 SEK/hour"
-        },
-        "availability": {
-          "title": "Availability",
-          "subtitle": "Set your working hours",
-          "monday": "Monday",
-          "tuesday": "Tuesday",
-          "wednesday": "Wednesday",
-          "thursday": "Thursday",
-          "friday": "Friday",
-          "saturday": "Saturday",
-          "sunday": "Sunday",
-          "closed": "Closed",
-          "setHours": "Set Hours",
-          "from": "From",
-          "to": "To",
-          "addTimeSlot": "Add Time Slot",
-          "autoAccept": "Auto-Accept Bookings",
-          "autoAcceptDesc": "New bookings will be automatically accepted"
-        }
+        "languages": "Languages you speak",
+        "categories": "Service categories",
+        "pricing": "Pricing",
+        "hourlyRate": "Hourly Rate",
+        "currency": "SEK",
+        "availability": "Availability"
       },
       "notifications": {
         "title": "Notification Preferences",
         "subtitle": "Choose when and how you want to be notified",
-        "email": {
-          "title": "Email Notifications",
-          "subtitle": "Receive notifications via email",
-          "enable": "Enable email notifications"
-        },
-        "sms": {
-          "title": "SMS Notifications",
-          "subtitle": "Receive notifications via SMS to your phone",
-          "enable": "Enable SMS notifications"
-        },
-        "types": {
-          "title": "Notification Types",
-          "newBookings": "New Bookings",
-          "newBookingsDesc": "When you receive a new booking request",
-          "messages": "Messages",
-          "messagesDesc": "When you receive a new message",
-          "reviews": "Reviews",
-          "reviewsDesc": "When you receive a new review",
-          "promotions": "Promotions and Updates",
-          "promotionsDesc": "Special offers and news from MinKompis",
-          "reminders": "Reminders",
-          "remindersDesc": "Reminders for upcoming appointments",
-          "marketing": "Marketing Emails",
-          "marketingDesc": "Tips, trends, and best practices"
-        }
-      },
-      "actions": {
-        "save": "Save Changes",
-        "cancel": "Cancel",
-        "saving": "Saving...",
-        "saved": "Saved!",
-        "error": "An error occurred",
-        "unsavedChanges": "You have unsaved changes",
-        "discardChanges": "Discard changes"
-      },
-      "messages": {
-        "profileUpdated": "Profile updated successfully!",
-        "accountUpdated": "Account settings updated!",
-        "serviceUpdated": "Service settings updated!",
-        "notificationsUpdated": "Notification preferences updated!",
-        "photoUploaded": "Photo uploaded!",
-        "photoRemoved": "Photo removed!",
-        "emailVerificationSent": "Verification email sent!",
-        "passwordChanged": "Password changed successfully!",
-        "sessionEnded": "Session ended",
-        "allSessionsEnded": "All sessions ended",
-        "error": "An error occurred. Please try again."
-      },
-      "confirmations": {
-        "deleteAccount": {
-          "title": "Delete Account",
-          "message": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently deleted.",
-          "confirm": "Yes, Delete My Account",
-          "cancel": "Cancel"
-        },
-        "signOutAll": {
-          "title": "Sign Out All Sessions",
-          "message": "Are you sure you want to sign out from all devices?",
-          "confirm": "Yes, Sign Out All Sessions",
-          "cancel": "Cancel"
-        },
-        "unsavedChanges": {
-          "title": "Unsaved Changes",
-          "message": "You have unsaved changes. Are you sure you want to leave this page?",
-          "confirm": "Yes, Leave",
-          "cancel": "Stay on Page"
-        }
+        "email": "Email Notifications",
+        "sms": "SMS Notifications",
+        "types": "Notification Types"
       }
     },
     "services": {
@@ -714,10 +653,35 @@
       "status": "Status"
     }
   },
+  "contact": {
+    "contactProvider": "Contact Provider",
+    "typicallyResponds": "Typically responds in",
+    "quickMessages": "Quick Message Templates",
+    "quickMessagesHint": "Click to insert a template message",
+    "quickMessage1": "Hi! I'm interested in your services. When are you available?",
+    "quickMessage2": "Could you provide more details about your services and pricing?",
+    "quickMessage3": "I have a question about the booking process. Can you help?",
+    "quickMessage4": "Are you available for a consultation this week?",
+    "subject": "Subject",
+    "subjectPlaceholder": "What is your inquiry about?",
+    "message": "Message",
+    "messagePlaceholder": "Tell the provider about what you need, ask questions, or discuss your requirements...",
+    "messageHint": "Be specific about your needs to get a helpful response",
+    "messagingTips": "Messaging Tips:",
+    "tip1": "Be clear and specific about what you need",
+    "tip2": "Ask about availability and pricing upfront",
+    "tip3": "Keep all communication within the platform",
+    "safetyTitle": "Stay Safe",
+    "safetyMessage": "Never share personal contact information or make payments outside of MinKompis platform.",
+    "sendMessage": "Send Message",
+    "sending": "Sending...",
+    "messageSent": "Message sent successfully! Check your messages for replies."
+  },
   "about": {
     "hero": {
       "title": "About Us",
-      "subtitle": "Discover how easy it is to find and offer services in your own language with MinKompis"
+      "subtitle": "Discover how easy it is to find and offer services in your own language with MinKompis",
+      "badge": "Active and Growing"
     },
     "stats": {
       "providers": "Service Providers",
@@ -731,6 +695,8 @@
       "badge": "Our Mission",
       "title": "Equal Opportunities for Everyone in Sweden",
       "description": "MinKompis is a platform that enables immigrants in Sweden to access quality services by overcoming language barriers. It also empowers multilingual professionals to showcase their talents and earn income.",
+      "foundingYear": "2023",
+      "foundingLabel": "Founded",
       "points": {
         "point1": {
           "title": "Break Language Barriers",
@@ -796,6 +762,8 @@
       }
     },
     "cta": {
+      "title": "Ready to Get Started?",
+      "subtitle": "Discover reliable services in your language or start offering your expertise",
       "customer": {
         "title": "Find Services",
         "description": "Discover trusted service providers who speak your language",
@@ -807,30 +775,6 @@
         "button": "Become a Provider"
       }
     }
-  },
-  "contact": {
-    "contactProvider": "Contact Provider",
-    "typicallyResponds": "Typically responds in",
-    "quickMessages": "Quick Message Templates",
-    "quickMessagesHint": "Click to insert a template message",
-    "quickMessage1": "Hi! I'm interested in your services. When are you available?",
-    "quickMessage2": "Could you provide more details about your services and pricing?",
-    "quickMessage3": "I have a question about the booking process. Can you help?",
-    "quickMessage4": "Are you available for a consultation this week?",
-    "subject": "Subject",
-    "subjectPlaceholder": "What is your inquiry about?",
-    "message": "Message",
-    "messagePlaceholder": "Tell the provider about what you need, ask questions, or discuss your requirements...",
-    "messageHint": "Be specific about your needs to get a helpful response",
-    "messagingTips": "Messaging Tips:",
-    "tip1": "Be clear and specific about what you need",
-    "tip2": "Ask about availability and pricing upfront",
-    "tip3": "Keep all communication within the platform",
-    "safetyTitle": "Stay Safe",
-    "safetyMessage": "Never share personal contact information or make payments outside of MinKompis platform.",
-    "sendMessage": "Send Message",
-    "sending": "Sending...",
-    "messageSent": "Message sent successfully! Check your messages for replies."
   },
   "toast": {
     "booking": {
@@ -875,15 +819,28 @@
   },
   "footer": {
     "tagline": "Your partner for services in your own language in Sweden",
+    "forCustomers": "For Customers",
     "browseServices": "Browse Services",
+    "howItWorks": "How It Works",
+    "safety": "Safety & Trust",
+    "forProviders": "For Providers",
     "becomeProvider": "Become a Provider",
+    "providerResources": "Provider Resources",
+    "pricing": "Pricing",
+    "company": "Company",
     "aboutUs": "About Us",
+    "careers": "Careers",
+    "blog": "Blog",
+    "press": "Press",
+    "support": "Support",
     "helpCenter": "Help Center",
-    "safety": "Safety",
-    "contact": "Contact",
-    "privacy": "Privacy",
-    "terms": "Terms",
-    "cookies": "Cookies",
-    "allRightsReserved": "All rights reserved"
+    "contact": "Contact Us",
+    "faq": "FAQ",
+    "legal": "Legal Information",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "cookies": "Cookie Policy",
+    "allRightsReserved": "All rights reserved",
+    "followUs": "Follow Us"
   }
 }

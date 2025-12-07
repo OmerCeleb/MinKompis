@@ -1,14 +1,37 @@
 // src/app/[locale]/dashboard/layout.tsx
 'use client';
 
+import { useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { ReactNode } from 'react';
+import { useAuth } from '@/hooks';
+import PageLoader from '@/components/shared/PageLoader';
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
-    const t = useTranslations('dashboard');
+export default function DashboardLayout({
+                                            children,
+                                        }: {
+    children: React.ReactNode;
+}) {
+    const router = useRouter();
     const pathname = usePathname();
+    const t = useTranslations('dashboard');
+    const tCommon = useTranslations('common');
+    const { user, loading, isAuthenticated } = useAuth();
+
+    useEffect(() => {
+        if (!loading && !isAuthenticated) {
+            router.push('/auth/login');
+        }
+        if (!loading && user?.role === 'CUSTOMER') {
+            router.push('/customer/overview');
+        }
+    }, [loading, isAuthenticated, user, router]);
+
+    // ✅ PageLoader kullanımı
+    if (loading || !user || user.role !== 'PROVIDER') {
+        return <PageLoader message={tCommon('loading')} />;
+    }
 
     const navigation = [
         {
@@ -41,10 +64,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         {
             name: t('myMessages'),
             href: '/dashboard/messages',
-            badge: 3,
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                 </svg>
             )
         },
@@ -69,78 +91,72 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         }
     ];
 
-    const isActive = (href: string) => {
-        if (href === '/dashboard') {
-            return pathname.endsWith('/dashboard');
-        }
-        return pathname.includes(href);
-    };
-
     return (
-        <div className="min-h-screen bg-neutral-50 pt-16">
+        <div className="min-h-screen bg-neutral-50">
             <div className="flex">
-
                 {/* Sidebar */}
-                <aside className="w-64 bg-white border-r border-neutral-200 min-h-screen fixed left-0 top-16">
-                    <div className="p-6">
-
-                        {/* User Info */}
-                        <div className="flex items-center gap-3 mb-8 pb-6 border-b border-neutral-200">
-                            <img
-                                src="https://i.pravatar.cc/150?img=1"
-                                alt="Provider"
-                                className="w-12 h-12 rounded-full ring-2 ring-primary-100"
-                            />
-                            <div className="flex-1 min-w-0">
-                                <h3 className="font-semibold text-neutral-900 truncate">Ayşe Yılmaz</h3>
-                                <p className="text-sm text-neutral-500 truncate">{t('providerAccount')}</p>
+                <aside className="hidden md:flex md:flex-shrink-0">
+                    <div className="flex flex-col w-64 bg-white border-r border-neutral-200">
+                        <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+                            <div className="flex items-center flex-shrink-0 px-4 mb-8">
+                                <Link href="/" className="flex items-center gap-2">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
+                                        <span className="text-white text-lg font-bold">M</span>
+                                    </div>
+                                    <span className="text-xl font-bold text-neutral-900">{tCommon('appName')}</span>
+                                </Link>
                             </div>
+
+                            <nav className="flex-1 px-3 space-y-1">
+                                {navigation.map((item) => {
+                                    const isActive = pathname === item.href;
+                                    return (
+                                        <Link
+                                            key={item.name}
+                                            href={item.href}
+                                            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
+                                                isActive
+                                                    ? 'bg-primary-50 text-primary-700 font-medium'
+                                                    : 'text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900'
+                                            }`}
+                                        >
+                                            {item.icon}
+                                            <span>{item.name}</span>
+                                        </Link>
+                                    );
+                                })}
+                            </nav>
                         </div>
 
-                        {/* Navigation */}
-                        <nav className="space-y-1">
-                            {navigation.map((item) => (
-                                <Link
-                                    key={item.href}
-                                    href={item.href}
-                                    className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
-                                        isActive(item.href)
-                                            ? 'bg-primary-50 text-primary-700 font-medium'
-                                            : 'text-neutral-700 hover:bg-neutral-50'
-                                    }`}
-                                >
-                                    {item.icon}
-                                    <span className="flex-1">{item.name}</span>
-                                    {item.badge && (
-                                        <span className="px-2 py-0.5 bg-primary-600 text-white text-xs font-semibold rounded-full">
-                      {item.badge}
-                    </span>
-                                    )}
-                                </Link>
-                            ))}
-                        </nav>
-
-                        {/* View Profile Link */}
-                        <div className="mt-8 pt-6 border-t border-neutral-200">
-                            <Link
-                                href="/providers/1"
-                                className="flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
-                            >
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                </svg>
-                                {t('viewPublicProfile')}
+                        {/* User Profile */}
+                        <div className="flex-shrink-0 flex border-t border-neutral-200 p-4">
+                            <Link href="/dashboard/settings" className="flex items-center gap-3 w-full hover:bg-neutral-50 rounded-lg p-2 -m-2 transition-colors">
+                                <img
+                                    className="w-10 h-10 rounded-full"
+                                    src={user.avatar || 'https://i.pravatar.cc/150?img=1'}
+                                    alt={user.firstName}
+                                />
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-medium text-neutral-900 truncate">
+                                        {user.firstName} {user.lastName}
+                                    </p>
+                                    <p className="text-xs text-neutral-500 truncate">
+                                        {t('providerAccount')}
+                                    </p>
+                                </div>
                             </Link>
                         </div>
-
                     </div>
                 </aside>
 
                 {/* Main Content */}
-                <main className="flex-1 ml-64 p-8">
-                    {children}
+                <main className="flex-1 overflow-y-auto">
+                    <div className="py-6">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            {children}
+                        </div>
+                    </div>
                 </main>
-
             </div>
         </div>
     );
