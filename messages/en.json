@@ -36,6 +36,7 @@
   },
   "customer": {
     "customerAccount": "Customer Account",
+    "customerRole": "Customer",
     "overview": "Overview",
     "myBookings": "My Bookings",
     "myMessages": "Messages",
@@ -82,6 +83,108 @@
       "tipTitle": "Quick Tip",
       "tipDesc": "Click the heart icon on any provider's profile to add them to your favorites"
     },
+    "messages": {
+      "title": "Messages",
+      "subtitle": "Communicate with service providers",
+      "searchConversations": "Search conversations...",
+      "active": "Active",
+      "typeMessage": "Type your message...",
+      "sendMessage": "Send",
+      "selectConversation": "Select a conversation",
+      "selectConversationDesc": "Choose a conversation from the list to start messaging",
+      "noConversations": "No conversations yet",
+      "noConversationsDesc": "Start a conversation by contacting a service provider",
+      "browseProviders": "Browse Providers",
+      "lastMessage": "Last message",
+      "online": "Online",
+      "offline": "Offline",
+      "typing": "typing...",
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "newMessage": "New message from",
+      "markAsRead": "Mark as read",
+      "markAsUnread": "Mark as unread",
+      "deleteConversation": "Delete conversation",
+      "confirmDelete": "Are you sure you want to delete this conversation?",
+      "attachFile": "Attach file",
+      "sendingMessage": "Sending...",
+      "messageSent": "Message sent",
+      "messageFailed": "Failed to send message"
+    },
+    "settingss": {
+      "title": "Settings",
+      "subtitle": "Manage your account settings and preferences",
+      "tabs": {
+        "profile": "Profile",
+        "account": "Account & Security",
+        "notifications": "Notifications"
+      },
+      "profile": {
+        "title": "Profile Information",
+        "subtitle": "Update your personal information",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "phone": "Phone Number",
+        "location": "Location",
+        "preferredLanguage": "Preferred Language",
+        "languageHint": "Choose your preferred language for the interface",
+        "profilePhoto": "Profile Photo",
+        "changePhoto": "Change Photo",
+        "removePhoto": "Remove Photo",
+        "saveChanges": "Save Changes"
+      },
+      "account": {
+        "title": "Account Security",
+        "subtitle": "Manage your login credentials and security settings",
+        "email": "Email Address",
+        "verified": "Verified",
+        "currentPassword": "Current Password",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm New Password",
+        "changePassword": "Change Password",
+        "passwordRequirements": "Password must be at least 8 characters with uppercase, lowercase, and numbers",
+        "passwordMismatch": "Passwords do not match",
+        "twoFactor": "Two-Factor Authentication",
+        "twoFactorDesc": "Add an extra layer of security to your account",
+        "deleteAccount": "Delete Account",
+        "deleteAccountDesc": "Permanently delete your account and all associated data. This action cannot be undone.",
+        "deleteAccountButton": "Delete My Account",
+        "saveChanges": "Save Changes"
+      },
+      "notifications": {
+        "title": "Notification Preferences",
+        "subtitle": "Choose when and how you want to be notified",
+        "emailNotifications": "Email Notifications",
+        "emailDesc": "Receive notifications via email",
+        "bookingConfirmations": "Booking Confirmations",
+        "bookingConfirmationsDesc": "Get notified when your booking is confirmed",
+        "bookingReminders": "Booking Reminders",
+        "bookingRemindersDesc": "Receive reminders about upcoming appointments",
+        "messages": "New Messages",
+        "messagesDesc": "Get notified when you receive a new message",
+        "reviews": "Review Reminders",
+        "reviewsDesc": "Reminders to leave reviews after completed services",
+        "promotions": "Promotions & Updates",
+        "promotionsDesc": "Receive news about special offers and platform updates",
+        "otherChannels": "Other Notification Channels",
+        "smsNotifications": "SMS Notifications",
+        "smsDesc": "Receive important updates via SMS",
+        "pushNotifications": "Push Notifications",
+        "pushDesc": "Get notifications on your mobile device",
+        "saveChanges": "Save Preferences"
+      },
+      "messages": {
+        "profileUpdated": "Profile updated successfully!",
+        "accountUpdated": "Account settings updated!",
+        "notificationsUpdated": "Notification preferences saved!",
+        "accountDeleted": "Account deleted successfully",
+        "error": "An error occurred. Please try again."
+      },
+      "confirmations": {
+        "deleteAccount": {
+          "message": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently deleted."
+        }
+      },
     "bookings": {
       "title": "My Bookings",
       "subtitle": "Manage your appointments and bookings",
@@ -111,7 +214,24 @@
       "noPast": "No past bookings",
       "noPastDesc": "You haven't completed any bookings yet",
       "findServices": "Find Services"
+    },
+    "reviews": {
+      "title": "My Reviews",
+      "subtitle": "Reviews you've written for service providers",
+      "averageRating": "Average Rating",
+      "totalReviews": "Total Reviews",
+      "reviewsWritten": "Reviews Written",
+      "filterByRating": "Filter by rating",
+      "all": "All",
+      "noReviews": "No reviews yet",
+      "noReviewsDesc": "You haven't written any reviews yet. Complete a booking to leave a review!",
+      "viewBooking": "View Booking",
+      "viewProvider": "View Provider",
+      "viewBookings": "View Bookings",
+      "helpfulTip": "Helpful Tip",
+      "helpfulTipDesc": "Your reviews help other customers make informed decisions and help providers improve their services. Be honest and constructive in your feedback!"
     }
+  }
   },
   "booking": {
     "bookAppointment": "Book Appointment",
