@@ -711,9 +711,26 @@
       "notifications": {
         "title": "Notification Preferences",
         "subtitle": "Choose when and how you want to be notified",
-        "email": "Email Notifications",
-        "sms": "SMS Notifications",
-        "types": "Notification Types"
+        "emailNotifications": "Email Notifications",
+        "emailDesc": "Receive notifications via email",
+        "newBookings": "New Booking Requests",
+        "newBookingsDesc": "Get notified when you receive a new booking request",
+        "bookingConfirmations": "Booking Confirmations",
+        "bookingConfirmationsDesc": "Notifications when bookings are confirmed or cancelled",
+        "messages": "New Messages",
+        "messagesDesc": "Get notified when you receive a new message from customers",
+        "reviews": "New Reviews",
+        "reviewsDesc": "Notifications when customers leave reviews for your services",
+        "reminders": "Booking Reminders",
+        "remindersDesc": "Receive reminders about upcoming bookings",
+        "promotions": "Platform Updates & Promotions",
+        "promotionsDesc": "Receive news about platform features and promotional opportunities",
+        "otherChannels": "Other Notification Channels",
+        "smsNotifications": "SMS Notifications",
+        "smsDesc": "Receive important updates via SMS",
+        "pushNotifications": "Push Notifications",
+        "pushDesc": "Get notifications on your mobile device",
+        "saveChanges": "Save Preferences"
       }
     },
     "services": {

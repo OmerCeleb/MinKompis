@@ -63,15 +63,15 @@ export function useAuth() {
 
             // Mock user data - CUSTOMER olarak değiştirildi
             const mockUser: User = {
-                id: '2', // Farklı ID
-                email: 'customer@example.com',
-                firstName: 'Ahmet',
-                lastName: 'Kaya',
-                role: 'CUSTOMER', // ← BURADA DEĞİŞTİRİN
-                avatar: 'https://i.pravatar.cc/150?img=68',
-                languages: ['tr', 'en']
+                id: '1',
+                email: 'ayse.yilmaz@example.com',
+                firstName: 'Ayşe',
+                lastName: 'Yılmaz',
+                role: 'PROVIDER', // ← Bu satırı değiştirin
+                avatar: 'https://i.pravatar.cc/150?img=1',
+                phone: '+46 70 123 4567',
+                languages: ['tr', 'sv', 'en']
             };
-
             setState({ user: mockUser, loading: false, error: null });
         } catch (error) {
             console.error('Auth check failed:', error);

@@ -703,33 +703,28 @@
       },
 
       "notifications": {
-        "title": "Notisinställningar",
-        "subtitle": "Välj när och hur du vill bli meddelad",
-        "email": {
-          "title": "E-postnotiser",
-          "subtitle": "Ta emot notiser via e-post",
-          "enable": "Aktivera e-postnotiser"
-        },
-        "sms": {
-          "title": "SMS-notiser",
-          "subtitle": "Ta emot notiser via SMS till din telefon",
-          "enable": "Aktivera SMS-notiser"
-        },
-        "types": {
-          "title": "Notistyper",
-          "newBookings": "Nya bokningar",
-          "newBookingsDesc": "När du får en ny bokningsförfrågan",
-          "messages": "Meddelanden",
-          "messagesDesc": "När du får ett nytt meddelande",
-          "reviews": "Recensioner",
-          "reviewsDesc": "När du får en ny recension",
-          "promotions": "Kampanjer och uppdateringar",
-          "promotionsDesc": "Specialerbjudanden och nyheter från MinKompis",
-          "reminders": "Påminnelser",
-          "remindersDesc": "Påminnelser om kommande möten",
-          "marketing": "Marknadsföringsmejl",
-          "marketingDesc": "Tips, trender och bästa praxis"
-        }
+        "title": "Notifieringspreferenser",
+        "subtitle": "Välj när och hur du vill bli notifierad",
+        "emailNotifications": "E-postnotiser",
+        "emailDesc": "Ta emot notiser via e-post",
+        "newBookings": "Nya Bokningsförfrågningar",
+        "newBookingsDesc": "Få notiser när du får en ny bokningsförfrågan",
+        "bookingConfirmations": "Bokningsbekräftelser",
+        "bookingConfirmationsDesc": "Notiser när bokningar bekräftas eller avbokas",
+        "messages": "Nya Meddelanden",
+        "messagesDesc": "Få notiser när du får ett nytt meddelande från kunder",
+        "reviews": "Nya Omdömen",
+        "reviewsDesc": "Notiser när kunder lämnar omdömen för dina tjänster",
+        "reminders": "Bokningspåminnelser",
+        "remindersDesc": "Ta emot påminnelser om kommande bokningar",
+        "promotions": "Plattformsuppdateringar & Kampanjer",
+        "promotionsDesc": "Ta emot nyheter om plattformsfunktioner och kampanjmöjligheter",
+        "otherChannels": "Andra Notifieringskanaler",
+        "smsNotifications": "SMS-notiser",
+        "smsDesc": "Ta emot viktiga uppdateringar via SMS",
+        "pushNotifications": "Push-notiser",
+        "pushDesc": "Få notiser på din mobila enhet",
+        "saveChanges": "Spara Preferenser"
       },
 
       "actions": {

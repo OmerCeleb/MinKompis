@@ -730,32 +730,27 @@
       },
       "notifications": {
         "title": "Bildirim Tercihleri",
-        "subtitle": "Bildirim almak istediğiniz durumları seçin",
-        "email": {
-          "title": "E-posta Bildirimleri",
-          "subtitle": "E-posta ile bildirim alın",
-          "enable": "E-posta bildirimlerini etkinleştir"
-        },
-        "sms": {
-          "title": "SMS Bildirimleri",
-          "subtitle": "Telefon numaranıza SMS ile bildirim alın",
-          "enable": "SMS bildirimlerini etkinleştir"
-        },
-        "types": {
-          "title": "Bildirim Türleri",
-          "newBookings": "Yeni Rezervasyonlar",
-          "newBookingsDesc": "Yeni rezervasyon talebi geldiğinde",
-          "messages": "Mesajlar",
-          "messagesDesc": "Yeni mesaj aldığınızda",
-          "reviews": "Yorumlar",
-          "reviewsDesc": "Yeni yorum aldığınızda",
-          "promotions": "Promosyonlar ve Güncellemeler",
-          "promotionsDesc": "MinKompis'ten özel teklifler ve haberler",
-          "reminders": "Hatırlatmalar",
-          "remindersDesc": "Yaklaşan randevular için hatırlatmalar",
-          "marketing": "Pazarlama E-postaları",
-          "marketingDesc": "İpuçları, trendler ve en iyi uygulamalar"
-        }
+        "subtitle": "Ne zaman ve nasıl bildirim almak istediğinizi seçin",
+        "emailNotifications": "E-posta Bildirimleri",
+        "emailDesc": "E-posta ile bildirim alın",
+        "newBookings": "Yeni Rezervasyon İstekleri",
+        "newBookingsDesc": "Yeni bir rezervasyon isteği aldığınızda bildirim alın",
+        "bookingConfirmations": "Rezervasyon Onayları",
+        "bookingConfirmationsDesc": "Rezervasyonlar onaylandığında veya iptal edildiğinde bildirim alın",
+        "messages": "Yeni Mesajlar",
+        "messagesDesc": "Müşterilerden yeni mesaj aldığınızda bildirim alın",
+        "reviews": "Yeni Yorumlar",
+        "reviewsDesc": "Müşteriler hizmetleriniz için yorum bıraktığında bildirim alın",
+        "reminders": "Rezervasyon Hatırlatıcıları",
+        "remindersDesc": "Yaklaşan rezervasyonlar için hatırlatıcı alın",
+        "promotions": "Platform Güncellemeleri ve Promosyonlar",
+        "promotionsDesc": "Platform özellikleri ve promosyon fırsatları hakkında haberler alın",
+        "otherChannels": "Diğer Bildirim Kanalları",
+        "smsNotifications": "SMS Bildirimleri",
+        "smsDesc": "Önemli güncellemeleri SMS ile alın",
+        "pushNotifications": "Anlık Bildirimler",
+        "pushDesc": "Mobil cihazınızda bildirim alın",
+        "saveChanges": "Tercihleri Kaydet"
       },
       "actions": {
         "save": "Değişiklikleri Kaydet",

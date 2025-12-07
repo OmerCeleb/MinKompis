@@ -49,14 +49,17 @@ export default function DashboardSettingsPage() {
         }
     });
 
-    // Notification Settings State
+    // Notification Settings State - UPDATED
     const [notificationData, setNotificationData] = useState({
         emailNotifications: true,
         newBookings: true,
+        bookingConfirmations: true,
         messages: true,
         reviews: true,
+        reminders: true,
         promotions: false,
-        smsNotifications: false
+        smsNotifications: false,
+        pushNotifications: true
     });
 
     const availableLanguages = [
@@ -80,7 +83,6 @@ export default function DashboardSettingsPage() {
     const handleSaveProfile = async () => {
         setLoading(true);
         try {
-            // TODO: Backend integration
             console.log('Saving profile:', profileData);
             await new Promise(resolve => setTimeout(resolve, 1000));
             showToast(tToast('settings.profileUpdated'), 'success');
@@ -94,7 +96,6 @@ export default function DashboardSettingsPage() {
     const handleSaveAccount = async () => {
         setLoading(true);
         try {
-            // TODO: Backend integration
             console.log('Saving account:', accountData);
             await new Promise(resolve => setTimeout(resolve, 1000));
             showToast(tToast('settings.accountUpdated'), 'success');
@@ -108,7 +109,6 @@ export default function DashboardSettingsPage() {
     const handleSaveService = async () => {
         setLoading(true);
         try {
-            // TODO: Backend integration
             console.log('Saving service settings:', serviceData);
             await new Promise(resolve => setTimeout(resolve, 1000));
             showToast(tToast('settings.serviceUpdated'), 'success');
@@ -122,7 +122,6 @@ export default function DashboardSettingsPage() {
     const handleSaveNotifications = async () => {
         setLoading(true);
         try {
-            // TODO: Backend integration
             console.log('Saving notifications:', notificationData);
             await new Promise(resolve => setTimeout(resolve, 1000));
             showToast(tToast('settings.notificationsUpdated'), 'success');
@@ -285,7 +284,7 @@ export default function DashboardSettingsPage() {
                             disabled={loading}
                             fullWidth
                         >
-                            {loading ? t('common.saving') : t('profile.saveChanges')}
+                            {loading ? tCommon('saving') : t('profile.saveChanges')}
                         </Button>
                     </div>
                 )}
@@ -357,10 +356,12 @@ export default function DashboardSettingsPage() {
                             disabled={loading}
                             fullWidth
                         >
-                            {loading ? t('common.saving') : t('account.saveChanges')}
+                            {loading ? tCommon('saving') : t('account.saveChanges')}
                         </Button>
                     </div>
-                )}{/* Service Settings */}
+                )}
+
+                {/* Service Settings */}
                 {activeTab === 'service' && (
                     <div className="space-y-6">
                         <h2 className="text-2xl font-bold text-neutral-900 mb-6">{t('service.subtitle')}</h2>
@@ -480,12 +481,12 @@ export default function DashboardSettingsPage() {
                             disabled={loading}
                             fullWidth
                         >
-                            {loading ? t('common.saving') : t('service.saveChanges')}
+                            {loading ? tCommon('saving') : t('service.saveChanges')}
                         </Button>
                     </div>
                 )}
 
-                {/* Notification Settings */}
+                {/* Notification Settings - UPDATED */}
                 {activeTab === 'notifications' && (
                     <div className="space-y-6">
                         <h2 className="text-2xl font-bold text-neutral-900 mb-6">{t('notifications.subtitle')}</h2>
@@ -493,8 +494,8 @@ export default function DashboardSettingsPage() {
                         <div className="space-y-4">
                             <label className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
                                 <div>
-                                    <div className="font-medium text-neutral-900">{t('notifications.email.title')}</div>
-                                    <div className="text-sm text-neutral-600">{t('notifications.email.enable')}</div>
+                                    <div className="font-medium text-neutral-900">{t('notifications.emailNotifications')}</div>
+                                    <div className="text-sm text-neutral-600">{t('notifications.emailDesc')}</div>
                                 </div>
                                 <input
                                     type="checkbox"
@@ -513,6 +514,19 @@ export default function DashboardSettingsPage() {
                                     type="checkbox"
                                     checked={notificationData.newBookings}
                                     onChange={(e) => setNotificationData({ ...notificationData, newBookings: e.target.checked })}
+                                    className="w-5 h-5 text-primary-600 border-neutral-300 rounded focus:ring-primary-500"
+                                />
+                            </label>
+
+                            <label className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
+                                <div>
+                                    <div className="font-medium text-neutral-900">{t('notifications.bookingConfirmations')}</div>
+                                    <div className="text-sm text-neutral-600">{t('notifications.bookingConfirmationsDesc')}</div>
+                                </div>
+                                <input
+                                    type="checkbox"
+                                    checked={notificationData.bookingConfirmations}
+                                    onChange={(e) => setNotificationData({ ...notificationData, bookingConfirmations: e.target.checked })}
                                     className="w-5 h-5 text-primary-600 border-neutral-300 rounded focus:ring-primary-500"
                                 />
                             </label>
@@ -545,6 +559,19 @@ export default function DashboardSettingsPage() {
 
                             <label className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
                                 <div>
+                                    <div className="font-medium text-neutral-900">{t('notifications.reminders')}</div>
+                                    <div className="text-sm text-neutral-600">{t('notifications.remindersDesc')}</div>
+                                </div>
+                                <input
+                                    type="checkbox"
+                                    checked={notificationData.reminders}
+                                    onChange={(e) => setNotificationData({ ...notificationData, reminders: e.target.checked })}
+                                    className="w-5 h-5 text-primary-600 border-neutral-300 rounded focus:ring-primary-500"
+                                />
+                            </label>
+
+                            <label className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
+                                <div>
                                     <div className="font-medium text-neutral-900">{t('notifications.promotions')}</div>
                                     <div className="text-sm text-neutral-600">{t('notifications.promotionsDesc')}</div>
                                 </div>
@@ -558,13 +585,26 @@ export default function DashboardSettingsPage() {
 
                             <label className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
                                 <div>
-                                    <div className="font-medium text-neutral-900">{t('notifications.sms.title')}</div>
-                                    <div className="text-sm text-neutral-600">{t('notifications.sms.enable')}</div>
+                                    <div className="font-medium text-neutral-900">{t('notifications.smsNotifications')}</div>
+                                    <div className="text-sm text-neutral-600">{t('notifications.smsDesc')}</div>
                                 </div>
                                 <input
                                     type="checkbox"
                                     checked={notificationData.smsNotifications}
                                     onChange={(e) => setNotificationData({ ...notificationData, smsNotifications: e.target.checked })}
+                                    className="w-5 h-5 text-primary-600 border-neutral-300 rounded focus:ring-primary-500"
+                                />
+                            </label>
+
+                            <label className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
+                                <div>
+                                    <div className="font-medium text-neutral-900">{t('notifications.pushNotifications')}</div>
+                                    <div className="text-sm text-neutral-600">{t('notifications.pushDesc')}</div>
+                                </div>
+                                <input
+                                    type="checkbox"
+                                    checked={notificationData.pushNotifications}
+                                    onChange={(e) => setNotificationData({ ...notificationData, pushNotifications: e.target.checked })}
                                     className="w-5 h-5 text-primary-600 border-neutral-300 rounded focus:ring-primary-500"
                                 />
                             </label>
@@ -575,7 +615,7 @@ export default function DashboardSettingsPage() {
                             disabled={loading}
                             fullWidth
                         >
-                            {loading ? t('common.saving') : t('notifications.saveChanges')}
+                            {loading ? tCommon('saving') : t('notifications.saveChanges')}
                         </Button>
                     </div>
                 )}
