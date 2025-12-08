@@ -1,32 +1,7 @@
-// src/hooks/useAuth.ts
+// src/hooks/useAuth.ts - API İle Güncellenmiş Versiyon
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-
-export interface User {
-    id: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    role: 'CUSTOMER' | 'PROVIDER' | 'ADMIN';
-    avatar?: string;
-    phone?: string;
-    languages: string[];
-}
-
-export interface LoginCredentials {
-    email: string;
-    password: string;
-}
-
-export interface RegisterData {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    role: 'CUSTOMER' | 'PROVIDER';
-    phone?: string;
-    languages?: string[];
-}
+import { api, type User, type LoginRequest, type RegisterRequest } from '@/lib/api';
 
 interface AuthState {
     user: User | null;
@@ -47,77 +22,49 @@ export function useAuth() {
         checkAuth();
     }, []);
 
-// src/hooks/useAuth.ts içinde checkAuth fonksiyonunu bulun ve mock user'ı değiştirin:
-
     const checkAuth = async () => {
         try {
             setState(prev => ({ ...prev, loading: true, error: null }));
 
-            // TODO: Backend entegrasyonu - session kontrolü
-            const token = localStorage.getItem('auth_token');
+            // Real API call
+            const response = await api.auth.getCurrentUser();
 
-            if (!token) {
+            if (response.success && response.data) {
+                setState({ user: response.data, loading: false, error: null });
+            } else {
                 setState({ user: null, loading: false, error: null });
-                return;
             }
-
-            // Mock user data - CUSTOMER olarak değiştirildi
-            const mockUser: User = {
-                id: '1',
-                email: 'ayse.yilmaz@example.com',
-                firstName: 'Ayşe',
-                lastName: 'Yılmaz',
-                role: 'PROVIDER', // ← Bu satırı değiştirin
-                avatar: 'https://i.pravatar.cc/150?img=1',
-                phone: '+46 70 123 4567',
-                languages: ['tr', 'sv', 'en']
-            };
-            setState({ user: mockUser, loading: false, error: null });
-        } catch (error) {
+        } catch (error: any) {
             console.error('Auth check failed:', error);
-            setState({ user: null, loading: false, error: 'Authentication failed' });
+            setState({ user: null, loading: false, error: null });
         }
     };
 
-
-    const login = useCallback(async (credentials: LoginCredentials) => {
+    const login = useCallback(async (credentials: LoginRequest) => {
         try {
             setState(prev => ({ ...prev, loading: true, error: null }));
 
-            // TODO: Backend API call
-            // const response = await fetch('/api/auth/login', {
-            //   method: 'POST',
-            //   headers: { 'Content-Type': 'application/json' },
-            //   body: JSON.stringify(credentials)
-            // });
-            // const data = await response.json();
+            // Real API call
+            const response = await api.auth.login(credentials);
 
-            // Mock response
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            if (response.success && response.data) {
+                setState({
+                    user: response.data.user,
+                    loading: false,
+                    error: null
+                });
 
-            const mockUser: User = {
-                id: '1',
-                email: credentials.email,
-                firstName: 'Ayşe',
-                lastName: 'Yılmaz',
-                role: 'PROVIDER',
-                avatar: 'https://i.pravatar.cc/150?img=1',
-                languages: ['tr', 'sv']
-            };
+                // Redirect based on role
+                if (response.data.user.role === 'PROVIDER') {
+                    router.push('/dashboard');
+                } else {
+                    router.push('/');
+                }
 
-            // Save token
-            localStorage.setItem('auth_token', 'mock_token_123');
-
-            setState({ user: mockUser, loading: false, error: null });
-
-            // Redirect based on role
-            if (mockUser.role === 'PROVIDER') {
-                router.push('/dashboard');
+                return { success: true };
             } else {
-                router.push('/');
+                throw new Error(response.error || 'Login failed');
             }
-
-            return { success: true };
         } catch (error: any) {
             const errorMessage = error.message || 'Login failed';
             setState(prev => ({ ...prev, loading: false, error: errorMessage }));
@@ -125,41 +72,31 @@ export function useAuth() {
         }
     }, [router]);
 
-    const register = useCallback(async (data: RegisterData) => {
+    const register = useCallback(async (data: RegisterRequest) => {
         try {
             setState(prev => ({ ...prev, loading: true, error: null }));
 
-            // TODO: Backend API call
-            // const response = await fetch('/api/auth/register', {
-            //   method: 'POST',
-            //   headers: { 'Content-Type': 'application/json' },
-            //   body: JSON.stringify(data)
-            // });
+            // Real API call
+            const response = await api.auth.register(data);
 
-            // Mock response
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            if (response.success && response.data) {
+                setState({
+                    user: response.data.user,
+                    loading: false,
+                    error: null
+                });
 
-            const mockUser: User = {
-                id: Date.now().toString(),
-                email: data.email,
-                firstName: data.firstName,
-                lastName: data.lastName,
-                role: data.role,
-                languages: data.languages || ['en']
-            };
+                // Redirect based on role
+                if (response.data.user.role === 'PROVIDER') {
+                    router.push('/dashboard');
+                } else {
+                    router.push('/');
+                }
 
-            localStorage.setItem('auth_token', 'mock_token_123');
-
-            setState({ user: mockUser, loading: false, error: null });
-
-            // Redirect based on role
-            if (mockUser.role === 'PROVIDER') {
-                router.push('/dashboard');
+                return { success: true };
             } else {
-                router.push('/');
+                throw new Error(response.error || 'Registration failed');
             }
-
-            return { success: true };
         } catch (error: any) {
             const errorMessage = error.message || 'Registration failed';
             setState(prev => ({ ...prev, loading: false, error: errorMessage }));
@@ -171,11 +108,8 @@ export function useAuth() {
         try {
             setState(prev => ({ ...prev, loading: true }));
 
-            // TODO: Backend API call
-            // await fetch('/api/auth/logout', { method: 'POST' });
-
-            // Clear token
-            localStorage.removeItem('auth_token');
+            // Real API call
+            await api.auth.logout();
 
             setState({ user: null, loading: false, error: null });
             router.push('/');
@@ -191,23 +125,20 @@ export function useAuth() {
         try {
             setState(prev => ({ ...prev, loading: true, error: null }));
 
-            // TODO: Backend API call
-            // const response = await fetch('/api/user/profile', {
-            //   method: 'PATCH',
-            //   headers: { 'Content-Type': 'application/json' },
-            //   body: JSON.stringify(updates)
-            // });
+            // Real API call
+            const response = await api.users.updateProfile(updates);
 
-            // Mock update
-            await new Promise(resolve => setTimeout(resolve, 500));
+            if (response.success && response.data) {
+                setState(prev => ({
+                    ...prev,
+                    user: response.data!,
+                    loading: false
+                }));
 
-            setState(prev => ({
-                ...prev,
-                user: prev.user ? { ...prev.user, ...updates } : null,
-                loading: false
-            }));
-
-            return { success: true };
+                return { success: true };
+            } else {
+                throw new Error(response.error || 'Update failed');
+            }
         } catch (error: any) {
             setState(prev => ({ ...prev, loading: false, error: error.message }));
             return { success: false, error: error.message };
@@ -218,8 +149,10 @@ export function useAuth() {
         try {
             setState(prev => ({ ...prev, loading: true, error: null }));
 
-            // TODO: BankID integration
-            alert('BankID integration coming soon!');
+            // Real API call for BankID
+            const response = await api.auth.initBankID();
+
+            // BankID flow would continue here...
 
             setState(prev => ({ ...prev, loading: false }));
             return { success: false, error: 'Not implemented yet' };
@@ -245,3 +178,6 @@ export function useAuth() {
         checkAuth
     };
 }
+
+// Export types
+export type { User, LoginRequest as LoginCredentials, RegisterRequest as RegisterData };
